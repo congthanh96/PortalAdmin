@@ -1,0 +1,90 @@
+.productList {
+  flex: 6;
+  background-color: white;
+}
+
+.productListItem {
+  display: flex;
+  align-items: center;
+}
+
+.productListImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.productListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.productListEditTrans {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  color: #ffffff;
+  background-color: #4c84ff;
+  border-color: #4c84ff;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.productListEditConfirm {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  color: #ffffff;
+  background-color: #fe5461;
+  border-color: #fe5461;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.productListDelete {
+  color: red;
+  cursor: pointer;
+}
+
+.productAddButton {
+  /* width: 80px; */
+  border: none;
+  padding: 5px 24px;
+  background-color: teal;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.userListEditMoney {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #dedede;
+  color: black;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.widgetLgButton.Approved,
+.widgetLgButton.Accecpt {
+  background-color: #c5f8e5;
+  color: #3bb077;
+}
+.widgetLgButton.Cancel {
+  color: #ffffff;
+  background-color: #4c84ff;
+  border-color: #4c84ff;
+}
+.widgetLgButton.Pending {
+  color: #ffffff;
+  background-color: #fe5461;
+  border-color: #fe5461;
+}
