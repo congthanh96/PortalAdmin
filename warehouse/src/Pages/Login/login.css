@@ -1,0 +1,21 @@
+.pages-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 100vh;
+}
+.pages-login .form-login {
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 30px 20px;
+  margin-top: 30px;
+  border: 1px solid #dedede;
+}
+
+.pages-login .form-login .form__custom-button {
+  margin-top: 50px;
+}
