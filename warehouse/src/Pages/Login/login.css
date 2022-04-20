@@ -1,11 +1,12 @@
-.pages-login {
+.pageLogin {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
     height: 100vh;
 }
-.pages-login .form-login {
+
+.pageLogin .formLogin {
   width: 400px;
   margin: 0 auto;
   display: flex;
@@ -16,6 +17,10 @@
   border: 1px solid #dedede;
 }
 
-.pages-login .form-login .form__custom-button {
+.pageLogin .formLogin .formCustomButton {
   margin-top: 50px;
+}
+
+.Button {
+  padding: 20px;
 }

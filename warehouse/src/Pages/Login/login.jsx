@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-//import NoSSR from 'react-no-ssr'
+import NoSSR from 'react-no-ssr'
 import { useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import Button from '../../Components/material/Button'
 import CustomInput from '../../Components/material/CustomInput'
 import * as constant from "../../Common/constants"
 import './login.css'
-
+import { actLogin } from '../../Actions/AuthenticateActions/authenticateActions'
 function Login({ token, setToken }) {
   const dispatch = useDispatch()
   const [state, setState] = useState({
@@ -18,36 +18,38 @@ function Login({ token, setToken }) {
   }
   const history = useHistory()
   const handleSubmitLogin = async () => {
+    console.log(state)
     try {
-      await fetch('https://api.newee.asia:6001/Newee/Manager/Login', {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify({
-          userName: state.email,
-          password: state.password,
-        }),
-      })
-        .then((response) => response.json())
-        .then((res) => {
-          dispatch({
-            type: constant.LOGIN,
-            user: res,
-          })
+      // await fetch('https://api.newee.asia:6001/Newee/Manager/Login', {
+      //   headers: {
+      //     Accept: 'application/json',
+      //     'Content-Type': 'application/json',
+      //   },
+      //   method: 'POST',
+      //   body: JSON.stringify({
+      //     userName: state.email,
+      //     password: state.password,
+      //   }),
+      // })
+      //   .then((response) => console.log(response.json()))
+      // //   .then((res) => {
+      //     dispatch({
+      //       type: constant.LOGIN,
+      //       //user: res,
+      //     })
+      dispatch(actLogin(state.email, state.password));
+      //setToken(res.data.token)
 
-          setToken(res.data.token)
-
-          history.push(`/`)
-        })
+      history.push(`/`)
+      //})
     } catch (error) {
       console.log(error)
     }
   }
 
-  return (
-      <div className="form-login">
+  const content = (
+    <div className="pageLogin">
+      <div className="formLogin">
         <h3>Đăng nhập - Meta</h3>
         <CustomInput
           labelText="Email"
@@ -70,19 +72,15 @@ function Login({ token, setToken }) {
         <Button
           type="button"
           color="primary"
-          className="form__custom-button"
+          className="formCustomButton"
           onClick={() => handleSubmitLogin()}
         >
           Đăng nhập
         </Button>
-        <Link to="/blog">
-          <Button type="button" color="primary" className="form__custom-button">
-            Test - blog
-          </Button>
-        </Link>
       </div>
+    </div>
   )
- // return <NoSSR>{content}</NoSSR>
+  return <NoSSR>{content}</NoSSR>
 }
 
 export default Login

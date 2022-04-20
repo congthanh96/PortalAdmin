@@ -3,6 +3,7 @@ import React, { Suspense, useEffect, useRef, useState } from 'react'
 import { SnackbarProvider } from 'notistack'
 import { BrowserRouter, Redirect, Route, Switch, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import Topbar from "./Components/topbar/Topbar"
 //import './App.css'
 // import Sidebar from './components/sidebar/Sidebar'
 // import Topbar from './components/topbar/Topbar'
@@ -10,8 +11,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export default function App() {
   const notistackRef = useRef()
-  //const dispatch = useDispatch()
-  const user = useSelector((state) => state.auth.user)
+  const dispatch = useDispatch()
+  //const user = useSelector((state) => state.)
 
   const [token, setToken] = useState(() => {
     let isToken = localStorage.getItem('tokenADMIN')
@@ -23,19 +24,32 @@ export default function App() {
     console.log(token)
   }, [])
 
+
+  const ScrollToTop = () => {
+    const { pathname } = useLocation()
+
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [pathname])
+
+    return null
+  }
+
   return (
-    <BrowserRouter>
-    <SnackbarProvider>
- 
-    <Switch>
-      <Route exact path="/">
-        <Login token={token} setToken={setToken} />
-      </Route>
-    </Switch>
-    </SnackbarProvider>
+    <BrowserRouter basename="/">
+      <SnackbarProvider>
+        <ScrollToTop />
+        <Topbar token={token} setToken={setToken} />
+        <Switch>
+          <Route exact path="/">
+            <Login token={token} setToken={setToken} />
+          </Route>
+          <Route exact path="/login">
+            <Login token={token} setToken={setToken} />
+          </Route>
+        </Switch>
+      </SnackbarProvider>
     </BrowserRouter>
-     
-       
   );
 }
 
