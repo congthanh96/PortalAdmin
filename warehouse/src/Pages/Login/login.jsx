@@ -7,7 +7,10 @@ import CustomInput from '../../Components/material/CustomInput'
 import * as constant from "../../Common/constants"
 import './login.css'
 import { actLogin } from '../../Actions/AuthenticateActions/authenticateActions'
-function Login({ token, setToken }) {
+import  { Redirect } from 'react-router-dom'
+
+
+function Login() {
   const dispatch = useDispatch()
   const [state, setState] = useState({
     email: '',
@@ -20,30 +23,12 @@ function Login({ token, setToken }) {
   const handleSubmitLogin = async () => {
     console.log(state)
     try {
-      // await fetch('https://api.newee.asia:6001/Newee/Manager/Login', {
-      //   headers: {
-      //     Accept: 'application/json',
-      //     'Content-Type': 'application/json',
-      //   },
-      //   method: 'POST',
-      //   body: JSON.stringify({
-      //     userName: state.email,
-      //     password: state.password,
-      //   }),
-      // })
-      //   .then((response) => console.log(response.json()))
-      // //   .then((res) => {
-      //     dispatch({
-      //       type: constant.LOGIN,
-      //       //user: res,
-      //     })
-      dispatch(actLogin(state.email, state.password));
-      //setToken(res.data.token)
-
-      history.push(`/`)
-      //})
+       await dispatch(
+        actLogin(state.email, state.password));
+        history.push('/')
+        //console.log("login successs")
     } catch (error) {
-      console.log(error)
+      console.log(error+"đá")
     }
   }
 
@@ -78,6 +63,7 @@ function Login({ token, setToken }) {
           Đăng nhập
         </Button>
       </div>
+
     </div>
   )
   return <NoSSR>{content}</NoSSR>

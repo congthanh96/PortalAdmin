@@ -8,6 +8,9 @@ import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom';
 //Reducer
 import rootReducer from './Reducers/index'
+
+import ReduxToastr from 'react-redux-toastr'
+
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 if (process.env.NODE_ENV !== 'development') console.log = () => {}
 
@@ -17,7 +20,18 @@ const store = createStore(rootReducer, composeEnhancer(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <Provider store={store}>
+  
     <App />
+    <ReduxToastr
+      timeOut={4000}
+      newestOnTop={false}
+      preventDuplicates
+      position="top-left"
+      getState={(state) => state.toastr} // This is the default
+      transitionIn="fadeIn"
+      transitionOut="fadeOut"
+      progressBar
+      closeOnToastrClick/>
   </Provider>,
   document.getElementById("root")
 );

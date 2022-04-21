@@ -1,53 +1,54 @@
-
+import React from "react"
 import * as constant from "../../Common/constants"
 import { timeoutPromise } from '../../Utils/timeOut'
-
+import { toastr } from 'react-redux-toastr'
+import { Redirect } from 'react-router-dom'
+import { authAPI } from "../../APIs"
 export const actLogin = (email, password) => {
-  console.log(email,password);
-    return async (dispatch) => {
-      dispatch({
-        type: constant.AUTH_LOADING,
+  console.log(email, password);
+  return async (dispatch) => {
+    dispatch({
+      type: constant.AUTH_LOADING,
+    })
+
+    try {
+      console.log("call api")
+      // const response = await timeoutPromise(
+      //   fetch(`${constant.BASE_URL}${constant.LOGIN_API}`, {
+      //     headers: {
+      //       Accept: 'application/json',
+      //       'Content-Type': 'application/json',
+      //     },
+      //     method: 'POST',
+      //     body: JSON.stringify({
+      //       userName: email,
+      //       password: password,
+      //     }),
+      //   })
+      // )
+      var params = JSON.stringify({
+        userName: email,
+        password: password,
       })
-  
-      try {
-        console.log("call api")
-        const response = await timeoutPromise(
-          fetch(`${constant.BASE_URL}${constant.LOGIN_API}`, {
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            method: 'POST',
-            body: JSON.stringify({
-              userName: email,
-              password: password,
-            }),
-          })
-        )
-  
-        const resData = await response.json()
-        console.log(resData+"res data")
-        if (resData.message === 'Logged in successfully') {
-          dispatch({
-            type: constant.LOGIN,
-            user: resData,
-          })
-        } else {
-          dispatch({
-            type: constant.AUTH_FAILURE,
-          })
-          throw new Error(resData.err)
-        }
-      } catch (err) {
-        dispatch({
-          type: constant.AUTH_FAILURE,
-        })
-        alert('Đăng nhập không thành công! Sai tài khoản hoặc mật khẩu!')
-        // throw new Error(err);
-      }
+      const response = await authAPI.login(params);
+      console.log(response)
+
+      dispatch({
+        type: constant.LOGIN,
+        user: response,
+      });
+
+    } catch (err) {
+      dispatch({
+        type: constant.AUTH_FAILURE,
+      })
+      toastr.error('Login failed', 'Please enter correct username and password')
+
+      //alert('Đăng nhập không thành công! Sai tài khoản hoặc mật khẩu!')
     }
   }
-  //Logout
+}
+//Logout
 export const actLogout = () => {
   return (dispatch) => {
     clearLogoutTimer() //clear setTimeout when logout
@@ -72,15 +73,4 @@ const actSetLogoutTimer = (expirationTime) => {
       alert('Logout section expired')
     }, expirationTime)
   }
-}
-
-// Check loggged in
-export const checkLogin = () =>
-{
-  return (dispatch)=>{
-    dispatch({
-      type: constant.CHECK_LOGIN,
-    })
-  }
-
 }

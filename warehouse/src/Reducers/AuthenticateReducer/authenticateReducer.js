@@ -9,7 +9,7 @@ const initialState = {
     forgetPW: "",
     login_101: false,
     login_100: false,
-    isLogin: localStorage.getItem("tokenADMIN")?true:false
+    isLogin: localStorage.getItem("tokenADMIN") ? true : false
 };
 
 export default function authReducer(state = initialState, action) {
@@ -24,9 +24,9 @@ export default function authReducer(state = initialState, action) {
         }
         case constant.LOGIN:
             console.log("loginreducer")
-            localStorage.setItem("tokenADMIN", action.user.data.token);
+            localStorage.setItem("tokenADMIN", action.user.token);
             return {
-                user: action.user.data.token,
+                user: action.user.token,
                 isLoading: false,
                 isLogin: true
             };
@@ -40,7 +40,7 @@ export default function authReducer(state = initialState, action) {
                 isLogin: false
             };
 
-         case constant.LOGOUT:
+        case constant.LOGOUT:
             localStorage.removeItem("tokenADMIN");
             return {
                 ...state,

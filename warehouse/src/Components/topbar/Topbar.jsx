@@ -8,22 +8,15 @@ import './topbar.css'
 import { timeoutPromise } from '../../Utils/timeOut'
 import authReducer from '../../Reducers/AuthenticateReducer/authenticateReducer'
 
-export default function Topbar({ token, setToken }) {
+export default function Topbar() {
   const dispatch = useDispatch()
   const history = useHistory()
   const isLogin = useSelector(state => state.authReducer.isLogin)
-  console.log(isLogin)
-  // useEffect(
-  //   if(token!===null)
-  //   {
-  //     dispatch(authReducer())
-  //   }
-  // )
+
   const logOut = async () => {
     try {
       await dispatch(actLogout())
       localStorage.removeItem('tokenADMIN')
-      setToken(null)
       history.push('/login')
     } catch (err) {
       console.log(err)
