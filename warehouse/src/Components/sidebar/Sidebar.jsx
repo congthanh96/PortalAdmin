@@ -19,35 +19,35 @@ import './sidebar.css'
 export default function Sidebar() {
   const [isActive, setIsActive] = useState(-1)
   const sideBar = [
-    {
-      id: 1,
-      linkTo: '/users',
-      nameIcon: 'PermIdentity',
-      nameLink: 'Tài khoản',
-    },
+    // {
+    //   id: 1,
+    //   linkTo: '/users',
+    //   nameIcon: 'PermIdentity',
+    //   nameLink: 'Tài khoản',
+    // },
     {
       id: 2,
       linkTo: '/products',
       nameIcon: 'WorkOutline',
       nameLink: 'Sản phẩm',
     },
-    { id: 3, linkTo: '/orders', nameIcon: 'MailOutline', nameLink: 'Đơn hàng' },
-    { id: 4, linkTo: '/ghtk', nameIcon: 'MailOutline', nameLink: 'GHTK' },
-    {
-      id: 5,
-      linkTo: '/promotions',
-      nameIcon: 'TrendingUp',
-      nameLink: 'Khuyến mãi',
-    },
-    { id: 6, linkTo: '/rankList', nameIcon: 'Storefront', nameLink: 'Ranks' },
-    { id: 7, linkTo: '/requests', nameIcon: 'BarChart', nameLink: 'Yêu cầu' },
-    { id: 8, linkTo: '/transactions', nameIcon: 'AttachMoney', nameLink: 'Ví' },
-    { id: 9, linkTo: '/reports', nameIcon: 'Report', nameLink: 'Báo cáo' },
-    { id: 10, linkTo: '/create-site', nameIcon: 'TrendingUp', nameLink: 'Tạo site' },
+    // { id: 3, linkTo: '/orders', nameIcon: 'MailOutline', nameLink: 'Đơn hàng' },
+    // { id: 4, linkTo: '/ghtk', nameIcon: 'MailOutline', nameLink: 'GHTK' },
+    // {
+    //   id: 5,
+    //   linkTo: '/promotions',
+    //   nameIcon: 'TrendingUp',
+    //   nameLink: 'Khuyến mãi',
+    // },
+    // { id: 6, linkTo: '/rankList', nameIcon: 'Storefront', nameLink: 'Ranks' },
+    // { id: 7, linkTo: '/requests', nameIcon: 'BarChart', nameLink: 'Yêu cầu' },
+    // { id: 8, linkTo: '/transactions', nameIcon: 'AttachMoney', nameLink: 'Ví' },
+    // { id: 9, linkTo: '/reports', nameIcon: 'Report', nameLink: 'Báo cáo' },
+    // { id: 10, linkTo: '/create-site', nameIcon: 'TrendingUp', nameLink: 'Tạo site' },
 
-    //2022/04/12 Huynh-dt add create-account start
-    { id: 11, linkTo: '/create-account', nameIcon: 'PersonAddAlt', nameLink: 'Tạo tài khoản' },
-    //2022/04/12 Huynh-dt add create-account start
+    // //2022/04/12 Huynh-dt add create-account start
+    // { id: 11, linkTo: '/create-account', nameIcon: 'PersonAddAlt', nameLink: 'Tạo tài khoản' },
+    // //2022/04/12 Huynh-dt add create-account start
 
 
   ]
@@ -55,7 +55,7 @@ export default function Sidebar() {
     <div className="sidebar">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Dashboard</h3>
+          {/* <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
             <Link to="/" className="link">
               <li
@@ -66,13 +66,13 @@ export default function Sidebar() {
                 Home
               </li>
             </Link>
-          </ul>
+          </ul> */}
         </div>
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
             {sideBar.map((value, index) => (
-              <Link to={value.linkTo} className="link">
+              <Link to={value.linkTo} className="link" key={value.id}>
                 <li
                   className={isActive === index ? 'sidebarListItem active' : 'sidebarListItem'}
                   onClick={() => setIsActive(index)}
@@ -102,7 +102,7 @@ export default function Sidebar() {
             ))}
           </ul>
         </div>
-        <div className="sidebarMenu">
+        {/* <div className="sidebarMenu">
           <h3 className="sidebarTitle">Notifications</h3>
           <ul className="sidebarList">
             <Link to="/settings" className="link">
@@ -112,7 +112,7 @@ export default function Sidebar() {
               </li>
             </Link>
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   )

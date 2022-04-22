@@ -1,21 +1,17 @@
 import Login from './Pages/Login/login';
-import React, { Suspense, useEffect, useRef, useState } from 'react'
-import { BrowserRouter, Redirect, Route, Switch, useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { Suspense, useEffect } from 'react'
+import { BrowserRouter, Route, Switch, useLocation } from 'react-router-dom'
+import {useSelector } from 'react-redux'
 import Topbar from "./Components/topbar/Topbar"
 import NotFound from "./Pages/404/NotFound"
 import './App.css'
 import Sidebar from './Components/sidebar/Sidebar';
-
-
+import Home from './Pages/Home/Home'
+import Products from './Pages/Products/Products';
+import Product from './Pages/Product/Product';
 export default function App() {
-  const notistackRef = useRef()
-  const dispatch = useDispatch()
+
   const isLogin = useSelector(state => state.authReducer.isLogin)
-  // const [token, setToken] = useState(() => {
-  //   let isToken = localStorage.getItem('tokenADMIN')
-  //   return isToken
-  // })
 
   const ScrollToTop = () => {
     const { pathname } = useLocation()
@@ -33,10 +29,18 @@ export default function App() {
       <ScrollToTop />
 
       <Topbar/>
+
       <div className="container">
-        {isLogin && <Sidebar />}
+        {isLogin && <Sidebar/>}
         <Suspense fallback={<div>Loading...</div>}>
-          {isLogin ? (<></>) :
+          {isLogin ? (
+            <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/products" component={Products} /> 
+                <Route path="/product/:productID" component={Product} /> 
+                <Route path="*" component={NotFound} />
+            </Switch>
+          ) :
             (
               <Switch>
                 <Route exact path="/">
@@ -46,7 +50,6 @@ export default function App() {
                   <Login/>
                 </Route>
                 <Route path="*" component={NotFound} />
-
               </Switch>
             )}
         </Suspense>

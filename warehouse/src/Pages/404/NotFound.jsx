@@ -9,7 +9,7 @@ const NotFound = () => (
       Go Home
     </Link>
    
-  <img src="https://i.imgur.com/qIufhof.png" />
+  <img src="https://i.imgur.com/qIufhof.png" alt ="" />
   </div>
   </div>
 );

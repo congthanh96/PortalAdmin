@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom';
@@ -12,7 +12,7 @@ import rootReducer from './Reducers/index'
 import ReduxToastr from 'react-redux-toastr'
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-if (process.env.NODE_ENV !== 'development') console.log = () => {}
+if (process.env.NODE_ENV !== 'development') console.log = () => { }
 
 const store = createStore(rootReducer, composeEnhancer(applyMiddleware(thunk)))
 
@@ -20,7 +20,6 @@ const store = createStore(rootReducer, composeEnhancer(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <Provider store={store}>
-  
     <App />
     <ReduxToastr
       timeOut={4000}
@@ -31,7 +30,7 @@ ReactDOM.render(
       transitionIn="fadeIn"
       transitionOut="fadeOut"
       progressBar
-      closeOnToastrClick/>
+      closeOnToastrClick />
   </Provider>,
   document.getElementById("root")
 );

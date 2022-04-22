@@ -1,4 +1,4 @@
-import * as constant from "../../Common/constants"
+import {AUTH_LOADING, LOGIN, LOGOUT} from "../../Common/constants"
 
 const initialState = {
     user: localStorage.getItem("tokenADMIN") || {},
@@ -14,7 +14,7 @@ const initialState = {
 
 export default function authReducer(state = initialState, action) {
     switch (action.type) {
-        case constant.AUTH_LOADING: {
+        case AUTH_LOADING: {
             console.log("authloadingreducer")
             return {
                 ...state,
@@ -22,7 +22,7 @@ export default function authReducer(state = initialState, action) {
                 // error: false,
             };
         }
-        case constant.LOGIN:
+        case LOGIN:
             console.log("loginreducer")
             localStorage.setItem("tokenADMIN", action.user.token);
             return {
@@ -30,17 +30,7 @@ export default function authReducer(state = initialState, action) {
                 isLoading: false,
                 isLogin: true
             };
-        case constant.LOGOUT:
-            localStorage.removeItem("tokenADMIN");
-            return {
-                ...state,
-                user: {},
-                dataUser: {},
-                isLoading: false,
-                isLogin: false
-            };
-
-        case constant.LOGOUT:
+        case LOGOUT:
             localStorage.removeItem("tokenADMIN");
             return {
                 ...state,

@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import logo from '../../Assets/images/icon.png'
 import logoNewee from '../../Assets/images/logo.png'
-import { actLogout } from '../../Actions/AuthenticateActions/authenticateActions'
+import { actLogout } from '../../Actions/AuthenticateAction/authenticateAction'
 import './topbar.css'
-import { timeoutPromise } from '../../Utils/timeOut'
-import authReducer from '../../Reducers/AuthenticateReducer/authenticateReducer'
 
 export default function Topbar() {
   const dispatch = useDispatch()

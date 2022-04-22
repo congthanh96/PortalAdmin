@@ -1,14 +1,11 @@
-import React from "react"
-import * as constant from "../../Common/constants"
-import { timeoutPromise } from '../../Utils/timeOut'
+import {LOGIN,AUTH_FAILURE,LOGOUT,AUTH_LOADING  } from "../../Common/constants"
 import { toastr } from 'react-redux-toastr'
-import { Redirect } from 'react-router-dom'
 import { authAPI } from "../../APIs"
 export const actLogin = (email, password) => {
   console.log(email, password);
   return async (dispatch) => {
     dispatch({
-      type: constant.AUTH_LOADING,
+      type: AUTH_LOADING,
     })
 
     try {
@@ -34,13 +31,13 @@ export const actLogin = (email, password) => {
       console.log(response)
 
       dispatch({
-        type: constant.LOGIN,
+        type: LOGIN,
         user: response,
       });
 
     } catch (err) {
       dispatch({
-        type: constant.AUTH_FAILURE,
+        type: AUTH_FAILURE,
       })
       toastr.error('Login failed', 'Please enter correct username and password')
 
@@ -53,7 +50,7 @@ export const actLogout = () => {
   return (dispatch) => {
     clearLogoutTimer() //clear setTimeout when logout
     dispatch({
-      type: constant.LOGOUT,
+      type: LOGOUT,
       user: {},
     })
   }

@@ -1,9 +1,7 @@
 import axiosClient from '../axiosClient'
-import * as constant from "../../Common/constants"
-
+import { LOGIN_API } from '../../Common/constants'
 export const authAPI = {
-    login: (params) => {
-        console.log(params)
-        return axiosClient.post(constant.LOGIN_API,params)
+    login: (data) => {
+        return axiosClient.post(LOGIN_API,data)
     }
 }

@@ -1,0 +1,68 @@
+.productList {
+  flex: 6;
+  background-color: white;
+}
+
+.product-list-header {
+  display: flex;
+}
+
+.product-list-header .header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.productListItem {
+  display: flex;
+  align-items: center;
+}
+
+.productListImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.productListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.productListDelete {
+  color: red;
+  cursor: pointer;
+}
+
+.productAddButton {
+  /* width: 80px; */
+  border: none;
+  padding: 6px 24px;
+  background-color: teal;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.productRefeshButton {
+  /* width: 80px; */
+  border: none;
+  padding: 6px 24px;
+  background-color: #2a7ade;
+  color: #ebf1fe;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-right: 12px;
+}
+.linear{
+  width: 100%;
+}

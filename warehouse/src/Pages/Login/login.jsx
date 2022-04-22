@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import NoSSR from 'react-no-ssr'
 import { useDispatch } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import {useHistory } from 'react-router-dom'
 import Button from '../../Components/material/Button'
 import CustomInput from '../../Components/material/CustomInput'
-import * as constant from "../../Common/constants"
 import './login.css'
-import { actLogin } from '../../Actions/AuthenticateActions/authenticateActions'
-import  { Redirect } from 'react-router-dom'
+import { actLogin } from '../../Actions/AuthenticateAction/authenticateAction'
+
 
 
 function Login() {
