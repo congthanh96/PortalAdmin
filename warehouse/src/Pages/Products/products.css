@@ -28,11 +28,14 @@
 .productListEdit {
   border: none;
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 0px 10px;
   background-color: #3bb077;
   color: white;
   cursor: pointer;
   margin-right: 20px;
+  text-align:justify;
+  display: flex;
+  height: 40px;
 }
 
 .productListDelete {
@@ -51,6 +54,7 @@
   cursor: pointer;
   margin-bottom: 10px;
 }
+
 .productRefeshButton {
   /* width: 80px; */
   border: none;
@@ -63,6 +67,7 @@
   margin-bottom: 10px;
   margin-right: 12px;
 }
+
 .linear{
   width: 100%;
 }

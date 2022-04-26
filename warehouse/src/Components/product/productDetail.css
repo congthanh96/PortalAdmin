@@ -1,4 +1,4 @@
-.card{
+.cardDetail{
     display: flex;
     margin: 20px;
     padding: 20px;
@@ -10,4 +10,8 @@
     width: 350px;
     height: 400px;
     margin: 20px;
+}
+
+.fontText{
+    font-size: 14px;
 }
