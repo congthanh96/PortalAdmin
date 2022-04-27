@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { LinearProgress } from "@material-ui/core";
-import { maxWidth } from "@mui/system";
 
 class ColoredLinearProgress extends Component {
   render() {

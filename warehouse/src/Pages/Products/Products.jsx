@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import "./products.css";
 import { DataGrid } from "@material-ui/data-grid";
+import { formatVND } from '../../Utils/formatVND';
 //  //2022/04/13 Huynh-dt export file ADD
 // import CustomToolbar from "../../components/ToolbarExportToCSV/CustomToolbar";
 //  //2022/04/13 Huynh-dt export file ADD
@@ -20,9 +21,8 @@ export default function Products() {
       dispatch(
         actGetProducts()
       )
-      //console.log("login successs")
     } catch (error) {
-      console.log(error + "đá")
+      console.log(error)
     }
   }, []
   )
@@ -77,7 +77,7 @@ export default function Products() {
         return (
           <>
             <Link to={"/product/" + params.row.id}>
-              <button className="productListEdit">Edit</button>
+              <button className="productListEdit" >Edit</button>
             </Link>
             {/* <DeleteOutline
               className="productListDelete"
@@ -98,15 +98,8 @@ export default function Products() {
     },
   ];
 
-  const formatVND = (currentAmout) => {
-    const newAmount = currentAmout / 1;
-    return newAmount.toLocaleString("it-IT", {
-      style: "currency",
-      currency: "VND",
-    });
-  };
+ 
 
-  console.log(lstProduct)
   return (
     <div className='productList'>
       {isLoading ? (

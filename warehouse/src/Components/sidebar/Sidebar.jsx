@@ -1,23 +1,21 @@
 import {
   AttachMoney,
   BarChart,
-  DynamicFeed,
-  LineStyle,
-  MailOutline,
+  ShoppingCart,
   PermIdentity,
   Report,
   Storefront,
   TrendingUp,
   WorkOutline,
-  PersonAdd
-} from '@material-ui/icons'
-import React from 'react';
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import './sidebar.css'
+  PersonAdd,
+} from "@material-ui/icons";
+import React from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import "./sidebar.css";
 
 export default function Sidebar() {
-  const [isActive, setIsActive] = useState(-1)
+  const [isActive, setIsActive] = useState(-1);
   const sideBar = [
     // {
     //   id: 1,
@@ -27,11 +25,11 @@ export default function Sidebar() {
     // },
     {
       id: 2,
-      linkTo: '/products',
-      nameIcon: 'WorkOutline',
-      nameLink: 'Sản phẩm',
+      linkTo: "/products",
+      nameIcon: "WorkOutline",
+      nameLink: "Sản phẩm",
     },
-    // { id: 3, linkTo: '/orders', nameIcon: 'MailOutline', nameLink: 'Đơn hàng' },
+    { id: 3, linkTo: "/orders", nameIcon: "ShoppingCart", nameLink: "Đơn hàng" },
     // { id: 4, linkTo: '/ghtk', nameIcon: 'MailOutline', nameLink: 'GHTK' },
     // {
     //   id: 5,
@@ -48,9 +46,7 @@ export default function Sidebar() {
     // //2022/04/12 Huynh-dt add create-account start
     // { id: 11, linkTo: '/create-account', nameIcon: 'PersonAddAlt', nameLink: 'Tạo tài khoản' },
     // //2022/04/12 Huynh-dt add create-account start
-
-
-  ]
+  ];
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -74,26 +70,30 @@ export default function Sidebar() {
             {sideBar.map((value, index) => (
               <Link to={value.linkTo} className="link" key={value.id}>
                 <li
-                  className={isActive === index ? 'sidebarListItem active' : 'sidebarListItem'}
+                  className={
+                    isActive === index
+                      ? "sidebarListItem active"
+                      : "sidebarListItem"
+                  }
                   onClick={() => setIsActive(index)}
                 >
-                  {value.nameIcon === 'PermIdentity' ? (
+                  {value.nameIcon === "PermIdentity" ? (
                     <PermIdentity className="sidebarIcon" />
-                  ) : value.nameIcon === 'WorkOutline' ? (
+                  ) : value.nameIcon === "WorkOutline" ? (
                     <WorkOutline className="sidebarIcon" />
-                  ) : value.nameIcon === 'Storefront' ? (
+                  ) : value.nameIcon === "Storefront" ? (
                     <Storefront className="sidebarIcon" />
-                  ) : value.nameIcon === 'MailOutline' ? (
-                    <MailOutline className="sidebarIcon" />
-                  ) : value.nameIcon === 'TrendingUp' ? (
+                  ) : value.nameIcon === "ShoppingCart" ? (
+                    <ShoppingCart className="sidebarIcon" />
+                  ) : value.nameIcon === "TrendingUp" ? (
                     <TrendingUp className="sidebarIcon" />
-                  ) : value.nameIcon === 'BarChart' ? (
+                  ) : value.nameIcon === "BarChart" ? (
                     <BarChart className="sidebarIcon" />
-                  ) : value.nameIcon === 'AttachMoney' ? (
+                  ) : value.nameIcon === "AttachMoney" ? (
                     <AttachMoney className="sidebarIcon" />
-                  ) : value.nameIcon === 'PersonAddAlt' ? (
+                  ) : value.nameIcon === "PersonAddAlt" ? (
                     <PersonAdd className="sidebarIcon" />
-                  ): (
+                  ) : (
                     <Report className="sidebarIcon" />
                   )}
                   {value.nameLink}
@@ -115,5 +115,5 @@ export default function Sidebar() {
         </div> */}
       </div>
     </div>
-  )
+  );
 }

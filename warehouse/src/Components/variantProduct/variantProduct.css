@@ -26,3 +26,9 @@
   text-align: center;
   display: flex;
 }
+
+.inputNum {
+  margin-left: 10px;
+  border: none;
+  border-bottom: 1px solid lightgray;
+}

@@ -63,11 +63,3 @@ const clearLogoutTimer = () => {
     clearTimeout(timer)
   }
 }
-const actSetLogoutTimer = (expirationTime) => {
-  return (dispatch) => {
-    timer = setTimeout(async () => {
-      await dispatch(actLogout())
-      alert('Logout section expired')
-    }, expirationTime)
-  }
-}
