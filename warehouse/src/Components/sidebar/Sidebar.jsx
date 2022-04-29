@@ -29,7 +29,7 @@ export default function Sidebar() {
       nameIcon: "WorkOutline",
       nameLink: "Sản phẩm",
     },
-    { id: 3, linkTo: "/orders", nameIcon: "ShoppingCart", nameLink: "Đơn hàng" },
+    { id: 3, linkTo: "/orders", nameIcon: "ShoppingCart", nameLink: "Đóng hàng" },
     // { id: 4, linkTo: '/ghtk', nameIcon: 'MailOutline', nameLink: 'GHTK' },
     // {
     //   id: 5,

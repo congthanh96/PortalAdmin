@@ -1,5 +1,6 @@
 import React from "react";
 import "./productDetail.css";
+
 const CardProduct = ({
   image,
   name,

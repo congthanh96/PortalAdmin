@@ -1,35 +1,36 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import "./products.css";
 import { DataGrid } from "@material-ui/data-grid";
-import { formatVND } from '../../Utils/formatVND';
+import { formatVND } from "../../Utils/formatVND";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+
 //  //2022/04/13 Huynh-dt export file ADD
 // import CustomToolbar from "../../components/ToolbarExportToCSV/CustomToolbar";
 //  //2022/04/13 Huynh-dt export file ADD
-import { actGetProducts } from '../../Actions/ProductsAction/productsAction'
-import ColoredLinearProgress from '../../Common/LineProgress'
+import { actGetProducts } from "../../Actions/ProductsAction/productsAction";
+import ColoredLinearProgress from "../../Common/LineProgress";
 
 export default function Products() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const lstProduct = useSelector((state) => state.productsReducer.products);
-  const isLoading = useSelector((state) => state.productsReducer.isLoading)
+  const isLoading = useSelector((state) => state.productsReducer.isLoading);
   const [pageSize, setPageSize] = useState(10);
 
   useEffect(() => {
     try {
-      dispatch(
-        actGetProducts()
-      )
+      dispatch(actGetProducts());
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }, []
-  )
+  }, []);
 
   const columns = [
     {
-      field: "id", headerName: "ID", minWidth: 110,
+      field: "id",
+      headerName: "ID",
+      minWidth: 110,
       flex: 1,
     },
     {
@@ -77,7 +78,7 @@ export default function Products() {
         return (
           <>
             <Link to={"/product/" + params.row.id}>
-              <button className="productListEdit" >Edit</button>
+              <ModeEditIcon style={{ marginLeft: 15, marginTop:20 }} />
             </Link>
             {/* <DeleteOutline
               className="productListDelete"
@@ -98,16 +99,13 @@ export default function Products() {
     },
   ];
 
- 
-
   return (
-    <div className='productList'>
+    <div className="productList">
       {isLoading ? (
-        <div className='linear'>
+        <div className="linear">
           <ColoredLinearProgress />
         </div>
       ) : (
-
         <DataGrid
           rows={lstProduct}
           disableSelectionOnClick
@@ -117,13 +115,13 @@ export default function Products() {
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           rowsPerPageOptions={[10, 25, 50, 100]}
           pagination
-        //2022/04/13 Huynh-dt export file ADD
-        // components={{
-        //   Toolbar: () => CustomToolbar("Product List"),
-        // }}
-        //2022/04/13 Huynh-dt export file ADD
+          //2022/04/13 Huynh-dt export file ADD
+          // components={{
+          //   Toolbar: () => CustomToolbar("Product List"),
+          // }}
+          //2022/04/13 Huynh-dt export file ADD
         />
       )}
     </div>
-  )
+  );
 }

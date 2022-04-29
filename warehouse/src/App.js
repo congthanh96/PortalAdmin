@@ -9,7 +9,8 @@ import Sidebar from './Components/sidebar/Sidebar';
 import Home from './Pages/Home/Home'
 import Products from './Pages/Products/Products';
 import Product from './Pages/Product/Product';
-import Orders from './Pages/Orders/Order';
+import Orders from './Pages/Orders/Orders';
+import Order from './Pages/Order/Order';
 export default function App() {
 
   const isLogin = useSelector(state => state.authReducer.isLogin)
@@ -40,6 +41,7 @@ export default function App() {
                 <Route path="/products" component={Products} /> 
                 <Route path="/product/:productID" component={Product} /> 
                 <Route path="/orders" component={Orders}/>
+                <Route path="/order/:orderID" component={Order}/>
                 <Route path="*" component={NotFound} />
             </Switch>
           ) :

@@ -5,6 +5,7 @@ import CardProduct from "../../Components/product/productDetail";
 import VariantProduct from "../../Components/variantProduct/variantProduct";
 import ColoredLinearProgress from "../../Common/LineProgress";
 import "./product.css";
+
 export default function Product() {
   let { productID } = useParams();
   const [productDetail, setProductDetail] = useState("");

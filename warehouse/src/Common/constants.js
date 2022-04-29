@@ -6,6 +6,8 @@ export const GET_DETAIL_PRODUCT_API = "/Newee/ManagerProduct/GetById/";
 export const GET_VARIANT_PRODUCT_API = "/Newee/ManagerVariant/Get/";
 export const UPDATE_MOUNT_VARIANT_PRODUCT_API = "/Newee/ManagerVariant/Edit";
 export const GET_ORDERS_API = "/Newee/Bill/GetListBill/1000/1"; //limit = 1000, indexpage = 1
+export const GET_ORDER_BY_ID_API = "/Newee/Bill/GetBillById/"
+export const GET_PRODUCTS_IN_ORDER_API = "/Newee/Bill/GetBillDetailByIdBill/"
 
 //ACTIONS AUTHENTICATE
 export const AUTH_LOADING = "AUTH_LOADING";
@@ -22,3 +24,12 @@ export const GET_PRODUCTS_FAILURE = "GET_PRODUCTS_FAILURE";
 export const ORDERS_LOADING = "ORDERS_LOADING";
 export const GET_ORDERS = "GET_ORDERS";
 export const GET_ORDERS_FAILURE = "GET_ORDERS_FAILURE";
+export const GET_ORDERS_ACCEPT = "GET_ORDERS_ACCEPT";
+export const GET_ORDERS_PREPARING = "GET_ORDERS_PREPARING";
+export const GET_ORDERS_SHIPPING = "GET_ORDERS_SHIPPING";
+
+// STATUS ORDER
+export const ACCEPT = "Accecpt";
+export const PREPARING = "Preparing";
+export const SHIPPING = "Shipping";
+
