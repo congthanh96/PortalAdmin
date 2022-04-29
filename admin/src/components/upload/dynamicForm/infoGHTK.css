@@ -1,0 +1,66 @@
+
+
+.container-space-between.form-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+   margin-left: -12px;
+    
+}
+
+
+.container-space-between.form-row .form-group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+     margin-left: 12px;
+}
+.container-space-between.form-row .form-group > label{
+  color: gray;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.container-space-between.form-row .form-group > input {
+    padding: 10px;
+     border: 1px solid rgb(118, 118, 118);
+      border-radius: 2px;
+}
+.container-space-between.form-row .form-group > select {
+  padding: 10px;
+  -webkit-appearance:none;
+  border: 1px solid rgb(118, 118, 118);
+  border-radius: 2px;
+}
+
+.container-space-between.form-row .form-group.col-sm-6{
+ width: calc(50% - 12px);
+}
+.container-space-between.form-row .form-group.col-sm-3 {
+    width: calc(33.33% - 12px);
+  
+}
+.container-space-between.form-row .form-group.col-sm-4 {
+    width: calc(25% - 12px )
+}
+.container-space-between.form-row .form-group.col-sm-12 {
+    width: 100%;
+}
+.container-space-between.form-row .form-group.desc {
+    min-height: 40vh;
+}
+.container-space-between.form-row .form-group.content {
+    min-height: 30vh;
+}
+.container-space-between.form-row .form-group.desc > input,
+.container-space-between.form-row .form-group.content > input {
+    height: 100%;
+}
+
+h6 {
+    width: 100%;
+    font-size: 14px;
+    margin-top: 16px !important;
+    /* margin-bottom: 16px !important; */
+}

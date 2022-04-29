@@ -1,0 +1,26 @@
+.pageLogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 100vh;
+}
+
+.pageLogin .formLogin {
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 30px 20px;
+  margin-top: 30px;
+  border: 1px solid #dedede;
+}
+
+.pageLogin .formLogin .formCustomButton {
+  margin-top: 50px;
+}
+
+.Button {
+  padding: 20px;
+}

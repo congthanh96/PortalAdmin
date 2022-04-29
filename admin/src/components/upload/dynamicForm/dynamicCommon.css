@@ -1,0 +1,18 @@
+.container-space-between.form-row.col {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    width: 100%;
+    margin-left: 0px;
+    /* background: rgb(118, 118, 118); */
+    position: relative;
+    margin-bottom: 20px;
+}
+.submit-button {
+    margin: auto 0;
+}
+.submit-button .btn.btn-primary{
+    height: 35px;
+    background-color: darkblue;
+}

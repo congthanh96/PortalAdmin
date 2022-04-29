@@ -1,0 +1,18 @@
+.orderList {
+    flex: 6;
+    background-color: white;
+  }
+
+  .linear{
+    width: 100%;
+  }
+  
+  .orderListEdit {
+    font-size: 12px;
+    color: #3bb077;
+  }
+  
+  .orderListEditDev {
+    font-size: 12px;
+    color: red;
+  }

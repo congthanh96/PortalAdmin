@@ -1,0 +1,74 @@
+.container-space-between.form-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.container-space-between.form-row .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.container-space-between.form-row .form-group > label {
+  color: gray;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.container-space-between.form-row .form-group > input {
+  padding: 10px;
+  border: 1px solid rgb(118, 118, 118);
+  border-radius: 2px;
+}
+.container-space-between.form-row .form-group > select {
+  padding: 10px;
+  -webkit-appearance: none;
+  border: 1px solid rgb(118, 118, 118);
+  border-radius: 2px;
+}
+
+.container-space-between.form-row .form-group.col-sm-6 {
+  width: 49.5%;
+}
+.container-space-between.form-row .form-group.col-sm-3 {
+  width: 32.5%;
+}
+.container-space-between.form-row .form-group.col-sm-4 {
+  width: 24.5%;
+}
+.container-space-between.form-row .form-group.col-sm-12 {
+  width: 100%;
+}
+.container-space-between.form-row .form-group.desc {
+  min-height: 40vh;
+}
+.container-space-between.form-row .form-group.content {
+  min-height: 30vh;
+}
+.container-space-between.form-row .form-group.desc > input,
+.container-space-between.form-row .form-group.content > input {
+  height: 100%;
+}
+
+.addProductButton,
+.successProductButton {
+  margin-top: 10px;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 10px;
+
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  height: 45px;
+  margin-left: 16px;
+}
+.addProductButton.go-back {
+  background-color: #f5f5f5;
+  border: 1px solid darkblue;
+  color: darkblue;
+}
+.createProductButton {
+  background-color: darkblue;
+}

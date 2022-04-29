@@ -1,0 +1,34 @@
+.cardVariant {
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
+}
+.btnAdd {
+  border: none;
+  border-radius: 10px;
+  padding: 0px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+  text-align: center;
+  display: flex;
+}
+
+.btnExcept {
+  border: none;
+  border-radius: 10px;
+  padding: px 10px;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+  text-align: center;
+  display: flex;
+}
+
+.inputNum {
+  margin-left: 10px;
+  border: none;
+  border-bottom: 1px solid lightgray;
+}
