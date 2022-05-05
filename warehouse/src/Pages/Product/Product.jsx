@@ -5,12 +5,15 @@ import CardProduct from "../../Components/product/productDetail";
 import VariantProduct from "../../Components/variantProduct/variantProduct";
 import ColoredLinearProgress from "../../Common/LineProgress";
 import "./product.css";
+import { Modal} from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 export default function Product() {
   let { productID } = useParams();
   const [productDetail, setProductDetail] = useState("");
   const [variantProduct, setVariantProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  
   useEffect(async () => {
     setIsLoading(true);
     await getDetailProduct();
@@ -39,15 +42,15 @@ export default function Product() {
     }
   };
 
-  // function updateAmountVariantProduct(id, count) {
-  //   setVariantProduct((variantProduct) => {
-  //     return variantProduct.map((row, index) =>
-  //       index === id
-  //         ? { ...row, count: count }
-  //         : row
-  //     );
-  //   });
-  // }
+  const handlePacking = () =>{
+    Modal.confirm({
+      title: 'Confirm',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Bla bla ...',
+      okText: '确认',
+      cancelText: '取消',
+    });
+  }
   return (
     <React.Fragment>
       {isLoading ? (
@@ -70,6 +73,7 @@ export default function Product() {
           />
           <VariantProduct
             variantProductData={variantProduct}
+            onclick={handlePacking}
             //update={updateAmountVariantProduct}
           />
         </div>

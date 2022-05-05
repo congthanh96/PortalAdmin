@@ -3,6 +3,7 @@ import {
   GET_ORDERS_API,
   GET_ORDER_BY_ID_API,
   GET_PRODUCTS_IN_ORDER_API,
+  UPDATE_STATUS_ORDER_API,
 } from "../../Common/constants";
 
 export const ordersAPI = {
@@ -17,5 +18,8 @@ export const ordersAPI = {
   },
   getProductsInOrder: (params) => {
     return axiosClient.get(GET_PRODUCTS_IN_ORDER_API + params);
+  },
+  changeStatusProduct: (id, status) => {
+    return axiosClient.post(UPDATE_STATUS_ORDER_API + id + "/" + status);
   },
 };

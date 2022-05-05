@@ -5,11 +5,14 @@ import {
   GET_ORDERS_ACCEPT,
   GET_ORDERS_PREPARING,
   GET_ORDERS_SHIPPING,
+  GET_ORDERS_PENDING,
   ACCEPT,
   PREPARING,
-  SHIPPING
+  SHIPPING,
+  PENDING
 } from "../../Common/constants";
 import { ordersAPI } from "../../APIs";
+import { Pending } from "@mui/icons-material";
 
 export const actGetOrders = () => {
   return async (dispatch) => {
@@ -44,30 +47,34 @@ export const actGetOrdersWithStatus = (status) => {
 
     try {
       const response = await ordersAPI.getOrdersWithStatus(status);
-      console.log(response);
-      if(response.bills===undefined)
-      {
-          return;
-      }
+      console.log(response+status);
+      const data = response.bills===undefined?[]:response.bills
       switch (status) {
         case ACCEPT: {
           dispatch({
             type: GET_ORDERS_ACCEPT,
-            orders: response.bills,
+            orders: data,
           });
           break;
         }
         case PREPARING: {
           dispatch({
             type: GET_ORDERS_PREPARING,
-            orders: response.bills,
+            orders: data,
           });
           break;
         }
         case SHIPPING: {
           dispatch({
             type: GET_ORDERS_SHIPPING,
-            orders: response.bills,
+            orders: data,
+          });
+          break;
+        }
+        case PENDING: {
+          dispatch({
+            type: GET_ORDERS_PENDING,
+            orders: data,
           });
           break;
         }

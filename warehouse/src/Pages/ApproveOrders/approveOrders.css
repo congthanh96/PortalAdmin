@@ -1,0 +1,8 @@
+.linear{
+    width: 100%;
+  }
+  .approve-order-list {
+    margin-top: 30px;
+    flex: 6;
+    background-color: white;
+  }

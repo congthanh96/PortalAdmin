@@ -9,6 +9,7 @@ import { formatVND } from "../../Utils/formatVND";
 
 const VariantProduct = ({ variantProductData }) => {
   const [data, setData] = useState(variantProductData);
+  console.log(data)
   const [dataToUpdate, setDataToUpdate] = useState("");
   const [pageSize, setPageSize] = useState(10);
   // object for import

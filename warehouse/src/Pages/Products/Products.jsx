@@ -110,7 +110,6 @@ export default function Products() {
           rows={lstProduct}
           disableSelectionOnClick
           columns={columns}
-          checkboxSelection
           pageSize={pageSize}
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           rowsPerPageOptions={[10, 25, 50, 100]}

@@ -5,12 +5,14 @@ import {
   GET_ORDERS_ACCEPT,
   GET_ORDERS_PREPARING,
   GET_ORDERS_SHIPPING,
+  GET_ORDERS_PENDING,
 } from "../../Common/constants";
 const initialState = {
   orders: [],
   ordersAccept: [],
   ordersPreparing: [],
   ordersShipping: [],
+  ordersPending: [],
   isLoading: false,
 };
 
@@ -50,6 +52,12 @@ export default function ordersReducer(state = initialState, action) {
       return {
         ...state,
         ordersShipping: action.orders,
+        isLoading: false,
+      };
+      case GET_ORDERS_PENDING:
+      return {
+        ...state,
+        ordersPending: action.orders,
         isLoading: false,
       };
     default:

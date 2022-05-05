@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  actGetOrders,
-  actGetOrdersWithStatus,
-} from "../../Actions/OrdersAction/ordersAction";
+import { actGetOrdersWithStatus } from "../../Actions/OrdersAction/ordersAction";
 import ColoredLinearProgress from "../../Common/LineProgress";
 import { formatVND } from "../../Utils/formatVND";
 import { DataGrid } from "@material-ui/data-grid";
@@ -13,6 +10,11 @@ import { SHIPPING, ACCEPT, PREPARING } from "../../Common/constants";
 import { Link } from "react-router-dom";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import MoveToInboxIcon from "@mui/icons-material/MoveToInbox";
+import { Modal, Button } from "antd";
+import { ordersAPI } from "../../APIs";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { toastr } from "react-redux-toastr";
+
 export default function Orders() {
   const dispatch = useDispatch();
   // const lstOrder = useSelector((state) => state.ordersReducer.orders);
@@ -26,13 +28,14 @@ export default function Orders() {
     (state) => state.ordersReducer.ordersShipping
   );
   const isLoading = useSelector((state) => state.ordersReducer.isLoading);
-
+  console.log("accept" + lstOrderAccept);
+  console.log("prepare" + lstOrderPrepareing);
+  console.log("shipp" + lstOrderShipping);
   const [data, setData] = useState(lstOrderAccept);
   const [pageSize, setPageSize] = useState(10);
   const [activeBtn, setActiveBtn] = useState(0);
   const [isAccept, setIsAccept] = useState(true);
   const [isPreparing, setIsPreparing] = useState(false);
-  //const [isShipping, setIsShipping] = useState(false);
 
   useEffect(() => {
     try {
@@ -109,13 +112,13 @@ export default function Orders() {
       renderCell: (params) => {
         return (
           <div
-            // className={
-            //   params.row.codeSeller === "NW2021000469" ||
-            //   params.row.codeSeller === "NW2021000218" ||
-            //   params.row.codeSeller === "NW2021000470"
-            //     ? "orderListEditDev"
-            //     : "orderListEdit"
-            // }
+          // className={
+          //   params.row.codeSeller === "NW2021000469" ||
+          //   params.row.codeSeller === "NW2021000218" ||
+          //   params.row.codeSeller === "NW2021000470"
+          //     ? "orderListEditDev"
+          //     : "orderListEdit"
+          // }
           >
             {params.row.code}
           </div>
@@ -129,13 +132,13 @@ export default function Orders() {
       renderCell: (params) => {
         return (
           <div
-            // className={
-            //   params.row.codeSeller === "NW2021000469" ||
-            //   params.row.codeSeller === "NW2021000218" ||
-            //   params.row.codeSeller === "NW2021000470"
-            //     ? "orderListEditDev"
-            //     : "orderListEdit"
-            // }
+          // className={
+          //   params.row.codeSeller === "NW2021000469" ||
+          //   params.row.codeSeller === "NW2021000218" ||
+          //   params.row.codeSeller === "NW2021000470"
+          //     ? "orderListEditDev"
+          //     : "orderListEdit"
+          // }
           >
             {params.row.codeSeller}
           </div>
@@ -175,110 +178,13 @@ export default function Orders() {
           <>{params.row.status === ACCEPT ? "Accept" : params.row.status}</>
         );
       },
-      // renderCell: (params) => {
-      //   return (
-      //     <>
-      //       {params.row.idShip ? (
-      //         <Link
-      //           to={{
-      //             pathname: `/status-GHTK/${params.row.idBill}/${params.row.idShip}`,
-      //             state: params.row,
-      //           }}
-      //         >
-      //           <button className="orderListEditDev">
-      //             {params.row.shipStatusText}
-      //           </button>
-      //         </Link>
-      //       ) : (
-      //         <>
-      //           <select
-      //             className={"order form-select " + params.row.status}
-      //             onClick={(value, key) =>
-      //               townsFilter(value, key, params.row.status)
-      //             }
-      //             onTouchStart={(value, key) =>
-      //               townsFilter(value, key, params.row.status)
-      //             }
-      //             onChange={(value, key) =>
-      //               townsFilter(value, key, params.row.status)
-      //             }
-      //           >
-      //             <option className={params.row.status}>
-      //               {params.row.status}
-      //             </option>
-      //             {downCategory.map((value, key) => {
-      //               return (
-      //                 <option
-      //                   value={value.id}
-      //                   key={key}
-      //                   style={{ padding: 10 }}
-      //                 >
-      //                   {key + " - " + value.id + " -  " + value.name}
-      //                 </option>
-      //               );
-      //             })}
-      //           </select>
-      //           <IconButton
-      //             aria-label="edit"
-      //             disabled={loading2 === params.row.idBill}
-      //             onClick={() => {
-      //               handleTransStatus(params.row.idBill, params.row.status);
-      //             }}
-      //           >
-      //             <EditIcon />
-      //             {loading2 === params.row.idBill && (
-      //               <CircularProgress
-      //                 size={38}
-      //                 className={classes.fabProgress}
-      //               />
-      //             )}
-      //           </IconButton>
-      //         </>
-      //       )}
-      //     </>
-      //   );
-      // },
     },
-    // {
-    //   field: "",
-    //   headerName: "Vận chuyển",
-    //   flex:1
-    //    //2022/04/13 Huynh-dt export file ADD
-    //   disableExport: true,
-    //    //2022/04/13 Huynh-dt export file ADD
-    //   // renderCell: (params) => {
-    //   //   return (
-    //   //     <>
-    //   //       {params.row.shipName ? (
-    //   //         <>
-    //   //           <button
-    //   //             className="productListEdit"
-    //   //             onClick={() => handleChangeToDelivered(params.row)}
-    //   //           >
-    //   //             Giao thành công
-    //   //           </button>
-    //   //         </>
-    //   //       ) : (
-    //   //         <Link
-    //   //           to={{
-    //   //             pathname: `/order-GHTK/${params.row.idBill}`,
-    //   //             state: params.row,
-    //   //           }}
-    //   //         >
-    //   //           <button className="productListEdit">Thêm GHTK</button>
-    //   //         </Link>
-    //   //       )}
-    //   //     </>
-    //   //   );
-    //   // },
-    // },
-
     { field: "updater", headerName: "Người xử lý", flex: 1, minWidth: 120 },
     {
       field: "packing",
       headerName: "Đóng hàng",
       flex: 1,
-      minWidth: 120,
+      minWidth: 155,
       hide: !isAccept,
       renderCell: (params) => {
         return (
@@ -292,23 +198,54 @@ export default function Orders() {
       field: "delivery",
       headerName: "Giao hàng",
       flex: 1,
-      minWidth: 120,
+      minWidth: 155,
       hide: !isPreparing,
       renderCell: (params) => {
-        return <LocalShippingIcon style={{ marginLeft: 15 }} />;
+        return (
+          <Button
+            type="link"
+            onClick={() => handleDelivery(params.row.code, params.row.idBill)}
+          >
+            <LocalShippingIcon style={{ marginLeft: 15 }} />
+          </Button>
+        );
       },
     },
   ];
 
+  const handleDelivery = (code, idBill) => {
+    console.log(code + "  " + idBill);
+    Modal.confirm({
+      title: `Xác nhận chuyển hàng cho shipper đơn hàng #${code}`,
+      icon: <ExclamationCircleOutlined />,
+      content:
+        "Sau khi gửi hàng cho shipper thì đơn hàng sẽ chuyển sang trạng thái đã chuyển hàng cho shipper",
+      okText: "OK",
+      cancelText: "CANCEL",
+      onOk: () => handleOk(code, idBill),
+      onCancel: () => {
+        console.log("cancel");
+      },
+    });
+  };
+
+  const handleOk = async (code, idBill) => {
+    console.log("Ok");
+    try {
+      await ordersAPI.changeStatusProduct(idBill, SHIPPING);
+      await dispatch(actGetOrdersWithStatus(PREPARING));
+      await dispatch(actGetOrdersWithStatus(SHIPPING));
+      toastr.success(`Gửi đơn hàng #${code} cho shipper thành công`);
+    } catch (error) {
+      toastr.error(error);
+      console.log(error);
+    }
+  };
+
   const lstStatus = [
-    //{ id: "All", name: "Tất cả", index: 0 },
-    // { id: "Pending", name: "Đơn chờ duyệt", index: 1 },
     { id: ACCEPT, name: "Đang chờ đóng", index: 0 },
     { id: PREPARING, name: "Đã đóng hàng xong", index: 1 },
     { id: SHIPPING, name: "Đã giao hàng cho shipper", index: 2 },
-    // { id: "Delivered", name: "Giao thành công", index: 5 },
-    // { id: "Delay", name: "Hoãn đơn", index: 6 },
-    // { id: "Cancel", name: "Hủy đơn", index: 7 },
   ];
   return (
     <div className="orderList">
@@ -331,13 +268,11 @@ export default function Orders() {
           <ColoredLinearProgress />
         </div>
       ) : (
-        // <>{JSON.stringify(lstOrder)}</>
         <DataGrid
           rows={data}
           getRowId={(row) => row.idBill}
           disableSelectionOnClick
           columns={columns}
-          checkboxSelection
           pageSize={pageSize}
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           rowsPerPageOptions={[10, 25, 50, 100]}

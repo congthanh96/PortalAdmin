@@ -1,51 +1,25 @@
 import {
-  AttachMoney,
-  BarChart,
   ShoppingCart,
-  PermIdentity,
   Report,
-  Storefront,
-  TrendingUp,
   WorkOutline,
-  PersonAdd,
 } from "@material-ui/icons";
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./sidebar.css";
+import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 
 export default function Sidebar() {
   const [isActive, setIsActive] = useState(-1);
   const sideBar = [
-    // {
-    //   id: 1,
-    //   linkTo: '/users',
-    //   nameIcon: 'PermIdentity',
-    //   nameLink: 'Tài khoản',
-    // },
     {
-      id: 2,
+      id: 1,
       linkTo: "/products",
       nameIcon: "WorkOutline",
       nameLink: "Sản phẩm",
     },
-    { id: 3, linkTo: "/orders", nameIcon: "ShoppingCart", nameLink: "Đóng hàng" },
-    // { id: 4, linkTo: '/ghtk', nameIcon: 'MailOutline', nameLink: 'GHTK' },
-    // {
-    //   id: 5,
-    //   linkTo: '/promotions',
-    //   nameIcon: 'TrendingUp',
-    //   nameLink: 'Khuyến mãi',
-    // },
-    // { id: 6, linkTo: '/rankList', nameIcon: 'Storefront', nameLink: 'Ranks' },
-    // { id: 7, linkTo: '/requests', nameIcon: 'BarChart', nameLink: 'Yêu cầu' },
-    // { id: 8, linkTo: '/transactions', nameIcon: 'AttachMoney', nameLink: 'Ví' },
-    // { id: 9, linkTo: '/reports', nameIcon: 'Report', nameLink: 'Báo cáo' },
-    // { id: 10, linkTo: '/create-site', nameIcon: 'TrendingUp', nameLink: 'Tạo site' },
-
-    // //2022/04/12 Huynh-dt add create-account start
-    // { id: 11, linkTo: '/create-account', nameIcon: 'PersonAddAlt', nameLink: 'Tạo tài khoản' },
-    // //2022/04/12 Huynh-dt add create-account start
+    { id: 2, linkTo: "/orders", nameIcon: "ShoppingCart", nameLink: "Đóng hàng" },
+    { id: 3, linkTo: '/approve-orders', nameIcon: 'LibraryAddCheckIcon', nameLink: 'Duyệt đơn hàng' },
   ];
   return (
     <div className="sidebar">
@@ -77,22 +51,12 @@ export default function Sidebar() {
                   }
                   onClick={() => setIsActive(index)}
                 >
-                  {value.nameIcon === "PermIdentity" ? (
-                    <PermIdentity className="sidebarIcon" />
-                  ) : value.nameIcon === "WorkOutline" ? (
+                  { value.nameIcon === "WorkOutline" ? (
                     <WorkOutline className="sidebarIcon" />
-                  ) : value.nameIcon === "Storefront" ? (
-                    <Storefront className="sidebarIcon" />
-                  ) : value.nameIcon === "ShoppingCart" ? (
+                  )  : value.nameIcon === "ShoppingCart" ? (
                     <ShoppingCart className="sidebarIcon" />
-                  ) : value.nameIcon === "TrendingUp" ? (
-                    <TrendingUp className="sidebarIcon" />
-                  ) : value.nameIcon === "BarChart" ? (
-                    <BarChart className="sidebarIcon" />
-                  ) : value.nameIcon === "AttachMoney" ? (
-                    <AttachMoney className="sidebarIcon" />
-                  ) : value.nameIcon === "PersonAddAlt" ? (
-                    <PersonAdd className="sidebarIcon" />
+                  ) : value.nameIcon === "LibraryAddCheckIcon" ? (
+                    <LibraryAddCheckIcon className="LibraryAddCheckIcon" />
                   ) : (
                     <Report className="sidebarIcon" />
                   )}
