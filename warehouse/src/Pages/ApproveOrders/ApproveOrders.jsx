@@ -5,7 +5,10 @@ import { actGetOrdersWithStatus } from "../../Actions/OrdersAction/ordersAction"
 import { formatVND } from "../../Utils/formatVND";
 import { DataGrid } from "@material-ui/data-grid";
 import ColoredLinearProgress from "../../Common/LineProgress";
-import './approveOrders.css'
+import "./approveOrders.css";
+import { Link } from "react-router-dom";
+import { Menu, Dropdown, Space } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 
 export default function ApproveOrders() {
   const dispatch = useDispatch();
@@ -26,6 +29,46 @@ export default function ApproveOrders() {
       console.log(error);
     }
   }, []);
+
+  const menu = (order) => {
+    return (
+      <Menu
+        // onClick={() => {
+        //   console.log(order);
+        // }}
+        items={[
+          {
+            label: (
+              <Link
+                to={{
+                  pathname: `/GHTK/${order.idBill}`,
+                  state: JSON.stringify(order),
+                }}
+              >
+                GHTK
+              </Link>
+            ),
+            key: "0",
+          },
+          {
+            type: "divider",
+          },
+          {
+            label: "Newee Express",
+            key: "1",
+            disabled: true,
+          },
+
+          {
+            label: "Shopee Express",
+            key: "2",
+            disabled: true,
+          },
+        ]}
+      />
+    );
+  };
+
   const columns = [
     { field: "idBill", headerName: "ID", width: 90, hide: true },
     {
@@ -110,6 +153,48 @@ export default function ApproveOrders() {
       },
     },
     { field: "updater", headerName: "Người xử lý", flex: 1, minWidth: 120 },
+    {
+      field: "delivery",
+      headerName: "Vận chuyển",
+      flex: 1,
+      minWidth: 160,
+      //2022/04/13 Huynh-dt export file ADD
+      //disableExport: true,
+      //2022/04/13 Huynh-dt export file ADD
+      renderCell: (params) => {
+        return (
+          <>
+            {params.row.shipName ? (
+              <>
+                <button
+                  className="btn-ghtk"
+                  // onClick={() => handleChangeToDelivered(params.row)}
+                >
+                  Giao thành công
+                </button>
+              </>
+            ) : (
+              // <Link
+              //   to={{
+              //     pathname: `/GHTK/${params.row.idBill}`,
+              //     state: params.row,
+              //   }}
+              // >
+              //   <button className="btn-ghtk">Thêm GHTK</button>
+              // </Link>
+              <Dropdown overlay={menu(params.row)} placement="bottomLeft">
+                <a>
+                  <Space>
+                    Chọn DVVC
+                    <DownOutlined />
+                  </Space>
+                </a>
+              </Dropdown>
+            )}
+          </>
+        );
+      },
+    },
     // {
     //   field: "packing",
     //   headerName: "Đóng hàng",

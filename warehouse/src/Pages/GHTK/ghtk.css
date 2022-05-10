@@ -1,0 +1,32 @@
+.linear {
+  width: 100%;
+}
+
+.bill-container {
+  width: 100%;
+  display: inline;
+  margin: 20px;
+}
+
+.bill-detail {
+  flex: 1;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.inline {
+  display: flex;
+  
+}
+.item-container {
+  min-width: 200px;
+  width: 250px;
+  margin-left: 10px;
+  font-size: 16px;
+}
+.dropdown-address
+{
+  margin: 10px;
+  font-size: 18px;
+}
