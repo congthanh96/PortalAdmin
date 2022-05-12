@@ -45,15 +45,17 @@ export const LIST_ADDRESS_WAREHOUSE = [
         province:"Thành Phố Hồ Chí Minh",
         district:"Quận Bình Thạnh",
         ward:"Phường 13",
+        address:"438 Nơ Trang Long",
         tel:"0972100200"
     },
     {
         id:"2",
         name:"Kho Thủ Đức",
         province:"Thành Phố Hồ Chí Minh",
-        district:"Quận Bình Thạnh",
-        ward:"Phường 13",
-        tel:"0972100200"
+        district:"Quận Thủ Đức",
+        ward:"Phường Long Trường",
+        address:"22 Lê Văn Việt",
+        tel:"0338847312"
     }
 ]
 
