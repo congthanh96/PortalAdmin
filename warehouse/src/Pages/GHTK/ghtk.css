@@ -43,3 +43,8 @@
   margin:10px;
   border-radius: 5px;
 }
+.inputNum {
+  margin-left: 10px;
+  border: none;
+  border-bottom: 1px solid lightgray;
+}

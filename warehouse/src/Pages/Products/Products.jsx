@@ -73,7 +73,7 @@ export default function Products() {
       headerName: "Action",
       disableExport: true,
       minWidth: 110,
-      flex: 1,
+      flex: 0.3,
       renderCell: (params) => {
         return (
           <>

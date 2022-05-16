@@ -9,7 +9,8 @@ export const GET_ORDERS_API = "/Newee/Bill/GetListBill/1000/1"; //limit = 1000, 
 export const GET_ORDER_BY_ID_API = "/Newee/Bill/GetBillById/"
 export const GET_PRODUCTS_IN_ORDER_API = "/Newee/Bill/GetBillDetailByIdBill/"
 export const UPDATE_STATUS_ORDER_API = "/Newee/Bill/ChangeStatusTo/"//"/Newee/Bill/ChangeStatusTo/{idBill}/{status}"
-export const GET_GHTK_LIST_PICK_ADD = "/ghtk/get-list-pickadd"
+export const GET_GHTK_LIST_PICK_ADD_API = "/ghtk/get-list-pickadd"
+export const POST_GHTK_ORDER_API = "/ghtk/post-order"
 
 //ACTIONS AUTHENTICATE
 export const AUTH_LOADING = "AUTH_LOADING";

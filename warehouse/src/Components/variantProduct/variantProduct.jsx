@@ -129,11 +129,9 @@ const VariantProduct = ({ variantProductData }) => {
       minWidth: 160,
       renderCell: (params) => {
         return (
-          <>
-            <button className="btnAdd" onClick={() => importGood(params.row)}>
+            <a className="btnAdd" onClick={() => importGood(params.row)}>
               Nhập hàng
-            </button>
-          </>
+            </a>
         );
       },
     },
@@ -144,9 +142,9 @@ const VariantProduct = ({ variantProductData }) => {
       minWidth: 160,
       renderCell: (params) => {
         return (
-          <button className="btnExcept" onClick={() => exportGood(params.row)}>
+          <a className="btnExcept" onClick={() => exportGood(params.row)}>
             Xuất hàng
-          </button>
+          </a>
         );
       },
     },
