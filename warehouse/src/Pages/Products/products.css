@@ -1,5 +1,5 @@
 .productList {
-  margin-top: 30px;
+  margin-top: 20px;
   flex: 6;
   background-color: white;
 }
@@ -22,8 +22,8 @@
 .productListImg {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
   object-fit: cover;
+  margin-right: 10px;
 }
 
 .productListEdit {

@@ -1,3 +1,6 @@
+/**
+ * Actions của đơn hàng
+ */
 import {
   GET_ORDERS,
   ORDERS_LOADING,
@@ -9,27 +12,24 @@ import {
   ACCEPT,
   PREPARING,
   SHIPPING,
-  PENDING
+  PENDING,
 } from "../../Common/constants";
 import { ordersAPI } from "../../APIs";
-import { Pending } from "@mui/icons-material";
 
+// Lấy danh sách đơn hàng
 export const actGetOrders = () => {
   return async (dispatch) => {
-    //const tokenUser = getState().authReducer.user;
     dispatch({
       type: ORDERS_LOADING,
     });
 
     try {
       const response = await ordersAPI.getOrders();
-      console.log(response);
       dispatch({
         type: GET_ORDERS,
         orders: response.bills,
       });
     } catch (err) {
-      console.log(err);
       dispatch({
         type: GET_ORDERS_FAILURE,
       });
@@ -37,18 +37,15 @@ export const actGetOrders = () => {
   };
 };
 
+// Lấy danh sách đơn hàng dựa theo trạng thái đơn hàng
 export const actGetOrdersWithStatus = (status) => {
-  console.log(status);
   return async (dispatch) => {
-    //const tokenUser = getState().authReducer.user;
     dispatch({
       type: ORDERS_LOADING,
     });
-
     try {
       const response = await ordersAPI.getOrdersWithStatus(status);
-      console.log(response+status);
-      const data = response.bills===undefined?[]:response.bills
+      const data = response.bills === undefined ? [] : response.bills;
       switch (status) {
         case ACCEPT: {
           dispatch({
@@ -81,12 +78,7 @@ export const actGetOrdersWithStatus = (status) => {
         default:
           return;
       }
-      // dispatch({
-      //     type: GET_ORDERS,
-      //     orders: response.bills,
-      // })
     } catch (err) {
-      console.log(err);
       dispatch({
         type: GET_ORDERS_FAILURE,
       });

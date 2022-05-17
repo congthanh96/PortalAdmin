@@ -1,9 +1,12 @@
+/**
+ * Trang xử lý đăng đơn lên GHTK và duyệt đơn
+ */
 import React, { useEffect, useState } from "react";
 import { GHTKAPI, ordersAPI } from "../../APIs";
 import { DownOutlined } from "@ant-design/icons";
 import ColoredLinearProgress from "../../Common/LineProgress";
 import { Menu, Dropdown, Space, Input, Button, Form, Table, Modal } from "antd";
-import { LIST_ADDRESS_WAREHOUSE,ACCEPT } from "../../Common/constants";
+import { LIST_ADDRESS_WAREHOUSE, ACCEPT } from "../../Common/constants";
 import { formatVND } from "../../Utils/formatVND";
 import { toastr } from "react-redux-toastr";
 import { useHistory } from "react-router-dom";
@@ -12,13 +15,11 @@ import "./ghtk.css";
 export default function GHTK({ location }) {
   const { state } = location;
   const history = useHistory();
-  // let { orderID } = useParams();
   const [form] = Form.useForm();
   const billData = JSON.parse(state);
   const [isLoading, setIsLoading] = useState(false);
   const [isVisibleModalWeight, setIsVisibleModalWeight] = useState(false);
   const [productsInOrder, setProductsInOrder] = useState([]);
-  //const [dataToUpdateWeight,setDataToUpdateWeight] =  useState("")
   const [dataOrder, setDataOrder] = useState({
     id: "string",
     pick_name: "string",
@@ -47,157 +48,6 @@ export default function GHTK({ location }) {
     tag: [],
   });
 
-  useEffect(async () => {
-    try {
-      setIsLoading(true);
-      console.log(billData);
-
-      var listProducts = [];
-
-      await billData.billDetail.forEach((element) => {
-        listProducts.push({
-          name: `${element.productName}` || "sản phẩm test 01",
-          weight: element.weight * 1 || 1,
-          quantity: element.count * 1 || 1,
-          product_code: "",
-        });
-      });
-
-      console.log(listProducts)
-      setProductsInOrder(listProducts);
-
-      let tagTemp = getTagOfOrder();
-      setDataOrder({
-        ...dataOrder,
-        id: billData.idBill,
-        pick_name: billData.code,
-        pick_province: LIST_ADDRESS_WAREHOUSE[0].province,
-        pick_district: LIST_ADDRESS_WAREHOUSE[0].district,
-        pick_ward: LIST_ADDRESS_WAREHOUSE[0].ward,
-        pick_address: LIST_ADDRESS_WAREHOUSE[0].address,
-        pick_tel: LIST_ADDRESS_WAREHOUSE[0].tel,
-        tel: billData.phone,
-        name: billData.fullName,
-        address: billData.address,
-        province: billData.tp,
-        district: billData.qh,
-        ward: billData.pXa,
-        pick_money: billData.totalPrice,
-        note: billData.note,
-        value: billData.totalPrice,
-        tag: tagTemp,
-      });
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
-  const getTagOfOrder = () => {
-    let isFragile = false; // hàng dễ vỡ
-    let isAgricultural = false; // hàng nông sản
-    billData.billDetail.forEach((product) => {
-      console.log(product.variantf.tag1);
-      console.log(product.variantf.tag7);
-      if (product.variantf.tag1) {
-        isFragile = true;
-      }
-      if (product.variantf.tag7) {
-        isAgricultural = true;
-      }
-    });
-    console.log(isFragile, isAgricultural);
-    let tagTemp = [];
-    switch ([isFragile, isAgricultural]) {
-      case [true, false]: {
-        tagTemp = [1];
-        break;
-      }
-      case [false, true]: {
-        tagTemp = [7];
-        break;
-      }
-      case [true, true]: {
-        tagTemp = [1, 7];
-        break;
-      }
-      case [false, false]: {
-        tagTemp = [0];
-        break;
-      }
-      default:
-        tagTemp = [0];
-    }
-    console.log(tagTemp);
-    return tagTemp;
-  };
-  const menu = () => {
-    const lstItemAddress = [];
-    LIST_ADDRESS_WAREHOUSE.map((element, index) => {
-      let objectInItems = {
-        label: element.name,
-        key: element.id,
-      };
-      lstItemAddress.push(objectInItems);
-    });
-
-    return (
-      <Menu onClick={handleChoooseAddressWarehouse} items={lstItemAddress} />
-    );
-  };
-
-  const handleChoooseAddressWarehouse = (e) => {
-    console.log(e.key + e.label);
-    LIST_ADDRESS_WAREHOUSE.forEach((element) => {
-      console.log(element.id);
-      if (element.id === e.key) {
-        setDataOrder({
-          ...dataOrder,
-          pick_province: element.province,
-          pick_district: element.district,
-          pick_ward: element.ward,
-          pick_address: element.address,
-          pick_tel: element.tel,
-        });
-      }
-    });
-  };
-
-  const handlePostGHTK = async() => {
-    
-    try{
-      const dataToPost ={
-        products:productsInOrder,
-        order:dataOrder
-      }
-      console.log("data" + JSON.stringify(dataToPost));
-
-      const resDataPost = await GHTKAPI.postOrder(JSON.stringify(dataToPost))
-    
-      console.log(resDataPost)
-      if(resDataPost.success)
-      {
-        try {
-          const resChangeStatus = await ordersAPI.changeStatusProduct(dataOrder.id,ACCEPT)
-          console.log(resChangeStatus)
-          toastr.success("Duyệt đơn thành công, đơn hàng sẽ được chuyển sang trạng thái đang chờ đóng.")
-          history.push({
-            pathname: "/orders",
-          });
-        } catch (error) {
-          toastr.warning("Đăng đơn thành công nhưng chuyển trạng thái đơn hàng không thành công.")
-        }
-      }
-      else{
-        toastr.warning("Quá trình đăng đơn lên GHTK chưa hoàn tất!",resDataPost.message)
-      }
-    }catch(e)
-    {
-      console.log(e)
-      toastr.warning("Quá trình đăng đơn lên GHTK chưa hoàn tất!")
-    }
-  };
-
   const columns = [
     {
       title: "key",
@@ -225,7 +75,7 @@ export default function GHTK({ location }) {
       dataIndex: "variantf",
       key: "variantf",
       render: (text) => {
-        return <a onClick={() => updateWeight(text)}>{text.weight}</a>;
+        return <label onClick={() => updateWeight(text)}>{text.weight}</label>;
       },
     },
     {
@@ -241,12 +91,7 @@ export default function GHTK({ location }) {
     },
   ].filter((item) => !item.hidden);
 
-  const updateWeight = (text) => {
-    //setDataToUpdateWeight(text);
-    console.log(text);
-    setIsVisibleModalWeight(true);
-  };
-
+  // Hiển thị thông tin chung của danh sách sản phẩm trong đơn hàng
   const Footer = () => {
     return (
       <>
@@ -260,8 +105,162 @@ export default function GHTK({ location }) {
     );
   };
 
+  useEffect(async () => {
+    try {
+      setIsLoading(true);
+      var listProducts = [];
+
+      // Thêm danh sách sản phẩm của đơn hàng vào dữ liệu gửi lên GHTK
+      await billData.billDetail.forEach((element) => {
+        listProducts.push({
+          name: `${element.productName}` || "Sản phẩm chưa đặt tên",
+          weight: element.weight * 1 || 1,
+          quantity: element.count * 1 || 1,
+          product_code: "",
+        });
+      });
+      setProductsInOrder(listProducts);
+
+      // Xử lý data thông tin đơn hàng
+      let tagTemp = getTagOfOrder();
+      setDataOrder({
+        ...dataOrder,
+        id: billData.idBill,
+        pick_name: billData.code,
+        pick_province: LIST_ADDRESS_WAREHOUSE[0].province,
+        pick_district: LIST_ADDRESS_WAREHOUSE[0].district,
+        pick_ward: LIST_ADDRESS_WAREHOUSE[0].ward,
+        pick_address: LIST_ADDRESS_WAREHOUSE[0].address,
+        pick_tel: LIST_ADDRESS_WAREHOUSE[0].tel,
+        tel: billData.phone,
+        name: billData.fullName,
+        address: billData.address,
+        province: billData.tp,
+        district: billData.qh,
+        ward: billData.pXa,
+        pick_money: billData.totalPrice,
+        note: billData.note,
+        value: billData.totalPrice,
+        tag: tagTemp,
+      });
+      setIsLoading(false);
+    } catch (error) {
+      toastr.warning("Lấy thông tin đơn hàng bị lỗi! Vui lòng thử lại");
+    }
+  }, []);
+
+  // Xử lý các thuộc tính đặc biệt của đơn hàng
+  const getTagOfOrder = () => {
+    let isFragile = false; // hàng dễ vỡ
+    let isAgricultural = false; // hàng nông sản
+    billData.billDetail.forEach((product) => {
+      if (product.variantf.tag1) {
+        isFragile = true;
+      }
+      if (product.variantf.tag7) {
+        isAgricultural = true;
+      }
+    });
+    let tagTemp = [];
+    switch ([isFragile, isAgricultural]) {
+      case [true, false]: {
+        tagTemp = [1];
+        break;
+      }
+      case [false, true]: {
+        tagTemp = [7];
+        break;
+      }
+      case [true, true]: {
+        tagTemp = [1, 7];
+        break;
+      }
+      case [false, false]: {
+        tagTemp = [0];
+        break;
+      }
+      default:
+        tagTemp = [0];
+    }
+    return tagTemp;
+  };
+
+  // Danh sách địa chỉ kho
+  const menu = () => {
+    const lstItemAddress = [];
+    LIST_ADDRESS_WAREHOUSE.map((element, index) => {
+      let objectInItems = {
+        label: element.name,
+        key: element.id,
+      };
+      return lstItemAddress.push(objectInItems);
+    });
+    return (
+      <Menu onClick={handleChoooseAddressWarehouse} items={lstItemAddress} />
+    );
+  };
+
+  // Xử lý khi thay đổi địa chỉ kho
+  const handleChoooseAddressWarehouse = (e) => {
+    LIST_ADDRESS_WAREHOUSE.forEach((element) => {
+      if (element.id === e.key) {
+        setDataOrder({
+          ...dataOrder,
+          pick_province: element.province,
+          pick_district: element.district,
+          pick_ward: element.ward,
+          pick_address: element.address,
+          pick_tel: element.tel,
+        });
+      }
+    });
+  };
+
+  // Xử lý duyệt đơn hàng
+  const handlePostGHTK = async () => {
+    try {
+      const dataToPost = {
+        products: productsInOrder,
+        order: dataOrder,
+      };
+
+      const resDataPost = await GHTKAPI.postOrder(JSON.stringify(dataToPost));
+
+      // Đăng đơn hàng thành công
+      if (resDataPost.success) {
+        try {
+          // Chuyển trạng thái đơn hàng sang ACCEPT
+          await ordersAPI.changeStatusProduct(dataOrder.id, ACCEPT);
+          toastr.success(
+            "Duyệt đơn thành công, đơn hàng sẽ được chuyển sang trạng thái đang chờ đóng."
+          );
+          history.push({
+            pathname: "/orders",
+          });
+        } catch (error) {
+          toastr.warning(
+            "Đăng đơn thành công nhưng chuyển trạng thái đơn hàng không thành công."
+          );
+        }
+      } else {
+        toastr.warning(
+          "Quá trình đăng đơn lên GHTK chưa hoàn tất!",
+          resDataPost.message
+        );
+      }
+    } catch (e) {
+      toastr.warning("Quá trình đăng đơn lên GHTK chưa hoàn tất!");
+    }
+  };
+
+  // Xử lý khi update weight (để sau)
+  const updateWeight = (text) => {
+    //setDataToUpdateWeight(text);
+    setIsVisibleModalWeight(true);
+  };
+
+  // Xử lý khi thay đổi các thông tin của đơn hàng
   const handleChangeDataInput = (event) => {
-    console.log(event.target.value);
     setDataOrder({
       ...dataOrder,
       [event.target.name]: event.target.value,
@@ -269,7 +268,6 @@ export default function GHTK({ location }) {
   };
 
   return (
-    //<React.Fragment>
     <>
       {isLoading ? (
         <>
@@ -285,12 +283,10 @@ export default function GHTK({ location }) {
               <h3>Thông tin địa điểm lấy hàng</h3>
               <div className="dropdown-address">
                 <Dropdown overlay={menu} placement="bottomLeft">
-                  <a>
-                    <Space>
-                      Chọn địa chỉ lấy hàng
-                      <DownOutlined />
-                    </Space>
-                  </a>
+                  <Space>
+                    Chọn địa chỉ lấy hàng
+                    <DownOutlined />
+                  </Space>
                 </Dropdown>
               </div>
               <Form layout="inline" form={form}>
@@ -475,7 +471,6 @@ export default function GHTK({ location }) {
                     disabled
                   />
                 </div>
-                {/* </div> */}
               </Form>
             </div>
             <hr />
@@ -522,6 +517,5 @@ export default function GHTK({ location }) {
         </div>
       )}
     </>
-    //</React.Fragment>
   );
 }

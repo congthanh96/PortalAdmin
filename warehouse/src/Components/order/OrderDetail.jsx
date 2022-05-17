@@ -1,31 +1,62 @@
+/**
+ * Component chi tiết đơn hàng
+ */
 import React from "react";
-import "./orderDetail.css";
 import { formatVND } from "../../Utils/formatVND";
-import { DataGrid } from "@material-ui/data-grid";
+// import { DataGrid } from "@material-ui/data-grid";
+import { Table } from "antd";
+import "./orderDetail.css";
 
 const OrderDetail = ({ orderDetail, productsInOrder }) => {
-  const columns = [
-    // { field: "id", headerName: "ID", width: 0, hide: true },
+  // const columns = [
+  //   {
+  //     field: "productName",
+  //     headerName: "Tên sản phẩm",
+  //     flex: 2,
+  //   },
+  //   { field: "variantName", headerName: "Phân loại", flex: 1 },
+  //   { field: "count", headerName: "Số lượng", flex: 0.5 },
+
+  //   {
+  //     field: "price",
+  //     headerName: "Giá	",
+  //     flex: 1,
+  //     headerAlign: "center",
+  //     align: "center",
+  //     renderCell: (params) => {
+  //       return <>{formatVND(params.row.price)}</>;
+  //     },
+  //   },
+  // ];
+
+  const columnsAntd = [
     {
-      field: "productName",
-      headerName: "Tên sản phẩm",
-      flex: 2,
+      title: "Tên sản phẩm",
+      key: "productName",
+      dataIndex: "productName",
     },
-    // { field: "productf.brand", headerName: "Nhãn hiệu", width: 120 },
-    { field: "variantName", headerName: "Phân loại", flex: 1 },
-    { field: "count", headerName: "Số lượng", flex: 0.5 },
+    { dataIndex: "variantName", title: "Phân loại", key: "variantName" },
+    { dataIndex: "count", title: "Số lượng", key: "count" },
 
     {
-      field: "price",
-      headerName: "Giá	",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      renderCell: (params) => {
-        return <>{formatVND(params.row.price)}</>;
-      },
+      dataIndex: "price",
+      title: "Giá	",
+      render: (text) => formatVND(text),
     },
   ];
+
+  const Footer = () => {
+    return (
+      <>
+        Tiền đơn hàng: {formatVND(orderDetail.totalPrice)}
+        <br />
+        Phí ship: {formatVND(orderDetail.priceShip)}
+        <hr />
+        Tổng tiền đơn hàng:{" "}
+        {formatVND(orderDetail.totalPrice + orderDetail.priceShip)}
+      </>
+    );
+  };
 
   return (
     <div className="order-container">
@@ -62,13 +93,20 @@ const OrderDetail = ({ orderDetail, productsInOrder }) => {
       <div className="products-container">
         <div className="products-container-title">Thông tin sản phẩm:</div>
 
-        <DataGrid
+        {/* <DataGrid
           rows={productsInOrder}
           columns={columns}
           getRowId={(row) => row.variantId}
           disableSelectionOnClick
           autoHeight
-        />
+        /> */}
+        <Table
+          dataSource={productsInOrder}
+          columns={columnsAntd}
+          rowKey={(row) => row.variantId}
+          footer={Footer}
+          bordered
+        ></Table>
       </div>
     </div>
   );

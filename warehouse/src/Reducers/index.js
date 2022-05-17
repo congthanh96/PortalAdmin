@@ -1,4 +1,7 @@
 
+/**
+ * INDEX
+ */
 import { combineReducers } from 'redux';
 import authReducer from './AuthenticateReducer/authenticateReducer';
 import productsReducer from './ProductsReducer/productsReducer';

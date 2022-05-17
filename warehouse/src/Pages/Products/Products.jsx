@@ -1,16 +1,16 @@
+/**
+ * Trang danh sách sản phẩm
+ */
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import "./products.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { formatVND } from "../../Utils/formatVND";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-
-//  //2022/04/13 Huynh-dt export file ADD
-// import CustomToolbar from "../../components/ToolbarExportToCSV/CustomToolbar";
-//  //2022/04/13 Huynh-dt export file ADD
 import { actGetProducts } from "../../Actions/ProductsAction/productsAction";
 import ColoredLinearProgress from "../../Common/LineProgress";
+import "./products.css";
+import { toastr } from "react-redux-toastr";
 
 export default function Products() {
   const dispatch = useDispatch();
@@ -20,9 +20,10 @@ export default function Products() {
 
   useEffect(() => {
     try {
+      // Lấy danh sách sản phẩm
       dispatch(actGetProducts());
     } catch (error) {
-      console.log(error);
+      toastr.warning("Không thể lấy danh sách sản phẩm")
     }
   }, []);
 
@@ -80,19 +81,6 @@ export default function Products() {
             <Link to={"/product/" + params.row.id}>
               <ModeEditIcon style={{ marginLeft: 15, marginTop:20 }} />
             </Link>
-            {/* <DeleteOutline
-              className="productListDelete"
-              onClick={() => {
-                setConfirmDialog({
-                  isOpen: true,
-                  title: "Thực hiện sẽ không thể thay đổi!",
-                  subTitle: "Chắc chắn?",
-                  onConfirm: () => {
-                    handleDelete(params.row.id);
-                  },
-                });
-              }}
-            /> */}
           </>
         );
       },
@@ -101,6 +89,7 @@ export default function Products() {
 
   return (
     <div className="productList">
+      <h2> Danh sách sản phẩm</h2>
       {isLoading ? (
         <div className="linear">
           <ColoredLinearProgress />

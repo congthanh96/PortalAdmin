@@ -7,20 +7,22 @@
 }
 
 .pageLogin .formLogin {
-  width: 400px;
+  width: 450px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   background: white;
-  padding: 30px 20px;
+  padding: 40px;
   margin-top: 30px;
   border: 1px solid #dedede;
 }
 
-.pageLogin .formLogin .formCustomButton {
-  margin-top: 50px;
+.btn-login{
+  margin-top: 4px;
+  width: fit-content;
+  font-size: 20px;
 }
 
-.Button {
-  padding: 20px;
+.content{
+  width: 100%;
 }

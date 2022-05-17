@@ -1,3 +1,6 @@
+/**
+ * Topbar của trang web
+ */
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
@@ -29,7 +32,6 @@ export default function Topbar() {
           </Link>
         </div>
         <div className="topRight">
-          <div style={{ marginRight: 12 }}>{Date()}</div>
           <img src={logo} alt="" className="topAvatar" />
 
           {isLogin ?

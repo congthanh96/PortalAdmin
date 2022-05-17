@@ -1,10 +1,12 @@
+/**
+ * Danh sách đơn hàng đã được duyệt, đã đóng hàng và đã giao cho shipper
+ */
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actGetOrdersWithStatus } from "../../Actions/OrdersAction/ordersAction";
 import ColoredLinearProgress from "../../Common/LineProgress";
 import { formatVND } from "../../Utils/formatVND";
 import { DataGrid } from "@material-ui/data-grid";
-import "./orders.css";
 import { ButtonComponent } from "../../Components/orders/buttonComponent";
 import { SHIPPING, ACCEPT, PREPARING } from "../../Common/constants";
 import { Link } from "react-router-dom";
@@ -14,88 +16,39 @@ import { Modal, Button } from "antd";
 import { ordersAPI } from "../../APIs";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { toastr } from "react-redux-toastr";
+import "./orders.css";
 
 export default function Orders() {
   const dispatch = useDispatch();
-  // const lstOrder = useSelector((state) => state.ordersReducer.orders);
+
+  // Lấy danh sách đơn hàng đã được duyệt
   const lstOrderAccept = useSelector(
     (state) => state.ordersReducer.ordersAccept
   );
+
+  // Lấy danh sách đơn hàng đã đóng hàng
   const lstOrderPrepareing = useSelector(
     (state) => state.ordersReducer.ordersPreparing
   );
+
+  // Lấy danh sách đơn hàng đã giao cho shipper
   const lstOrderShipping = useSelector(
     (state) => state.ordersReducer.ordersShipping
   );
+
   const isLoading = useSelector((state) => state.ordersReducer.isLoading);
-  console.log("accept" + lstOrderAccept);
-  console.log("prepare" + lstOrderPrepareing);
-  console.log("shipp" + lstOrderShipping);
   const [data, setData] = useState(lstOrderAccept);
   const [pageSize, setPageSize] = useState(10);
   const [activeBtn, setActiveBtn] = useState(0);
   const [isAccept, setIsAccept] = useState(true);
   const [isPreparing, setIsPreparing] = useState(false);
 
-  useEffect(() => {
-    try {
-      //dispatch(actGetOrders());
-      lstStatus.forEach(async (status) => {
-        await dispatch(actGetOrdersWithStatus(status.id));
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const lstStatus = [
+    { id: ACCEPT, name: "Đang chờ đóng", index: 0 },
+    { id: PREPARING, name: "Đã đóng hàng xong", index: 1 },
+    { id: SHIPPING, name: "Đã giao hàng cho shipper", index: 2 },
+  ];
 
-  useEffect(() => {
-    console.log(activeBtn);
-    switch (activeBtn) {
-      case 0:
-        setData(lstOrderAccept);
-        break;
-      case 1:
-        setData(lstOrderPrepareing);
-        break;
-      case 2:
-        setData(lstOrderShipping);
-        break;
-      default:
-        setData(lstOrderAccept);
-    }
-    //setData(lstOrderAccept);
-  }, [lstOrderAccept, lstOrderPrepareing, lstOrderShipping]);
-
-  const onClick = async (id, index) => {
-    switch (index) {
-      case 0:
-        setData(lstOrderAccept);
-        setIsAccept(true);
-        setIsPreparing(false);
-        break;
-      case 1:
-        setData(lstOrderPrepareing);
-        setIsAccept(false);
-        setIsPreparing(true);
-        break;
-      case 2:
-        setData(lstOrderShipping);
-        setIsAccept(false);
-        setIsPreparing(false);
-        break;
-      default:
-        setData(lstOrderAccept);
-        setIsAccept(true);
-        setIsPreparing(false);
-    }
-    // if (id !== "All") {
-    //   setData(lstOrder.filter((item) => item.status === id));
-    // } else {
-    //   setData(lstOrder);
-    // }
-    setActiveBtn(index);
-    console.log(id + "222" + index);
-  };
   const columns = [
     { field: "idBill", headerName: "ID", width: 90, hide: true },
     {
@@ -110,19 +63,7 @@ export default function Orders() {
       headerName: "Mã Đơn Hàng",
       flex: 1,
       renderCell: (params) => {
-        return (
-          <div
-          // className={
-          //   params.row.codeSeller === "NW2021000469" ||
-          //   params.row.codeSeller === "NW2021000218" ||
-          //   params.row.codeSeller === "NW2021000470"
-          //     ? "orderListEditDev"
-          //     : "orderListEdit"
-          // }
-          >
-            {params.row.code}
-          </div>
-        );
+        return <div>{params.row.code}</div>;
       },
     },
     {
@@ -130,19 +71,7 @@ export default function Orders() {
       headerName: "Mã CTV",
       flex: 1,
       renderCell: (params) => {
-        return (
-          <div
-          // className={
-          //   params.row.codeSeller === "NW2021000469" ||
-          //   params.row.codeSeller === "NW2021000218" ||
-          //   params.row.codeSeller === "NW2021000470"
-          //     ? "orderListEditDev"
-          //     : "orderListEdit"
-          // }
-          >
-            {params.row.codeSeller}
-          </div>
-        );
+        return <div>{params.row.codeSeller}</div>;
       },
     },
     {
@@ -188,6 +117,7 @@ export default function Orders() {
       hide: !isAccept,
       renderCell: (params) => {
         return (
+          //Xử lý xem đơn hàng trước khi xác nhận đóng hàng
           <Link to={"/order/" + params.row.idBill}>
             <MoveToInboxIcon style={{ marginLeft: 15, marginTop: 20 }} />
           </Link>
@@ -212,9 +142,62 @@ export default function Orders() {
       },
     },
   ];
+  
 
+  useEffect(() => {
+    try {
+      lstStatus.forEach(async (status) => {
+        await dispatch(actGetOrdersWithStatus(status.id));
+      });
+    } catch (error) {
+      toastr.warning("Không thể lấy danh sách sản phẩm")
+    }
+  }, []);
+
+  useEffect(() => {
+    switch (activeBtn) {
+      case 0:
+        setData(lstOrderAccept);
+        break;
+      case 1:
+        setData(lstOrderPrepareing);
+        break;
+      case 2:
+        setData(lstOrderShipping);
+        break;
+      default:
+        setData(lstOrderAccept);
+    }
+  }, [lstOrderAccept, lstOrderPrepareing, lstOrderShipping]);
+
+  // Xử lý hiển thị data khi chọn vào các button
+  const onClick = async (id, index) => {
+    switch (index) {
+      case 0:
+        setData(lstOrderAccept);
+        setIsAccept(true);
+        setIsPreparing(false);
+        break;
+      case 1:
+        setData(lstOrderPrepareing);
+        setIsAccept(false);
+        setIsPreparing(true);
+        break;
+      case 2:
+        setData(lstOrderShipping);
+        setIsAccept(false);
+        setIsPreparing(false);
+        break;
+      default:
+        setData(lstOrderAccept);
+        setIsAccept(true);
+        setIsPreparing(false);
+    }
+    setActiveBtn(index);
+  };
+
+  // Xử lý khi nhấn vào button giao hàng cho shipper
   const handleDelivery = (code, idBill) => {
-    console.log(code + "  " + idBill);
     Modal.confirm({
       title: `Xác nhận chuyển hàng cho shipper đơn hàng #${code}`,
       icon: <ExclamationCircleOutlined />,
@@ -229,8 +212,8 @@ export default function Orders() {
     });
   };
 
+  // Xử lý khi xác nhận gửi hàng cho shipper
   const handleOk = async (code, idBill) => {
-    console.log("Ok");
     try {
       await ordersAPI.changeStatusProduct(idBill, SHIPPING);
       await dispatch(actGetOrdersWithStatus(PREPARING));
@@ -238,15 +221,9 @@ export default function Orders() {
       toastr.success(`Gửi đơn hàng #${code} cho shipper thành công`);
     } catch (error) {
       toastr.error(error);
-      console.log(error);
     }
   };
 
-  const lstStatus = [
-    { id: ACCEPT, name: "Đang chờ đóng", index: 0 },
-    { id: PREPARING, name: "Đã đóng hàng xong", index: 1 },
-    { id: SHIPPING, name: "Đã giao hàng cho shipper", index: 2 },
-  ];
   return (
     <div className="orderList">
       <div className="header-left">

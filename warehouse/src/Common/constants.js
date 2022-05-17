@@ -49,15 +49,15 @@ export const LIST_ADDRESS_WAREHOUSE = [
         address:"438 Nơ Trang Long",
         tel:"0972100200"
     },
-    {
-        id:"2",
-        name:"Kho Thủ Đức",
-        province:"Thành Phố Hồ Chí Minh",
-        district:"Quận Thủ Đức",
-        ward:"Phường Long Trường",
-        address:"22 Lê Văn Việt",
-        tel:"0338847312"
-    }
+    // {
+    //     id:"2",
+    //     name:"Kho Thủ Đức",
+    //     province:"Thành Phố Hồ Chí Minh",
+    //     district:"Quận Thủ Đức",
+    //     ward:"Phường Long Trường",
+    //     address:"22 Lê Văn Việt",
+    //     tel:"0338847312"
+    // }
 ]
 
 

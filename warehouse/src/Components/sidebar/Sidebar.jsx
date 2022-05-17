@@ -1,43 +1,49 @@
-import {
-  ShoppingCart,
-  Report,
-  WorkOutline,
-} from "@material-ui/icons";
-import React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+/**
+ * Side bar của trang web
+ */
+import { ShoppingCart, Report, WorkOutline } from "@material-ui/icons";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
 import "./sidebar.css";
-import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 
 export default function Sidebar() {
+  const location = useLocation();
   const [isActive, setIsActive] = useState(-1);
+
+  useEffect(() => {
+    sideBar.forEach((element) => {
+      if (location.pathname === element.linkTo) {
+        setIsActive(element.id);
+      }
+    });
+  });
+
   const sideBar = [
     {
-      id: 1,
+      id: 0,
       linkTo: "/products",
       nameIcon: "WorkOutline",
       nameLink: "Sản phẩm",
     },
-    { id: 2, linkTo: "/orders", nameIcon: "ShoppingCart", nameLink: "Đóng hàng" },
-    { id: 3, linkTo: '/approve-orders', nameIcon: 'LibraryAddCheckIcon', nameLink: 'Duyệt đơn hàng' },
+    {
+      id: 1,
+      linkTo: "/orders",
+      nameIcon: "ShoppingCart",
+      nameLink: "Đóng hàng",
+    },
+    {
+      id: 2,
+      linkTo: "/approve-orders",
+      nameIcon: "LibraryAddCheckIcon",
+      nameLink: "Duyệt đơn hàng",
+    },
   ];
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
-        <div className="sidebarMenu">
-          {/* <h3 className="sidebarTitle">Dashboard</h3>
-          <ul className="sidebarList">
-            <Link to="/" className="link">
-              <li
-                className={isActive === -1 ? 'sidebarListItem active' : 'sidebarListItem'}
-                onClick={() => setIsActive(-1)}
-              >
-                <LineStyle className="sidebarIcon" />
-                Home
-              </li>
-            </Link>
-          </ul> */}
-        </div>
+        <div className="sidebarMenu"></div>
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
@@ -45,15 +51,15 @@ export default function Sidebar() {
               <Link to={value.linkTo} className="link" key={value.id}>
                 <li
                   className={
-                    isActive === index
+                    index === isActive
                       ? "sidebarListItem active"
                       : "sidebarListItem"
                   }
                   onClick={() => setIsActive(index)}
                 >
-                  { value.nameIcon === "WorkOutline" ? (
+                  {value.nameIcon === "WorkOutline" ? (
                     <WorkOutline className="sidebarIcon" />
-                  )  : value.nameIcon === "ShoppingCart" ? (
+                  ) : value.nameIcon === "ShoppingCart" ? (
                     <ShoppingCart className="sidebarIcon" />
                   ) : value.nameIcon === "LibraryAddCheckIcon" ? (
                     <LibraryAddCheckIcon className="LibraryAddCheckIcon" />
@@ -66,17 +72,6 @@ export default function Sidebar() {
             ))}
           </ul>
         </div>
-        {/* <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Notifications</h3>
-          <ul className="sidebarList">
-            <Link to="/settings" className="link">
-              <li className="sidebarListItem">
-                <DynamicFeed className="sidebarIcon" />
-                Settings
-              </li>
-            </Link>
-          </ul>
-        </div> */}
       </div>
     </div>
   );

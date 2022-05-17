@@ -1,41 +1,38 @@
+/**
+ * Danh sách đơn hàng đang chờ duyệt
+ */
 import React, { useEffect, useState } from "react";
 import { PENDING, ACCEPT } from "../../Common/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { actGetOrdersWithStatus } from "../../Actions/OrdersAction/ordersAction";
 import { formatVND } from "../../Utils/formatVND";
 import { DataGrid } from "@material-ui/data-grid";
-import ColoredLinearProgress from "../../Common/LineProgress";
-import "./approveOrders.css";
 import { Link } from "react-router-dom";
 import { Menu, Dropdown, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import ColoredLinearProgress from "../../Common/LineProgress";
+import "./approveOrders.css";
+import { toastr } from "react-redux-toastr";
 
 export default function ApproveOrders() {
   const dispatch = useDispatch();
-  // const lstOrder = useSelector((state) => state.ordersReducer.orders);
   const lstOrderPending = useSelector(
     (state) => state.ordersReducer.ordersPending
   );
-
   const isLoading = useSelector((state) => state.ordersReducer.isLoading);
-  console.log("pending" + lstOrderPending);
-  const [data, setData] = useState(lstOrderPending);
   const [pageSize, setPageSize] = useState(10);
 
   useEffect(async () => {
     try {
       await dispatch(actGetOrdersWithStatus(PENDING));
     } catch (error) {
-      console.log(error);
+      toastr.warning("Không lấy được danh sách đơn hàng đang chờ duyệt!");
     }
   }, []);
 
   const menu = (order) => {
     return (
       <Menu
-        // onClick={() => {
-        //   console.log(order);
-        // }}
         items={[
           {
             label: (
@@ -83,19 +80,7 @@ export default function ApproveOrders() {
       headerName: "Mã Đơn Hàng",
       flex: 1,
       renderCell: (params) => {
-        return (
-          <div
-          // className={
-          //   params.row.codeSeller === "NW2021000469" ||
-          //   params.row.codeSeller === "NW2021000218" ||
-          //   params.row.codeSeller === "NW2021000470"
-          //     ? "orderListEditDev"
-          //     : "orderListEdit"
-          // }
-          >
-            {params.row.code}
-          </div>
-        );
+        return <div>{params.row.code}</div>;
       },
     },
     {
@@ -103,19 +88,7 @@ export default function ApproveOrders() {
       headerName: "Mã CTV",
       flex: 1,
       renderCell: (params) => {
-        return (
-          <div
-          // className={
-          //   params.row.codeSeller === "NW2021000469" ||
-          //   params.row.codeSeller === "NW2021000218" ||
-          //   params.row.codeSeller === "NW2021000470"
-          //     ? "orderListEditDev"
-          //     : "orderListEdit"
-          // }
-          >
-            {params.row.codeSeller}
-          </div>
-        );
+        return <div>{params.row.codeSeller}</div>;
       },
     },
     {
@@ -166,70 +139,25 @@ export default function ApproveOrders() {
           <>
             {params.row.shipName ? (
               <>
-                <button
-                  className="btn-ghtk"
-                  // onClick={() => handleChangeToDelivered(params.row)}
-                >
-                  Giao thành công
-                </button>
+                <button className="btn-ghtk">Giao thành công</button>
               </>
             ) : (
-              // <Link
-              //   to={{
-              //     pathname: `/GHTK/${params.row.idBill}`,
-              //     state: params.row,
-              //   }}
-              // >
-              //   <button className="btn-ghtk">Thêm GHTK</button>
-              // </Link>
               <Dropdown overlay={menu(params.row)} placement="bottomLeft">
-                <a>
                   <Space>
                     Chọn DVVC
                     <DownOutlined />
                   </Space>
-                </a>
               </Dropdown>
             )}
           </>
         );
       },
     },
-    // {
-    //   field: "packing",
-    //   headerName: "Đóng hàng",
-    //   flex: 1,
-    //   minWidth: 155,
-    //   hide: !isAccept,
-    //   renderCell: (params) => {
-    //     return (
-    //       <Link to={"/order/" + params.row.idBill}>
-    //         <MoveToInboxIcon style={{ marginLeft: 15, marginTop: 20 }} />
-    //       </Link>
-    //     );
-    //   },
-    // },
-    // {
-    //   field: "delivery",
-    //   headerName: "Giao hàng",
-    //   flex: 1,
-    //   minWidth: 155,
-    //   hide: !isPreparing,
-    //   renderCell: (params) => {
-    //     return (
-    //       <Button
-    //         type="link"
-    //         onClick={() => handleDelivery(params.row.code, params.row.idBill)}
-    //       >
-    //         <LocalShippingIcon style={{ marginLeft: 15 }} />
-    //       </Button>
-    //     );
-    //   },
-    // },
   ];
 
   return (
     <div className="approve-order-list">
+      <h2>Danh sách đơn hàng đang chờ duyệt</h2>
       {isLoading ? (
         <>
           <div className="linear">

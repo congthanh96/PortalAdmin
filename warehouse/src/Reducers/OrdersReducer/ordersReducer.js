@@ -1,3 +1,6 @@
+/**
+ * Reducers của danh sách đơn hàng
+ */
 import {
   ORDERS_LOADING,
   GET_ORDERS,
@@ -17,8 +20,6 @@ const initialState = {
 };
 
 export default function ordersReducer(state = initialState, action) {
-  console.log(action.type);
-  console.log(action.orders);
   switch (action.type) {
     case ORDERS_LOADING:
       return {
@@ -54,7 +55,7 @@ export default function ordersReducer(state = initialState, action) {
         ordersShipping: action.orders,
         isLoading: false,
       };
-      case GET_ORDERS_PENDING:
+    case GET_ORDERS_PENDING:
       return {
         ...state,
         ordersPending: action.orders,

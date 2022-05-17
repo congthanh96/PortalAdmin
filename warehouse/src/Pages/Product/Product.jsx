@@ -1,3 +1,6 @@
+/**
+ * Trang chi tiết sản phẩm
+ */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { productAPI } from "../../APIs";
@@ -5,8 +8,7 @@ import CardProduct from "../../Components/product/productDetail";
 import VariantProduct from "../../Components/variantProduct/variantProduct";
 import ColoredLinearProgress from "../../Common/LineProgress";
 import "./product.css";
-import { Modal} from 'antd';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { toastr } from "react-redux-toastr";
 
 export default function Product() {
   let { productID } = useParams();
@@ -21,36 +23,26 @@ export default function Product() {
     setIsLoading(false);
   }, []);
 
-//useEffect(()=>{},[variantProduct]);
+  // Lấy chi tiết sản phẩm
   const getDetailProduct = async () => {
     try {
       const res = await productAPI.getDetailProduct(productID);
       setProductDetail(res);
-      console.log(res);
     } catch (error) {
-      console.log(error);
+      toastr.warning("Không thể lấy chi tiết sản phẩm")
     }
   };
 
+  // Lấy danh sách variant của sản phẩm
   const getVariantProduct = async () => {
     try {
       const res = await productAPI.getVariantProduct(productID);
       setVariantProduct(res);
-      console.log(res);
     } catch (error) {
-      console.log(error);
+      toastr.warning("Không thể lấy danh sách variant của sản phẩm")
     }
   };
 
-  const handlePacking = () =>{
-    Modal.confirm({
-      title: 'Confirm',
-      icon: <ExclamationCircleOutlined />,
-      content: 'Bla bla ...',
-      okText: '确认',
-      cancelText: '取消',
-    });
-  }
   return (
     <React.Fragment>
       {isLoading ? (
@@ -73,8 +65,6 @@ export default function Product() {
           />
           <VariantProduct
             variantProductData={variantProduct}
-            onclick={handlePacking}
-            //update={updateAmountVariantProduct}
           />
         </div>
       )}

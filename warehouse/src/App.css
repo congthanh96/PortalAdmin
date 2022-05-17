@@ -3,6 +3,7 @@ body {
 }
 .container {
   display: flex;
+  background-color: white;
 }
 
 .link,
