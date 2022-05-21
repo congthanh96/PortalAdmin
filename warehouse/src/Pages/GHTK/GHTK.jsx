@@ -20,6 +20,7 @@ export default function GHTK({ location }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isVisibleModalWeight, setIsVisibleModalWeight] = useState(false);
   const [productsInOrder, setProductsInOrder] = useState([]);
+  const [isPosting, setIsPosting] = useState(false);
   const [dataOrder, setDataOrder] = useState({
     id: "string",
     pick_name: "string",
@@ -218,6 +219,7 @@ export default function GHTK({ location }) {
 
   // Xử lý duyệt đơn hàng
   const handlePostGHTK = async () => {
+    setIsPosting(true);
     try {
       const dataToPost = {
         products: productsInOrder,
@@ -231,6 +233,7 @@ export default function GHTK({ location }) {
         try {
           // Chuyển trạng thái đơn hàng sang ACCEPT
           await ordersAPI.changeStatusProduct(dataOrder.id, ACCEPT);
+          setIsPosting(false);
           toastr.success(
             "Duyệt đơn thành công, đơn hàng sẽ được chuyển sang trạng thái đang chờ đóng."
           );
@@ -238,11 +241,13 @@ export default function GHTK({ location }) {
             pathname: "/orders",
           });
         } catch (error) {
+          setIsPosting(false);
           toastr.warning(
             "Đăng đơn thành công nhưng chuyển trạng thái đơn hàng không thành công."
           );
         }
       } else {
+        setIsPosting(false);
         toastr.warning(
           "Quá trình đăng đơn lên GHTK chưa hoàn tất!",
           resDataPost.message
@@ -485,13 +490,16 @@ export default function GHTK({ location }) {
               ></Table>
             </div>
           </div>
+
           <Button
             type="primary"
             onClick={handlePostGHTK}
             className="btn-submit"
+            loading={isPosting}
           >
             Đăng đơn hàng lên GHTK
           </Button>
+
           <Modal
             title="Cập nhật lại khối lượng "
             visible={isVisibleModalWeight}
