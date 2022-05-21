@@ -2,7 +2,7 @@
  * Component chi tiết đơn hàng
  */
 import React from "react";
-import { formatVND } from "../../Utils/formatVND";
+import { formatVND } from "../../Common/formatVND";
 // import { DataGrid } from "@material-ui/data-grid";
 import { Table } from "antd";
 import "./orderDetail.css";

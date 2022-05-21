@@ -7,7 +7,7 @@ import { DownOutlined } from "@ant-design/icons";
 import ColoredLinearProgress from "../../Common/LineProgress";
 import { Menu, Dropdown, Space, Input, Button, Form, Table, Modal } from "antd";
 import { LIST_ADDRESS_WAREHOUSE, ACCEPT } from "../../Common/constants";
-import { formatVND } from "../../Utils/formatVND";
+import { formatVND } from "../../Common/formatVND";
 import { toastr } from "react-redux-toastr";
 import { useHistory } from "react-router-dom";
 import "./ghtk.css";

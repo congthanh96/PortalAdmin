@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@material-ui/data-grid";
-import { formatVND } from "../../Utils/formatVND";
+import { formatVND } from "../../Common/formatVND";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { actGetProducts } from "../../Actions/ProductsAction/productsAction";
 import ColoredLinearProgress from "../../Common/LineProgress";

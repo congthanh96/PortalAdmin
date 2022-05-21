@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { PENDING, ACCEPT } from "../../Common/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { actGetOrdersWithStatus } from "../../Actions/OrdersAction/ordersAction";
-import { formatVND } from "../../Utils/formatVND";
+import { formatVND } from "../../Common/formatVND";
 import { DataGrid } from "@material-ui/data-grid";
 import { Link } from "react-router-dom";
 import { Menu, Dropdown, Space } from "antd";

@@ -7,7 +7,7 @@ import "antd/dist/antd.css";
 import { Modal } from "antd";
 import { productAPI } from "../../APIs";
 import { toastr } from "react-redux-toastr";
-import { formatVND } from "../../Utils/formatVND";
+import { formatVND } from "../../Common/formatVND";
 import "./variantProduct.css";
 
 const VariantProduct = ({ variantProductData }) => {

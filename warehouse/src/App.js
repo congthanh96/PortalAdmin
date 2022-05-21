@@ -1,4 +1,4 @@
-import Login from "./Pages/Login/Login";
+
 import React, { Suspense, useEffect } from "react";
 import {
   BrowserRouter,
@@ -18,6 +18,7 @@ import Orders from "./Pages/Orders/Orders";
 import Order from "./Pages/Order/Order";
 import ApproveOrders from "./Pages/ApproveOrders/ApproveOrders";
 import GHTK from "./Pages/GHTK/GHTK";
+import Login from "./Pages/Login/login"
 import "./App.css";
 
 export default function App() {

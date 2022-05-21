@@ -1,19 +1,20 @@
-.linear{
-    width: 100%;
-  }
-  .approve-order-list {
-    margin-top: 30px;
-    flex: 6;
-    background-color: white;
-  }
+.linear {
+  width: 100%;
+}
 
-  .btn-ghtk {
-    border: none;
-    margin: 5px;
-    border-radius: 20px;
-    padding: 5px 10px;
-    background-color: #3bb077;
-    color: white;
-    cursor: pointer;
-    margin-right: 20px;
-  }
+.approve-order-list {
+  margin-top: 20px;
+  flex: 6;
+  background-color: white;
+}
+
+.btn-ghtk {
+  border: none;
+  margin: 5px;
+  border-radius: 20px;
+  padding: 5px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}

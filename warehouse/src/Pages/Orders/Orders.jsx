@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actGetOrdersWithStatus } from "../../Actions/OrdersAction/ordersAction";
 import ColoredLinearProgress from "../../Common/LineProgress";
-import { formatVND } from "../../Utils/formatVND";
+import { formatVND } from "../../Common/formatVND";
 import { DataGrid } from "@material-ui/data-grid";
 import { ButtonComponent } from "../../Components/orders/buttonComponent";
 import { SHIPPING, ACCEPT, PREPARING } from "../../Common/constants";

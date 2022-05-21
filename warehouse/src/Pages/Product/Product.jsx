@@ -7,8 +7,8 @@ import { productAPI } from "../../APIs";
 import CardProduct from "../../Components/product/productDetail";
 import VariantProduct from "../../Components/variantProduct/variantProduct";
 import ColoredLinearProgress from "../../Common/LineProgress";
-import "./product.css";
 import { toastr } from "react-redux-toastr";
+import "./product.css"
 
 export default function Product() {
   let { productID } = useParams();
@@ -50,7 +50,7 @@ export default function Product() {
           <ColoredLinearProgress />
         </div>
       ) : (
-        <div>
+        <div style={{width:"100%"}}>
           <CardProduct
             image={productDetail.link}
             name={productDetail.name}
