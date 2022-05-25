@@ -114,9 +114,9 @@ export default function GHTK({ location }) {
             district: state?.qh || '', // Thông tin người nhận
             ward: state?.pXa || '', // Thông tin người nhận
             street: state?.address || '', // Thông tin người nhận
-            value: res.data.fee.fee, // Thông tin giá ship
+            value: state?.totalPrice * 1 || 100000, // Thông tin giá ship
             hamlet: 'khác', // Thông tin người nhận
-            is_freeship: '1', // Thông tin giá ship
+            is_freeship: '0', // Thông tin giá ship
             pick_date: '2021-11-20', // Thông tin ngày nhận đơn hàng
             pick_money: state?.totalPrice * 1 || 100000, // Thông tin giá đơn hàng
             note: 'đơn hàng 123 - không cần gọi đâu nà', // Thông tin người nhận ghi chú.
