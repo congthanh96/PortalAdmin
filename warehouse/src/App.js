@@ -1,4 +1,3 @@
-
 import React, { Suspense, useEffect } from "react";
 import {
   BrowserRouter,
@@ -18,7 +17,9 @@ import Orders from "./Pages/Orders/Orders";
 import Order from "./Pages/Order/Order";
 import ApproveOrders from "./Pages/ApproveOrders/ApproveOrders";
 import GHTK from "./Pages/GHTK/GHTK";
-import Login from "./Pages/Login/login"
+import Login from "./Pages/Login/login";
+import ImportProductMount from "./Pages/ImportProductMount/ImportProductMount";
+import ExportProductMount from "./Pages/ExportProductMount/ExportProductMount";
 import "./App.css";
 
 export default function App() {
@@ -48,7 +49,17 @@ export default function App() {
               <Route exact path="/" component={Home} />
               <Route path="/login" exact render={() => <Redirect to="/" />} />
               <Route path="/products" component={Products} />
-              <Route path="/product/:productID" component={Product} />
+              <Route exact path="/product/:productID" component={Product} />
+              <Route
+                exact
+                path="/product/import-product-mount/:productID"
+                component={ImportProductMount}
+              />
+              <Route
+                exact
+                path="/product/export-product-mount/:productID"
+                component={ExportProductMount}
+              />
               <Route path="/orders" component={Orders} />
               <Route path="/order/:orderID" component={Order} />
               <Route path="/approve-orders" component={ApproveOrders} />

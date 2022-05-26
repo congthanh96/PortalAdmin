@@ -7,6 +7,10 @@ import { Link } from "react-router-dom";
 import { DataGrid } from "@material-ui/data-grid";
 import { formatVND } from "../../Common/formatVND";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import {
+  ImportOutlined,
+  ExportOutlined,
+} from '@ant-design/icons';
 import { actGetProducts } from "../../Actions/ProductsAction/productsAction";
 import ColoredLinearProgress from "../../Common/LineProgress";
 import "./products.css";
@@ -65,6 +69,38 @@ export default function Products() {
             <span style={{ textAlign: "right" }}>
               {formatVND(params.row.price1)}
             </span>
+          </>
+        );
+      },
+    },
+    {
+      field: "import",
+      headerName: "Import",
+      disableExport: true,
+      minWidth: 110,
+      flex: 0.3,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={"/product/import-product-mount/" + params.row.id}>
+              <ImportOutlined style={{ marginLeft: 15, marginTop:20 }} />
+            </Link>
+          </>
+        );
+      },
+    },
+    {
+      field: "Export",
+      headerName: "Export",
+      disableExport: true,
+      minWidth: 110,
+      flex: 0.3,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={"/product/export-product-mount/" + params.row.id}>
+              <ExportOutlined style={{ marginLeft: 15, marginTop:20 }} />
+            </Link>
           </>
         );
       },
