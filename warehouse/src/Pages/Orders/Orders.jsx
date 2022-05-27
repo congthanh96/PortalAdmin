@@ -16,7 +16,10 @@ import { Modal, Button } from "antd";
 import { ordersAPI } from "../../APIs";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { toastr } from "react-redux-toastr";
+import { Input } from "antd";
 import "./orders.css";
+
+const { Search } = Input;
 
 export default function Orders() {
   const dispatch = useDispatch();
@@ -42,6 +45,7 @@ export default function Orders() {
   const [activeBtn, setActiveBtn] = useState(0);
   const [isAccept, setIsAccept] = useState(true);
   const [isPreparing, setIsPreparing] = useState(false);
+  const [isLoadingSearch, setIsLoadingSearch] = useState(false);
 
   const lstStatus = [
     { id: ACCEPT, name: "Đang chờ đóng", index: 0 },
@@ -50,13 +54,16 @@ export default function Orders() {
   ];
 
   const columns = [
-    { field: "idBill", headerName: "ID", width: 90, hide: true },
+    { field: "idBill", headerName: "ID", width: 90, hide :true },
     {
       field: "createTime",
       headerName: "Ngày Đặt Hàng",
-      width: 120,
       flex: 1,
-      minWidth: 120,
+      minWidth: 100,
+      renderCell: (params) => {
+        let temp = params.row.createTime.toString().split("T")
+        return <div>{temp[0]}</div>;
+      },
     },
     {
       field: "code",
@@ -118,7 +125,7 @@ export default function Orders() {
       renderCell: (params) => {
         return (
           //Xử lý xem đơn hàng trước khi xác nhận đóng hàng
-          <Link to={"/order/" + params.row.idBill}>
+          <Link to={"/packing-order/" + params.row.idBill}>
             <MoveToInboxIcon style={{ marginLeft: 15, marginTop: 20 }} />
           </Link>
         );
@@ -131,13 +138,19 @@ export default function Orders() {
       minWidth: 155,
       hide: !isPreparing,
       renderCell: (params) => {
+        // return (
+        //   <Button
+        //     type="link"
+        //     onClick={() => handleDelivery(params.row.code, params.row.idBill)}
+        //   >
+        //     <LocalShippingIcon style={{ marginLeft: 15 }} />
+        //   </Button>
+        // );
         return (
-          <Button
-            type="link"
-            onClick={() => handleDelivery(params.row.code, params.row.idBill)}
-          >
-            <LocalShippingIcon style={{ marginLeft: 15 }} />
-          </Button>
+          //Xử lý xem đơn hàng trước khi xác nhận đóng hàng
+          <Link to={"/shipping-order/" + params.row.idBill}>
+            <LocalShippingIcon style={{ marginLeft: 15, marginTop: 20 }} />
+          </Link>
         );
       },
     },
@@ -224,6 +237,20 @@ export default function Orders() {
     }
   };
 
+  function requestSearch(searchedVal) {
+    console.log(searchedVal);
+    setIsLoadingSearch(true);
+    const filteredRows = data.filter((row) => {
+      return (
+        row.code.toLowerCase().includes(searchedVal.toLowerCase())||
+        row.codeSeller.toLowerCase().includes(searchedVal.toLowerCase())||
+        row.updater.toLowerCase().includes(searchedVal.toLowerCase())
+      );
+    });
+    setData(filteredRows);
+    setIsLoadingSearch(false);
+  }
+
   return (
     <div className="orderList">
       <div className="header-left">
@@ -240,6 +267,18 @@ export default function Orders() {
           />
         ))}
       </div>
+
+      <div className="header-right">
+            <Search
+              placeholder="input search text (mã đơn hàng, mã ctv, người xử lý)"
+              allowClear
+              enterButton="Search"
+              onSearch={(searchVal) => requestSearch(searchVal)}
+              style={{ width: 400 }}
+              loading={isLoadingSearch}
+            />
+      </div>
+
       {isLoading ? (
         <div className="linear">
           <ColoredLinearProgress />

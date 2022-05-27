@@ -71,3 +71,9 @@
 .linear{
   width: 100%;
 }
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}

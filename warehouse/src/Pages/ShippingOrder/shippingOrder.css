@@ -1,0 +1,111 @@
+.shipping-container, .orderList {
+    margin-top: 20px;
+    flex: 6;
+    background-color: white;
+  }
+  .header-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+  .orderList.container {
+    width: 800px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .orderList.container .order-header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dededede;
+  }
+  .orderList.container .order-body {
+    padding-top: 20px;
+  }
+  .orderList.container .order-body .order-body-info {
+    display: flex;
+  }
+  .orderList.container .order-body .order-body-info .order-body-info-title {
+    /* display: flex; */
+    min-width: 22%;
+  }
+  .orderList.container .order-body .order-body-info.product {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+  }
+  .orderList.container
+    .order-body
+    .order-body-info.product
+    .order-body-info-desc.product {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 400px;
+    max-height: auto;
+    padding: 20px 0;
+  }
+  .productListItem {
+    display: flex;
+    align-items: center;
+  }
+  
+  .productListImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .productListEdit {
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #3bb077;
+    color: white;
+    cursor: pointer;
+    margin-right: 20px;
+  }
+  
+  .productListDelete {
+    color: red;
+    cursor: pointer;
+  }
+  .productAddButton {
+    /* width: 80px; */
+    border: none;
+    padding: 5px 24px;
+    background-color: teal;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .orderList-header {
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+  }
+  
+  .linear {
+    width: 100%;
+  }
+  
+  .btn-package {
+    width: 150px;
+    height: 40px;
+    border: none;
+    padding: 5px 24px;
+    background-color: teal;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 20px;
+  }
+
+  

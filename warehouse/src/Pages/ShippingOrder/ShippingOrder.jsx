@@ -8,12 +8,12 @@ import ColoredLinearProgress from "../../Common/LineProgress";
 import OrderDetail from "../../Components/order/OrderDetail";
 import { Modal } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { PREPARING } from "../../Common/constants";
+import { SHIPPING } from "../../Common/constants";
 import { toastr } from "react-redux-toastr";
 import { useHistory } from "react-router-dom";
-import "./order.css";
+import "./shippingOrder.css";
 
-export default function Order() {
+export default function ShippingOrder() {
   const history = useHistory();
   let { orderID } = useParams();
   const [isLoading, setIsLoading] = useState(false);
@@ -47,16 +47,16 @@ export default function Order() {
     }
   };
 
-  // Xử lý hiển thị khi xác nhận đóng hàng
-  const handlePacking = () => {
+  // Xử lý khi nhấn vào button giao hàng cho shipper
+  const handleDelivery = (code, idBill) => {
     Modal.confirm({
-      title: `Xác nhận đóng gói đơn hàng #${orderDetail.code}`,
+      title: `Xác nhận chuyển hàng cho shipper đơn hàng #${orderDetail.code}`,
       icon: <ExclamationCircleOutlined />,
       content:
-        "Sau khi đóng gói thì đơn hàng sẽ chuyển sang trạng thái đã đóng hàng xong",
+        "Sau khi gửi hàng cho shipper thì đơn hàng sẽ chuyển sang trạng thái đã chuyển hàng cho shipper",
       okText: "OK",
       cancelText: "CANCEL",
-      onOk: () => handleOk(),
+      onOk: () => handleOk(code, idBill),
       onCancel: () => {
         console.log("cancel");
       },
@@ -66,18 +66,20 @@ export default function Order() {
   // Xử lý xác nhận đóng hàng
   const handleOk = async () => {
     try {
-      await ordersAPI.changeStatusProduct(orderID, PREPARING);
+      await ordersAPI.changeStatusProduct(orderID,SHIPPING );
       history.push({
         pathname: "/orders",
       });
-      toastr.success(`Đóng gói đơn hàng #${orderDetail.code} thành công`);
+      toastr.success(`Giao đơn hàng #${orderDetail.code} cho shipper thành công`);
     } catch (error) {
       toastr.error(error);
     }
   };
 
   return (
-    <React.Fragment>
+    <div className="shipping-container">
+      <h2>Giao hàng cho shipper</h2>
+      <hr />
       {isLoading ? (
         <div className="linear">
           <ColoredLinearProgress />
@@ -89,12 +91,12 @@ export default function Order() {
             productsInOrder={productsInOrder}
           />
           <div className="container-btn">
-            <button className="btn-package" onClick={handlePacking}>
-              Đóng hàng
+            <button className="btn-package" onClick={handleDelivery}>
+              Giao hàng
             </button>
           </div>
         </React.Fragment>
       )}
-    </React.Fragment>
+    </div>
   );
 }

@@ -14,7 +14,8 @@ import Home from "./Pages/Home/Home";
 import Products from "./Pages/Products/Products";
 import Product from "./Pages/Product/Product";
 import Orders from "./Pages/Orders/Orders";
-import Order from "./Pages/Order/Order";
+import PackingOrder from "./Pages/PackingOrder/PackingOrder";
+import ShippingOrder from "./Pages/ShippingOrder/ShippingOrder";
 import ApproveOrders from "./Pages/ApproveOrders/ApproveOrders";
 import GHTK from "./Pages/GHTK/GHTK";
 import Login from "./Pages/Login/login";
@@ -61,7 +62,8 @@ export default function App() {
                 component={ExportProductMount}
               />
               <Route path="/orders" component={Orders} />
-              <Route path="/order/:orderID" component={Order} />
+              <Route path="/packing-order/:orderID" component={PackingOrder} />
+              <Route path="/shipping-order/:orderID" component={ShippingOrder} />
               <Route path="/approve-orders" component={ApproveOrders} />
               <Route path="/GHTK/:orderID" component={GHTK} />
               <Route path="*" component={NotFound} />

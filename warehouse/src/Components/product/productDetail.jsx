@@ -18,16 +18,16 @@ const CardProduct = ({
 }) => {
   return (
     <div className="cardDetail">
-      <h2>Thông tin chi tiết</h2>
+      <h2>Thông tin sản phẩm</h2>
       <hr />
       <div className="flexCard">
         <img className="imageCard" src={`${image}`} alt="" />
 
         <div>
-          <h3>{name}</h3>
+          <h3>Tên sản phẩm: {name}</h3>
           <div>
             <h5>Category: {category}</h5>
-            <h5>Brand: {brand}</h5>
+            <h5>Brand: {brand}</h5> 
           </div>
           <hr />
           <div>
@@ -38,7 +38,7 @@ const CardProduct = ({
             ) : (
               <>
                 <span style={{ color: "red" }}>
-                  Rating: No one has rated it yet
+                  Rating: Chưa có đánh giá
                 </span>
               </>
             )}
@@ -46,9 +46,14 @@ const CardProduct = ({
           <hr />
           <div>
             <h5>Decription:</h5>
-            <ul>
-              <li className="fontText">{description}</li>
-            </ul>
+            {description === "" ? (
+                <>Chưa có mô tả</>
+            ) : (
+            
+              <ul>
+                <li className="fontText">{description}</li>
+              </ul>
+            )}
           </div>
           {content1 === "" && content2 === "" && content3 === "" ? (
             <></>
