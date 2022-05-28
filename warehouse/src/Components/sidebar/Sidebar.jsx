@@ -5,6 +5,7 @@ import { ShoppingCart, Report, WorkOutline } from "@material-ui/icons";
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
+import SummarizeIcon from '@mui/icons-material/Summarize';
 import "./sidebar.css";
 
 export default function Sidebar() {
@@ -38,6 +39,12 @@ export default function Sidebar() {
       nameIcon: "LibraryAddCheckIcon",
       nameLink: "Duyệt đơn hàng",
     },
+    {
+      id: 3,
+      linkTo: "/reports",
+      nameIcon: "SummarizeIcon",
+      nameLink: "Báo cáo",
+    },
   ];
 
   return (
@@ -63,6 +70,8 @@ export default function Sidebar() {
                     <ShoppingCart className="sidebarIcon" />
                   ) : value.nameIcon === "LibraryAddCheckIcon" ? (
                     <LibraryAddCheckIcon className="LibraryAddCheckIcon" />
+                  ) : value.nameIcon === "SummarizeIcon" ? (
+                    <SummarizeIcon className="SummarizeIcon" />
                   ) : (
                     <Report className="sidebarIcon" />
                   )}

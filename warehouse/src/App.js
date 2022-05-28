@@ -21,6 +21,7 @@ import GHTK from "./Pages/GHTK/GHTK";
 import Login from "./Pages/Login/login";
 import ImportProductMount from "./Pages/ImportProductMount/ImportProductMount";
 import ExportProductMount from "./Pages/ExportProductMount/ExportProductMount";
+import Reports from "./Pages/Reports/Reports"
 import "./App.css";
 
 export default function App() {
@@ -66,6 +67,7 @@ export default function App() {
               <Route path="/shipping-order/:orderID" component={ShippingOrder} />
               <Route path="/approve-orders" component={ApproveOrders} />
               <Route path="/GHTK/:orderID" component={GHTK} />
+              <Route path="/reports" component={Reports} />
               <Route path="*" component={NotFound} />
             </Switch>
           ) : (
