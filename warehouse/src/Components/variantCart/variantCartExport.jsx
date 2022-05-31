@@ -65,6 +65,7 @@ const variantCartExport = ({
             return (
               <Col span={8} style={{ marginBottom: 10 }} key={index}>
                 <Card
+                  style={{backgroundColor:"pink"}}
                   className="cardContainer"
                   cover={<img alt="example" src={element.imageLink} />}
                   actions={[
