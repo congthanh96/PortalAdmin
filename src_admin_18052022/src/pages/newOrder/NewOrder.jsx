@@ -170,7 +170,7 @@ export default function NewOrder() {
         pick_province: "Thành Phố Hồ Chí Minh", // Thông tin công ty.
         pick_district: "Quận Bình Thạnh", // Thông tin công ty.
         pick_ward: "Phường 13", // Thông tin công ty.
-        pick_tel: "0972100200", // Thông tin công ty.
+        pick_tel: "0886769468", // Thông tin công ty.
         tel: orderDetail[0].phone || "0972200600", // Thông tin người nhận
         name: orderDetail[0].fullName,
         address: orderDetail[0].address || "400 cộng hoà",

@@ -23,7 +23,7 @@ function Login({ token, setToken }) {
   const history = useHistory()
   const handleSubmitLogin = async () => {
     try {
-      await fetch('https://api.newee.asia:6001/Newee/Manager/Login', {
+      await fetch('https://api.newee.asia:5001/Newee/Manager/Login', {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',

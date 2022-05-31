@@ -24,13 +24,13 @@ export const GETPRODUCT = 'GETPRODUCT'
 export const API_NEWEE_5000 = 'https://api.newee.asia:5000'
 
 //api
-export const API_NEWEE_6001 = 'https://api.newee.asia:6001'
+export const API_NEWEE_5001 = 'https://api.newee.asia:5001'
 
-export const API_NEWEE_6001 = 'https://api.newee.asia:6001'
+export const API_NEWEE_5001 = 'https://api.newee.asia:5001'
 
-export const API_NEWEE_7001 = 'https://api.newee.asia:6001'
+export const API_NEWEE_7001 = 'https://api.newee.asia:5001'
 
-export const API_TEST = 'https://api.newee.asia:6001'
+export const API_TEST = 'https://api.newee.asia:5001'
 export const ADDTOCART = 'ADDTOCART'
 export const REMOVETOCART = 'REMOVETOCART'
 export const INCREASE_QUANTITY_SHOP = 'INCREASE_QUANTITY_SHOP'

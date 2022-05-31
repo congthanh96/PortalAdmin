@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { timeoutPromise } from '../../utils/Tools'
-const API = `https://api.newee.asia:6001`
+const API = `https://api.newee.asia:5001`
 
 export const ORDER_LOADING = 'ORDER_LOADING'
 export const ORDER_FAILURE = 'ORDER_FAILURE'
@@ -22,7 +22,7 @@ const ConfigAPI = async (endPoint, method, body, userToken) => {
       Authorization: `Bearer ${token ?? userToken}`,
     },
     method: method,
-    url: `https://api.newee.asia:6001/${endPoint}`,
+    url: `https://api.newee.asia:5001/${endPoint}`,
     data: body,
   })
 }

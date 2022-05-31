@@ -8,7 +8,7 @@ const apiLocalhost0 = async (endPoint, method, body) => {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     method: method,
-    url: `${Config.API_NEWEE_6001}/${endPoint}`,
+    url: `${Config.API_NEWEE_5001}/${endPoint}`,
     data: body,
   });
 };

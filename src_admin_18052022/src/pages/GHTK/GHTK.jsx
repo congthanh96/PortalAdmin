@@ -106,7 +106,7 @@ export default function GHTK({ location }) {
             pick_province: 'Thành Phố Hồ Chí Minh', // Thông tin công ty.
             pick_district: 'Quận Bình Thạnh', // Thông tin công ty.
             pick_ward: 'Phường 13', // Thông tin công ty.
-            pick_tel: '0972100200', // Thông tin công ty.
+            pick_tel: '0886769468', // Thông tin công ty.
             tel: state?.phone || '', // Thông tin người nhận
             name: state?.fullName, // Thông tin người nhận
             address: state?.address || '', // Thông tin người nhận

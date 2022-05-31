@@ -35,7 +35,7 @@ export default function Transactions(props) {
     }
   }, [])
 
-  const API = `https://api.newee.asia:6001`
+  const API = `https://api.newee.asia:5001`
   const handleSubmit = async () => {
     try {
       setConfirmDialog({

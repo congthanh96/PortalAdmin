@@ -173,7 +173,7 @@ export default function Product({ props }) {
   const getData = async () => {
     try {
       // const { data } = await axios.get(
-      //   `https://api.newee.asia:6001/Newee/RatingSeller/List/${slug}/1`
+      //   `https://api.newee.asia:5001/Newee/RatingSeller/List/${slug}/1`
       // )
 
       const response = await productApi.getComment(productId)

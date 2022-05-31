@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { productApiPr } from '../../api/private/productApiPr'
-const API = `https://api.newee.asia:6001`
+const API = `https://api.newee.asia:5001`
 
 export const FETCH_PRODUCTS = 'FETCH_PRODUCTS'
 export const FETCH_PRODUCTS_ENABLE = 'FETCH_PRODUCTS_ENABLE'
