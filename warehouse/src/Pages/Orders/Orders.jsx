@@ -12,9 +12,6 @@ import { SHIPPING, ACCEPT, PREPARING } from "../../Common/constants";
 import { Link } from "react-router-dom";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import MoveToInboxIcon from "@mui/icons-material/MoveToInbox";
-import { Modal, Button } from "antd";
-import { ordersAPI } from "../../APIs";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { toastr } from "react-redux-toastr";
 import { Input } from "antd";
 import "./orders.css";
@@ -210,35 +207,34 @@ export default function Orders() {
   };
 
   // Xử lý khi nhấn vào button giao hàng cho shipper
-  const handleDelivery = (code, idBill) => {
-    Modal.confirm({
-      title: `Xác nhận chuyển hàng cho shipper đơn hàng #${code}`,
-      icon: <ExclamationCircleOutlined />,
-      content:
-        "Sau khi gửi hàng cho shipper thì đơn hàng sẽ chuyển sang trạng thái đã chuyển hàng cho shipper",
-      okText: "OK",
-      cancelText: "CANCEL",
-      onOk: () => handleOk(code, idBill),
-      onCancel: () => {
-        console.log("cancel");
-      },
-    });
-  };
+  // const handleDelivery = (code, idBill) => {
+  //   Modal.confirm({
+  //     title: `Xác nhận chuyển hàng cho shipper đơn hàng #${code}`,
+  //     icon: <ExclamationCircleOutlined />,
+  //     content:
+  //       "Sau khi gửi hàng cho shipper thì đơn hàng sẽ chuyển sang trạng thái đã chuyển hàng cho shipper",
+  //     okText: "OK",
+  //     cancelText: "CANCEL",
+  //     onOk: () => handleOk(code, idBill),
+  //     onCancel: () => {
+  //       console.log("cancel");
+  //     },
+  //   });
+  // };
 
   // Xử lý khi xác nhận gửi hàng cho shipper
-  const handleOk = async (code, idBill) => {
-    try {
-      await ordersAPI.changeStatusProduct(idBill, SHIPPING);
-      await dispatch(actGetOrdersWithStatus(PREPARING));
-      await dispatch(actGetOrdersWithStatus(SHIPPING));
-      toastr.success(`Gửi đơn hàng #${code} cho shipper thành công`);
-    } catch (error) {
-      toastr.error(error);
-    }
-  };
+  // const handleOk = async (code, idBill) => {
+  //   try {
+  //     await ordersAPI.changeStatusProduct(idBill, SHIPPING);
+  //     await dispatch(actGetOrdersWithStatus(PREPARING));
+  //     await dispatch(actGetOrdersWithStatus(SHIPPING));
+  //     toastr.success(`Gửi đơn hàng #${code} cho shipper thành công`);
+  //   } catch (error) {
+  //     toastr.error(error);
+  //   }
+  // };
 
   function requestSearch(searchedVal) {
-    console.log(searchedVal);
     setIsLoadingSearch(true);
     const filteredRows = data.filter((row) => {
       return (

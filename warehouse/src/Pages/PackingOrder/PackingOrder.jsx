@@ -58,7 +58,6 @@ export default function PackingOrder() {
       cancelText: "CANCEL",
       onOk: () => handleOk(),
       onCancel: () => {
-        console.log("cancel");
       },
     });
   };

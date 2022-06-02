@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Card, Col, Row } from "antd";
 import { toastr } from "react-redux-toastr";
@@ -15,7 +15,6 @@ import {
   YAxis,
   CartesianGrid,
   Legend,
-  ResponsiveContainer,
   BarChart,
   Bar,
 } from "recharts";

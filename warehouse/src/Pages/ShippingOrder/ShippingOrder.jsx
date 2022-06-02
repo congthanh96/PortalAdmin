@@ -58,7 +58,6 @@ export default function ShippingOrder() {
       cancelText: "CANCEL",
       onOk: () => handleOk(code, idBill),
       onCancel: () => {
-        console.log("cancel");
       },
     });
   };

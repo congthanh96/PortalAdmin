@@ -4,9 +4,6 @@
 import React, { useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import "antd/dist/antd.css";
-import { Modal } from "antd";
-import { productAPI } from "../../APIs";
-import { toastr } from "react-redux-toastr";
 import { formatVND } from "../../Common/formatVND";
 import "./variantProduct.css";
 

@@ -1,3 +1,6 @@
+/**
+ * Card bớt sản phẩm
+ */
 import React, { useState } from "react";
 import { Card, Col, Row, Modal } from "antd";
 import { toastr } from "react-redux-toastr";
@@ -13,8 +16,6 @@ const variantCartExport = ({
   variantProductData,
   name,
   updateVariant,
-  isImport,
-  isExport,
 }) => {
   const [dataToUpdate, setDataToUpdate] = useState("");
   const [isModalExportVisible, setIsModalExportVisible] = useState(false);
@@ -50,7 +51,6 @@ const variantCartExport = ({
         row.id === id ? { ...row, count: count } : row
       );
     };
-    console.log(temp);
     // let temp2= {...variantProductData,dat}
     updateVariant(temp);
   }
@@ -65,7 +65,7 @@ const variantCartExport = ({
             return (
               <Col span={8} style={{ marginBottom: 10 }} key={index}>
                 <Card
-                  style={{backgroundColor:"pink"}}
+                  style={{backgroundColor:"#FAEBD7"}}
                   className="cardContainer"
                   cover={<img alt="example" src={element.imageLink} />}
                   actions={[
@@ -75,7 +75,6 @@ const variantCartExport = ({
                     <EditOutlined
                       key="edit"
                       onClick={() => {
-                        console.log("edit");
                         setIsModalExportVisible(true);
                         setDataToUpdate(element);
                       }}

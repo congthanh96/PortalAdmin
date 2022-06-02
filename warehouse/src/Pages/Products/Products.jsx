@@ -132,7 +132,6 @@ export default function Products() {
   ];
 
   function requestSearch(searchedVal) {
-    console.log(searchedVal);
     setIsLoadingSearch(true);
     const filteredRows = lstProduct.filter((row) => {
       return (

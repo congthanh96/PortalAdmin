@@ -44,7 +44,6 @@
        toastr.warning("Không thể lấy danh sách variant của sản phẩm");
      }
    };
-   console.log((variantProduct))
    return (
      <React.Fragment>
        {isLoading ? (
