@@ -1,3 +1,6 @@
+/**
+ * Reducers của xác thực
+ */
 import {AUTH_LOADING, LOGIN, LOGOUT} from "../../Common/constants"
 
 const initialState = {
@@ -15,15 +18,12 @@ const initialState = {
 export default function authReducer(state = initialState, action) {
     switch (action.type) {
         case AUTH_LOADING: {
-            console.log("authloadingreducer")
             return {
                 ...state,
                 isLoading: true,
-                // error: false,
             };
         }
         case LOGIN:
-            console.log("loginreducer")
             localStorage.setItem("tokenADMIN", action.user.token);
             return {
                 user: action.user.token,

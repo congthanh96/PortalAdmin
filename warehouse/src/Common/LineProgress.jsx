@@ -1,3 +1,6 @@
+/**
+ * Xử lý hiển thị khi load data
+ */
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { LinearProgress } from "@material-ui/core";

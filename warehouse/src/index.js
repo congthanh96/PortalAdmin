@@ -25,7 +25,7 @@ ReactDOM.render(
       timeOut={4000}
       newestOnTop={false}
       preventDuplicates
-      position="top-left"
+      position="bottom-right"
       getState={(state) => state.toastr} // This is the default
       transitionIn="fadeIn"
       transitionOut="fadeOut"

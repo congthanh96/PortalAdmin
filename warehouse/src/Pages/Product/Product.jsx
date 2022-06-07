@@ -1,15 +1,21 @@
+/**
+ * Trang chi tiết sản phẩm
+ */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { productAPI } from "../../APIs";
 import CardProduct from "../../Components/product/productDetail";
 import VariantProduct from "../../Components/variantProduct/variantProduct";
 import ColoredLinearProgress from "../../Common/LineProgress";
-import "./product.css";
+import { toastr } from "react-redux-toastr";
+import "./product.css"
+
 export default function Product() {
   let { productID } = useParams();
   const [productDetail, setProductDetail] = useState("");
   const [variantProduct, setVariantProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  
   useEffect(async () => {
     setIsLoading(true);
     await getDetailProduct();
@@ -17,36 +23,26 @@ export default function Product() {
     setIsLoading(false);
   }, []);
 
-//useEffect(()=>{},[variantProduct]);
+  // Lấy chi tiết sản phẩm
   const getDetailProduct = async () => {
     try {
       const res = await productAPI.getDetailProduct(productID);
       setProductDetail(res);
-      console.log(res);
     } catch (error) {
-      console.log(error);
+      toastr.warning("Không thể lấy chi tiết sản phẩm")
     }
   };
 
+  // Lấy danh sách variant của sản phẩm
   const getVariantProduct = async () => {
     try {
       const res = await productAPI.getVariantProduct(productID);
       setVariantProduct(res);
-      console.log(res);
     } catch (error) {
-      console.log(error);
+      toastr.warning("Không thể lấy danh sách variant của sản phẩm")
     }
   };
 
-  // function updateAmountVariantProduct(id, count) {
-  //   setVariantProduct((variantProduct) => {
-  //     return variantProduct.map((row, index) =>
-  //       index === id
-  //         ? { ...row, count: count }
-  //         : row
-  //     );
-  //   });
-  // }
   return (
     <React.Fragment>
       {isLoading ? (
@@ -54,7 +50,7 @@ export default function Product() {
           <ColoredLinearProgress />
         </div>
       ) : (
-        <div>
+        <div style={{width:"100%"}}>
           <CardProduct
             image={productDetail.link}
             name={productDetail.name}
@@ -69,7 +65,6 @@ export default function Product() {
           />
           <VariantProduct
             variantProductData={variantProduct}
-            //update={updateAmountVariantProduct}
           />
         </div>
       )}

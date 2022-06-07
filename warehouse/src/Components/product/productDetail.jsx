@@ -1,5 +1,9 @@
+/**
+ * Component chi tiết sản phẩm của trang chi tiết sản phẩm
+ */
 import React from "react";
 import "./productDetail.css";
+
 const CardProduct = ({
   image,
   name,
@@ -14,7 +18,8 @@ const CardProduct = ({
 }) => {
   return (
     <div className="cardDetail">
-      <h3>Thông tin chi tiết</h3>
+      <h2>Thông tin chi tiết</h2>
+      <hr />
       <div className="flexCard">
         <img className="imageCard" src={`${image}`} alt="" />
 
@@ -45,27 +50,33 @@ const CardProduct = ({
               <li className="fontText">{description}</li>
             </ul>
           </div>
-          <hr />
-          <div>
-            <h5>Content:</h5>
-            <ul>
-              {content1 !== "" ? (
-                <li className="fontText">{content1}</li>
-              ) : (
-                <></>
-              )}
-              {content2 !== "" ? (
-                <li className="fontText">{content2}</li>
-              ) : (
-                <></>
-              )}
-              {content3 !== "" ? (
-                <li className="fontText">{content3}</li>
-              ) : (
-                <></>
-              )}
-            </ul>
-          </div>
+          {content1 === "" && content2 === "" && content3 === "" ? (
+            <></>
+          ) : (
+            <>
+              <hr />
+              <div>
+                <h5>Content:</h5>
+                <ul>
+                  {content1 !== "" ? (
+                    <li className="fontText">{content1}</li>
+                  ) : (
+                    <></>
+                  )}
+                  {content2 !== "" ? (
+                    <li className="fontText">{content2}</li>
+                  ) : (
+                    <></>
+                  )}
+                  {content3 !== "" ? (
+                    <li className="fontText">{content3}</li>
+                  ) : (
+                    <></>
+                  )}
+                </ul>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -1,3 +1,6 @@
+/**
+ * APIs xác thực
+ */
 import axiosClient from '../axiosClient'
 import { LOGIN_API } from '../../Common/constants'
 export const authAPI = {
