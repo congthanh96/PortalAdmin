@@ -14,12 +14,12 @@ import { createSiteSellerApi } from "../../api/private";
 import { ButtonLoading } from "../../components/common/buttons";
 import ConfirmDialog from "../../components/notifications/ConfirmDialog";
 import Notification from "../../components/notifications/Notifications";
+//2022/04/13 Huynh-dt export file ADD
+import CustomToolbar from "../../components/ToolbarExportToCSV/CustomToolbar";
 import { fetchUser } from "../../reducers";
 import { ButtonComponent } from "../../_constants/UI/button/ButtonComponent";
 import ColoredLinearProgress from "../../_constants/UI/button/LineProgress";
 import "./productList.css";
-//2022/04/13 Huynh-dt export file ADD
-import CustomToolbar from "../../components/ToolbarExportToCSV/CustomToolbar";
 //2022/04/13 Huynh-dt export file ADD
 
 const useStyles = makeStyles((theme) => ({
@@ -74,6 +74,8 @@ export default function GhtkList() {
 
   const { orders, isLoading } = useSelector((state) => state.order);
   const fetchData = useSelector((state) => state.user.listUser);
+
+  console.log(fetchData);
 
   const [rows, setRows] = useState([]);
 
@@ -252,27 +254,6 @@ export default function GhtkList() {
     }
   };
 
-  const handleAdminCreateSite = async () => {
-    closeSnackbar();
-
-    try {
-      // CALL API HERE
-      const idUser = "afb09d7a-9ca4-46ca-bb30-0400d8fdb475";
-      const data = {
-        url: "vanslug3",
-        shopName: "vanshop4",
-      };
-      const response = await createSiteSellerApi.adminCreate(idUser, data);
-      console.log("response", response);
-      enqueueSnackbar(success, {
-        variant: "success",
-      });
-    } catch (err) {
-      enqueueSnackbar(error, {
-        variant: "error",
-      });
-    }
-  };
   const [dataSite, setDataSite] = useState({
     url: "",
     shopName: "",
@@ -492,9 +473,6 @@ export default function GhtkList() {
     { label: "Monty Python and the Holy Grail", year: 1975 },
   ];
   const [infoUser, setInfoUser] = useState({});
-  useEffect(() => {
-    console.log(infoUser);
-  }, [infoUser]);
 
   return (
     <div className="productList">
@@ -558,12 +536,24 @@ export default function GhtkList() {
                         <Autocomplete
                           disablePortal
                           id="combo-box-demo"
-                          options={fetchData?.map((value) => ({
-                            label: value.email,
-                            id: value.id,
-                            code: value.code,
-                            name: value.firstName + value.lastName,
-                          }))}
+                          options={
+                            fetchData.length > 0
+                              ? fetchData?.map((value) => ({
+                                  label: value.email || "noEmail",
+                                  id: value.id,
+                                  code: value.code,
+                                  name:
+                                    value.firstName ||
+                                    "noName" + value.lastName ||
+                                    "noName",
+                                }))
+                              : {
+                                  label: "label",
+                                  id: "value.id",
+                                  code: "value.code",
+                                  name: "value.firstName + value.lastName",
+                                }
+                          }
                           sx={{ width: 400 }}
                           onChange={(event, value) => setInfoUser(value)}
                           renderInput={(params) => (
@@ -619,7 +609,7 @@ export default function GhtkList() {
               </div>
             ) : (
               <DataGrid
-                rows={rows}
+                rows={rows || []}
                 getRowId={(row) => row.url}
                 disableSelectionOnClick
                 columns={columns}

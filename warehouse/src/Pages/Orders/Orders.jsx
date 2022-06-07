@@ -270,7 +270,7 @@ export default function Orders() {
               allowClear
               enterButton="Search"
               onSearch={(searchVal) => requestSearch(searchVal)}
-              style={{ width: 400 }}
+              style={{ width: 500 }}
               loading={isLoadingSearch}
             />
       </div>
