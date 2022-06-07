@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { GHTKAPI, ordersAPI } from "../../APIs";
 import { DownOutlined } from "@ant-design/icons";
 import ColoredLinearProgress from "../../Common/LineProgress";
-import { Menu, Dropdown, Space, Input, Button, Form, Table, Modal } from "antd";
+import { Menu, Dropdown, Space, Input, Button, Form, Table } from "antd";
 import { LIST_ADDRESS_WAREHOUSE, ACCEPT } from "../../Common/constants";
 import { formatVND } from "../../Common/formatVND";
 import { toastr } from "react-redux-toastr";
@@ -18,7 +18,7 @@ export default function GHTK({ location }) {
   const [form] = Form.useForm();
   const billData = JSON.parse(state);
   const [isLoading, setIsLoading] = useState(false);
-  const [isVisibleModalWeight, setIsVisibleModalWeight] = useState(false);
+  //const [isVisibleModalWeight, setIsVisibleModalWeight] = useState(false);
   const [productsInOrder, setProductsInOrder] = useState([]);
   const [isPosting, setIsPosting] = useState(false);
   const [dataOrder, setDataOrder] = useState({
@@ -73,11 +73,11 @@ export default function GHTK({ location }) {
     },
     {
       title: "Khối lượng",
-      dataIndex: "variantf",
-      key: "variantf",
-      render: (text) => {
-        return <label onClick={() => updateWeight(text)}>{text.weight}</label>;
-      },
+      dataIndex: "weight",
+      key: "weight",
+      // render: (text) => {
+      //   return <label onClick={() => updateWeight(text)}>{text.weight}</label>;
+      // },
     },
     {
       title: "Số lượng",
@@ -259,10 +259,10 @@ export default function GHTK({ location }) {
   };
 
   // Xử lý khi update weight (để sau)
-  const updateWeight = (text) => {
-    //setDataToUpdateWeight(text);
-    setIsVisibleModalWeight(true);
-  };
+  // const updateWeight = (text) => {
+  //   //setDataToUpdateWeight(text);
+  //   setIsVisibleModalWeight(true);
+  // };
 
   // Xử lý khi thay đổi các thông tin của đơn hàng
   const handleChangeDataInput = (event) => {
@@ -500,7 +500,7 @@ export default function GHTK({ location }) {
             Đăng đơn hàng lên GHTK
           </Button>
 
-          <Modal
+          {/* <Modal
             title="Cập nhật lại khối lượng "
             visible={isVisibleModalWeight}
             onOk={() => {
@@ -521,7 +521,7 @@ export default function GHTK({ location }) {
                 onChange={(e) => console.log(e.target.value)}
               ></input>
             </p>
-          </Modal>
+          </Modal> */}
         </div>
       )}
     </>

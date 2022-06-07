@@ -1,4 +1,5 @@
-.productList, .orderList {
+.packing-container, .orderList {
+  margin-top: 20px;
   flex: 6;
   background-color: white;
 }

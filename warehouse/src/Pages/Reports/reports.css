@@ -1,0 +1,12 @@
+.card{
+    padding: 20px;
+    box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
+    width: 100%;
+
+}
+.cardContainer{
+    /* width: 50%;
+    height: 50%;
+    border: 1px; */
+    padding: 20%;
+}

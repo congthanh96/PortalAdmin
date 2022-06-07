@@ -8,27 +8,6 @@ import { Table } from "antd";
 import "./orderDetail.css";
 
 const OrderDetail = ({ orderDetail, productsInOrder }) => {
-  // const columns = [
-  //   {
-  //     field: "productName",
-  //     headerName: "Tên sản phẩm",
-  //     flex: 2,
-  //   },
-  //   { field: "variantName", headerName: "Phân loại", flex: 1 },
-  //   { field: "count", headerName: "Số lượng", flex: 0.5 },
-
-  //   {
-  //     field: "price",
-  //     headerName: "Giá	",
-  //     flex: 1,
-  //     headerAlign: "center",
-  //     align: "center",
-  //     renderCell: (params) => {
-  //       return <>{formatVND(params.row.price)}</>;
-  //     },
-  //   },
-  // ];
-
   const columnsAntd = [
     {
       title: "Tên sản phẩm",
