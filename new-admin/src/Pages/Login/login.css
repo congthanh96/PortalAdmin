@@ -1,0 +1,19 @@
+.pageLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  height: 100vh;
+}
+
+.container-input {
+  width: 800px;
+  height: 64px;
+}
+
+.btn-login{
+  width: 800px;
+  height: 64px;
+  font-size: 24px;
+  background-color: #959595;
+}

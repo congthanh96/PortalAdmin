@@ -1,24 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import 'antd/dist/antd.min.css'
+import React, { Suspense, lazy } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import UserProvider from "./Context/UserContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import checkAuth from "./Utils/checkAuth";
+import Topbar from "./Components/topbar/Topbar";
 
+const Home = lazy(() => import("./Pages/Home/Home"));
+const Login = lazy(() => import("./Pages/Login/Login"));
 function App() {
+  // const toastId = React.useRef(null);
+
+  // const notify = () => {
+  //   if(! toast.isActive(toastId.current)) {
+  //     toastId.current = toast.success("I cannot be duplicated!");
+  //   }
+  // }
+  const isAuth = checkAuth();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Topbar />
+      <UserProvider>
+        {isAuth ? (
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Navigate to="/" />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Navigate to="/login" />} />
+          </Routes>
+        )}
+      </UserProvider>
+
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    </Router>
   );
 }
 

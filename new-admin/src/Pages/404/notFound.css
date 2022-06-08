@@ -1,0 +1,11 @@
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  display: flex;
+}
+
+.container-image {
+  width: 500px;
+  height: 500px;
+}
