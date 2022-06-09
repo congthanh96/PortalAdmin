@@ -4,18 +4,18 @@ const UserContext = createContext({});
 const UpdateUserContext = createContext(null);
 
 const defaultUserContext = {
-    isLoading: true,
-    userName: ""    
+    userName: localStorage.getItem("userName") || {},
+    isLogin: localStorage.getItem("tokenADMIN") ? true : false
 }
 
 const userReducer = (state, action) =>
 {
     switch (action.type) {
         case "LOGIN_SET": {
+            console.log("vô đây")
             return{
-                ...state,
-                userName: action.username,
-                isLoading: false
+                userName: action.userName,
+                isLogin: action.isLogin
             }
         }
 

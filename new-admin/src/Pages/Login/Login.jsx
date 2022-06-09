@@ -1,9 +1,9 @@
 /**
  * Trang đăng nhập
  */
-import React, {useState,useContext} from "react";
+import React, { useState, useContext } from "react";
 
-import { Button, Checkbox, Form, Input, Space } from "antd";
+import { Button, Form, Input, Space } from "antd";
 import {
   UserOutlined,
   EyeInvisibleOutlined,
@@ -11,23 +11,21 @@ import {
   LockOutlined,
 } from "@ant-design/icons";
 import "./login.css";
-import checkAuth from "../../Utils/checkAuth";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import {authAPI} from "../../APIs"
+import { authAPI } from "../../APIs";
 
-import {UpdateUserContext} from "../../Context/UserContext";
+import { UserContext,UpdateUserContext } from "../../Context/UserContext";
 
 const Login = () => {
   // const dispatch = useDispatch();
   const toastId = React.useRef(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const updateUser = useContext(UpdateUserContext);
   const [state, setState] = useState({
     email: "",
     password: "",
   });
-  const [isLogged,setIsLogged]=useState(false);
 
   // Xử lý khi nhập email và mật khẩu
   const handleChange = (e) => {
@@ -37,30 +35,24 @@ const Login = () => {
   //Xử lý khi ấn button đăng nhập
   const handleSubmitLogin = async () => {
     try {
-     
       var params = JSON.stringify({
         userName: state.email,
         password: state.password,
       });
 
       const response = await authAPI.login(params);
-      console.log(response)
-      updateUser({type: "LOGIN_SET", email: response.username})
+      console.log(response);
+      updateUser({ type: "LOGIN_SET", userName: response.username, isLogin:true });
       localStorage.setItem("tokenADMIN", response.token);
-      if(localStorage.getItem("tokenADMIN"))
-      {
-         navigate("/");
-      }
-      setIsLogged(true);
-    
+      localStorage.setItem("userName",response.username)
+      navigate("/");
     } catch (error) {
-        if(! toast.isActive(toastId.current)) {
-      toastId.current = toast.error("Đăng nhập thất bại!");
+      if (!toast.isActive(toastId.current)) {
+        toastId.current = toast.error("Đăng nhập thất bại!");
+      }
     }
-     }
- 
   };
- 
+
   return (
     <div className="pageLogin">
       <Form>
@@ -98,10 +90,7 @@ const Login = () => {
             />
           </Space>
         </Form.Item>
-        <Button
-          className="btn-login"
-          onClick={() => handleSubmitLogin()}
-        >
+        <Button className="btn-login" onClick={() => handleSubmitLogin()}>
           Đăng nhập
         </Button>
       </Form>

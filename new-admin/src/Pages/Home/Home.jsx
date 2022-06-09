@@ -5,9 +5,9 @@ import "./home.css";
 import React from 'react'
 const Home = () => {
   return (
-    <h1>
+    <div className="home-container">
       Warehouse Newee
-    </h1>
+    </div>
   );
 }
 export default Home

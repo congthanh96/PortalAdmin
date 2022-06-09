@@ -60,4 +60,29 @@ export const LIST_ADDRESS_WAREHOUSE = [
     // }
 ]
 
-
+export const DATA_ROUTE = [
+    {
+        linkTo: "/",
+        nameLink: "Trang chủ",
+    },
+    {
+      linkTo: "/users",
+      nameLink: "Tài khoản",
+    },
+    {
+      linkTo: "/products",
+      nameLink: "Sản phẩm",
+    },
+    {
+      linkTo: "/orders",
+      nameLink: "Đóng hàng",
+    },
+    {
+      linkTo: "/approve-orders",
+      nameLink: "Duyệt đơn hàng",
+    },
+    {
+      linkTo: "/reports",
+      nameLink: "Báo cáo",
+    },
+  ];
