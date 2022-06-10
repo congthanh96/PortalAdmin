@@ -11,6 +11,7 @@ export const GET_PRODUCTS_IN_ORDER_API = "/Newee/Bill/GetBillDetailByIdBill/"
 export const UPDATE_STATUS_ORDER_API = "/Newee/Bill/ChangeStatusTo/"//"/Newee/Bill/ChangeStatusTo/{idBill}/{status}"
 export const GET_GHTK_LIST_PICK_ADD_API = "/ghtk/get-list-pickadd"
 export const POST_GHTK_ORDER_API = "/ghtk/post-order"
+export const GET_USERS_API = "/Newee/Manager/GetListSeller/1000/1"//litmit = 1000, index page=1
 
 //ACTIONS AUTHENTICATE
 export const AUTH_LOADING = "AUTH_LOADING";
