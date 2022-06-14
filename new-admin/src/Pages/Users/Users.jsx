@@ -1,5 +1,5 @@
 /**
- * Danh sách sản phẩm
+ * Danh sách tài khoản
  */
 
 import React, { useEffect, useState } from "react";
@@ -10,14 +10,24 @@ import { Input, Spin } from "antd";
 import { toast } from "react-toastify";
 import { usersAPI } from "../../APIs";
 import NoData from "../../Components/NoData/NoData";
-import { CSVLink, CSVDownload } from "react-csv";
-import { Table } from "ant-table-extensions";
+import { CSVLink } from "react-csv";
+import { Table } from "antd";
 const Users = () => {
-  const dataTop = ["Trang chủ", "Tài khoản"];
+  const dataTop = [
+    {
+      linkTo: "/",
+      nameLink: "Trang chủ",
+    },
+    {
+      linkTo: "/users",
+      nameLink: "Danh sách tài khoản",
+    },
+  ];
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState("");
   const [dataToSearch, setDataToSearch] = useState([]);
+  const [dataToExport, setDataToExport] = useState([]);
   const [page, setPage] = React.useState(1);
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +38,7 @@ const Users = () => {
         setDataToSearch(res);
         setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
         toast.error(error);
       }
     };
@@ -46,24 +57,18 @@ const Users = () => {
       key: "code",
       dataIndex: "code",
       render: (text, record, index) =>
-      (record.code !== null) ? (
-        <span>
-          {record.code}
-        </span>
-      ) : (
-        <NoData/>
-      ),
+        record.code !== null ? <span>{record.code}</span> : <NoData />,
     },
     {
       title: "Họ tên",
       dataIndex: "fullname",
       render: (text, record, index) =>
-        (record.firstName !== null || record.lastName !== null) ? (
+        record.firstName !== null || record.lastName !== null ? (
           <span>
             {record.firstName} {record.lastName}
           </span>
         ) : (
-          <NoData/>
+          <NoData />
         ),
     },
     {
@@ -71,26 +76,14 @@ const Users = () => {
       key: "email",
       dataIndex: "email",
       render: (text, record, index) =>
-      (record.email !== null) ? (
-        <span>
-          {record.email}
-        </span>
-      ) : (
-        <NoData/>
-      ),
+        record.email !== null ? <span>{record.email}</span> : <NoData />,
     },
     {
       title: "Điện thoại",
       key: "phone",
       dataIndex: "phone",
       render: (text, record, index) =>
-      (record.phone !== null) ? (
-        <span>
-          {record.phone}
-        </span>
-      ) : (
-        <NoData/>
-      ),
+        record.phone !== null ? <span>{record.phone}</span> : <NoData />,
     },
     {
       title: "Hành động",
@@ -113,9 +106,24 @@ const Users = () => {
       return row.code.toLowerCase().includes(searchValue.toLowerCase());
     });
     console.log(filteredRows);
-
     setUsers(filteredRows);
   };
+
+  const handleDataToExport = () => {
+    toast.success("Xuất dữ liệu danh sách tài khoản thành công!")
+    setDataToExport(
+      users.map((e) => ({
+        "Mã CTV": e.code,
+        "Họ tên":
+          e.firstName === null && e.lastName === null
+            ? null
+            : e.firstName + " " + e.lastName,
+        Email: e.email,
+        SĐT: e.phone,
+      }))
+    );
+  };
+
   return (
     <div className="users-container">
       <Spin spinning={isLoading}>
@@ -132,6 +140,13 @@ const Users = () => {
           <ButtonComponent onClick={handleSearch}>Search</ButtonComponent>
         </div>
         <div className="container-data">
+          <div className="css-export">
+            <ButtonComponent onClick={handleDataToExport}>
+              <CSVLink data={dataToExport} filename="Quản lý tài khoản">
+                Xuất dữ liệu
+              </CSVLink>
+            </ButtonComponent>
+          </div>
           <>Total: {users.length} results</>
           <Table
             dataSource={users}
@@ -145,8 +160,8 @@ const Users = () => {
               },
               position: ["bottomCenter"],
             }}
-            exportable
-            exportableProps={{ users, fileName: "my-table" }}
+            // exportable
+            // exportableProps={{ users, fileName: "my-table" }}
             // searchableProps={{
             //   // dataSource,
             //   // setDataSource: setSearchDataSource,
@@ -157,7 +172,6 @@ const Users = () => {
             // }}
           ></Table>
         </div>
-        <CSVLink data={users}>Download me</CSVLink>;
       </Spin>
     </div>
   );

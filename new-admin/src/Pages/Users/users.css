@@ -2,14 +2,14 @@
   flex: 6;
   background-color: white;
   margin-left: 30px;
-  margin-top: 23px;
+  margin-top: 20px;
   width: 100%;
   margin-right: 40px;
 }
 
 .css-input {
-  width: 330px;
-  height: 46px;
+  width: 274px;
+  height: 37px;
   background: #ffffff;
   border: 1px solid #c4c4c4;
   border-radius: 8px;
@@ -23,4 +23,9 @@
 
 .css-a{
   border-bottom:1px solid #1890ff;
+}
+
+.css-export{
+  margin-top: 20px;
+  margin-bottom: 10px;
 }

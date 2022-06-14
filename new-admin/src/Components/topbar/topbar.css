@@ -1,6 +1,6 @@
 .topbar {
   width: 100%;
-  height: 64px;
+  height: 52px;
   background-color: #FFFDFD;
   position: sticky;
   top: 0;
@@ -18,7 +18,7 @@
 
 .logo {
   font-weight: bold;
-  font-size: 30px;
+  font-size: 20px;
   color: darkblue;
   cursor: pointer;
   text-decoration: none;
@@ -61,20 +61,21 @@
 .topLogo {
   width: 120px;
   height: 40px;
-  margin-top: 10px;
+  margin-top: 5px;
+  margin-left: 15px;
   cursor: pointer;
   object-fit: contain;
 }
 
 .css-name{
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   margin-right: 40px;
 }
 
 .css-logout{
-  margin-right: 20px;
-  font-size: 20px;
+  margin-right: 16px;
+  font-size: 16px;
   color: black;
   cursor: pointer;
 }

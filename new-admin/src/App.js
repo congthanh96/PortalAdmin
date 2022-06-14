@@ -16,6 +16,7 @@ import Sidebar from "./Components/sidebar/Sidebar";
 const Home = lazy(() => import("./Pages/Home/Home"));
 const Login = lazy(() => import("./Pages/Login/Login"));
 const Users =  lazy(() => import("./Pages/Users/Users"));
+const User = lazy(()=> import("./Pages/User/User"))
 const Products =  lazy(() => import("./Pages/Products/Products"));
 function App() {
   // const toastId = React.useRef(null);
@@ -49,6 +50,7 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route path="/login" element={<Navigate to="/" />} />
             <Route exact path="/users" element={<Users />} />
+            <Route path="/user/:userID" element={<User />} />
             <Route exact path="/products" element={<Products />} />
           </Routes>
         ) : (

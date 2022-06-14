@@ -33,7 +33,7 @@ export default function Topbar() {
   return (
     <div className="topbar">
       <div className="topbarWrapper">
-        <div className="topLeft">
+        <div>
           <Link className="logo" to="/">
             <img src={logoNewee} alt="" className="topLogo" />
           </Link>

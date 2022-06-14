@@ -12,6 +12,7 @@ export const UPDATE_STATUS_ORDER_API = "/Newee/Bill/ChangeStatusTo/"//"/Newee/Bi
 export const GET_GHTK_LIST_PICK_ADD_API = "/ghtk/get-list-pickadd"
 export const POST_GHTK_ORDER_API = "/ghtk/post-order"
 export const GET_USERS_API = "/Newee/Manager/GetListSeller/1000/1"//litmit = 1000, index page=1
+export const GET_USER_BY_ID_API = "/Newee/Manager/GetUserById/" // :{userID}
 
 //ACTIONS AUTHENTICATE
 export const AUTH_LOADING = "AUTH_LOADING";
@@ -63,12 +64,12 @@ export const LIST_ADDRESS_WAREHOUSE = [
 
 export const DATA_ROUTE = [
     {
-        linkTo: "/",
-        nameLink: "Trang chủ",
+      linkTo: "/",
+      nameLink: "Trang chủ",
     },
     {
       linkTo: "/users",
-      nameLink: "Tài khoản",
+      nameLink: "Danh sách tài khoản",
     },
     {
       linkTo: "/products",

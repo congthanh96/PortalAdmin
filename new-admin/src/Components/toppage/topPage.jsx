@@ -3,8 +3,8 @@ import { DATA_ROUTE } from "../../Common/constants";
 import { Breadcrumb } from 'antd';
 import "./topPage.css";
 const topPage = ({ dataProps }) => {
-  let data = DATA_ROUTE.filter((item) => dataProps.includes(item.nameLink));
-  const lastItem = [...data].pop().nameLink 
+  // let data = DATA_ROUTE.filter((item) => dataProps.includes(item.nameLink));
+  const lastItem = [...dataProps].pop().nameLink 
   return (
     // <>
     //   <div>
@@ -28,10 +28,10 @@ const topPage = ({ dataProps }) => {
    
     <>
       <Breadcrumb>
-        {data.map((value, index) => {
+        {dataProps.map((value, index) => {
           return (
             <Breadcrumb.Item key={index}>
-              {data.length - 1 === index ? (
+              {dataProps.length - 1 === index ? (
                 <>{value.nameLink}</>
               ) : (
                 <a href={value.linkTo}>{value.nameLink}</a>
