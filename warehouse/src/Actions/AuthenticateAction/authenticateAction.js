@@ -16,12 +16,12 @@ export const actLogin = (email, password) => {
     });
 
     try {
-      var params = JSON.stringify({
+      var data = JSON.stringify({
         userName: email,
         password: password,
       });
 
-      const response = await authAPI.login(params);
+      const response = await authAPI.login(data);
       // Đăng nhập thành công
       dispatch({
         type: LOGIN,

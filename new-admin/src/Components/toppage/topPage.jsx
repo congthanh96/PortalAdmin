@@ -2,6 +2,7 @@ import React from "react";
 import { DATA_ROUTE } from "../../Common/constants";
 import { Breadcrumb } from 'antd';
 import "./topPage.css";
+import { Link } from "react-router-dom";
 const topPage = ({ dataProps }) => {
   // let data = DATA_ROUTE.filter((item) => dataProps.includes(item.nameLink));
   const lastItem = [...dataProps].pop().nameLink 
@@ -34,7 +35,7 @@ const topPage = ({ dataProps }) => {
               {dataProps.length - 1 === index ? (
                 <>{value.nameLink}</>
               ) : (
-                <a href={value.linkTo}>{value.nameLink}</a>
+                <Link to={value.linkTo}>{value.nameLink}</Link>
               )}
             </Breadcrumb.Item>
           );

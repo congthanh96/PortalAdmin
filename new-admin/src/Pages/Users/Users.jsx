@@ -12,6 +12,7 @@ import { usersAPI } from "../../APIs";
 import NoData from "../../Components/NoData/NoData";
 import { CSVLink } from "react-csv";
 import { Table } from "antd";
+import { Link } from "react-router-dom";
 const Users = () => {
   const dataTop = [
     {
@@ -89,9 +90,9 @@ const Users = () => {
       title: "Hành động",
       key: "action",
       render: (text, record, index) => (
-        <a href={"/user/" + record.id} className="css-a">
+        <Link to={"/user/" + record.id} className="css-a">
           Xem
-        </a>
+        </Link>
       ),
     },
   ];
@@ -139,7 +140,7 @@ const Users = () => {
           ></Input>
           <ButtonComponent onClick={handleSearch}>Search</ButtonComponent>
         </div>
-        <div className="container-data">
+        <div className="container-data-users">
           <div className="css-export">
             <ButtonComponent onClick={handleDataToExport}>
               <CSVLink data={dataToExport} filename="Quản lý tài khoản">
