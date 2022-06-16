@@ -1,5 +1,6 @@
 //URLs
 export const BASE_URL = "https://api.newee.asia:6001";
+export const BASE_URL_IMAGE = "https://api.newee.asia:8001";
 export const LOGIN_API = "/Newee/Manager/Login";
 export const GET_PRODUCTS_API = "/Newee/ManagerProduct/GetList/500/1"; //litmit = 500, index page=1
 export const GET_DETAIL_PRODUCT_API = "/Newee/ManagerProduct/GetById/";
@@ -14,6 +15,7 @@ export const POST_GHTK_ORDER_API = "/ghtk/post-order"
 export const GET_USERS_API = "/Newee/Manager/GetListSeller/1000/1"//litmit = 1000, index page=1
 export const GET_USER_BY_ID_API = "/Newee/Manager/GetUserById/" // :{userID}
 export const UPDATE_USER_BY_ID_API = "/Newee/Manager/EditProfile"
+export const POST_IMAGE_API = "/upload-image"
 
 //ACTIONS AUTHENTICATE
 export const AUTH_LOADING = "AUTH_LOADING";

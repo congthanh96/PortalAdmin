@@ -1,11 +1,11 @@
 /**
  * APIs của hình ảnh
  */
- import axiosClient from "../axiosClient";
- import { GET_USERS_API, GET_USER_BY_ID_API } from "../../Common/constants";
-
+ import axiosClientImage from "../axiosClientImage";
+ 
+ import { POST_IMAGE_API } from "../../Common/constants";
  export const imageAPI = {
-    uploadImage:()=>{
-        return axiosClient.post()
+    uploadImage:(data)=>{
+        return axiosClientImage.post(POST_IMAGE_API,data)
     }
  }

@@ -111,7 +111,7 @@ const Users = () => {
   };
 
   const handleDataToExport = () => {
-    toast.success("Xuất dữ liệu danh sách tài khoản thành công!")
+    toast.success("Xuất dữ liệu danh sách tài khoản thành công!");
     setDataToExport(
       users.map((e) => ({
         "Mã CTV": e.code,
@@ -141,14 +141,17 @@ const Users = () => {
           <ButtonComponent onClick={handleSearch}>Search</ButtonComponent>
         </div>
         <div className="container-data-users">
-          <div className="css-export">
-            <ButtonComponent onClick={handleDataToExport}>
-              <CSVLink data={dataToExport} filename="Quản lý tài khoản">
-                Xuất dữ liệu
-              </CSVLink>
-            </ButtonComponent>
+          <div className="css-header">
+            <div className="css-total">Total: {users.length} results</div>
+            <div className="css-export">
+              <ButtonComponent onClick={handleDataToExport}>
+                <CSVLink data={dataToExport} filename="Quản lý tài khoản">
+                  Xuất dữ liệu
+                </CSVLink>
+              </ButtonComponent>
+            </div>
           </div>
-          <>Total: {users.length} results</>
+
           <Table
             dataSource={users}
             columns={columnsAntd}

@@ -32,14 +32,18 @@
   }
 
   .userUpdateImg {
-    width: 323.52755906px;
-    height: 204.01889764px;
+    width: 325px;
+    height: 205px;
     border-radius: 5px;
     object-fit: fill;
     margin-right: 20px;
     margin-bottom: 20px;
     border: 1px solid #dedede;
+    cursor:pointer;
   }
+  /* .userUpdateImg:hover::after{
+    background-color: #ffffff;
+  } */
 
   .ant-avatar>img {
     display: block;

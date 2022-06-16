@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import TopPage from "../../Components/toppage/topPage";
 import ButtonComponent from "../../Components/button/ButtonComponent";
 import { Input, Spin, Collapse, Card, Avatar, Button } from "antd";
-import { usersAPI } from "../../APIs";
+import { usersAPI,imageAPI } from "../../APIs";
 import { toast } from "react-toastify";
 import NoData from "../../Components/NoData/NoData";
 import {
@@ -29,8 +29,8 @@ const User = () => {
   const [user, setUser] = useState("");
   const [srcImgCardBefore, setSrcImgCardBefore] = useState("");
   const [srcImgCarAfter, setSrcImgCardAfter] = useState("");
-  const [fileCardBefore, setFilImgCardBefore] = useState("");
-  const [fileCarAfter, fileCardAfter] = useState("");
+  const [fileCardBefore, setFileImgCardBefore] = useState("");
+  const [fileCardAfter, setFileImgCardAfter] = useState("");
   const [referralCode, setReferralCode] = useState("");
   useEffect(() => {
     const fetchData = async () => {
@@ -71,32 +71,110 @@ const User = () => {
   };
 
   const handleUpdateCardBefore = (event) => {
-    // let temp = {...user,urlIDCardBefore:(event.target.files[0])}
-    // setSrcImgCardBefore(event.target.res)
-    // console.log(temp)
     const [file] = event.target.files;
+    setFileImgCardBefore(file)
     setSrcImgCardBefore(URL.createObjectURL(file));
-    console.log(file)
   };
+  const handleUpdateCardAfter = (event) => {
+    const [file] = event.target.files;
+    setFileImgCardAfter(file)
+    setSrcImgCardAfter(URL.createObjectURL(file));
+  };
+  
   const genExtra = () => (
     <SaveFilled
       style={{ fontSize: "150%" }}
-      onClick={(event) => {
+      onClick={ async(event) => {
         // If you don't want click extra trigger collapse, you can prevent this:
         event.stopPropagation();
-        saveImgCard();
+        setIsLoading(true)
+        try {
+         let dataPost = await postImage();
+        console.log(dataPost)
+         if(dataPost.isSuccess)
+         {
+          await saveImgCard(dataPost.urlImageBefore,dataPost.urlImageAfter);
+         }
+         setIsLoading(false)
+        } catch (error) {
+          setIsLoading(false)
+          toast.error(error)
+        }
+       
       }}
     />
   );
-  const saveImgCard = () => {};
+    
+  const postImage = async () => {
+    // let isSuccess= false;
+    let dataPost = {
+      
+      isSuccess : false,
+
+      urlImageBefore :user.urlIDCardBefore,
+      
+      urlImageAfter :user.urlIDcCardAffter,
+    }
+     
+    try {
+      if(fileCardBefore!=="")
+      {
+        let data = new FormData();
+        data.append('File',fileCardBefore);
+        data.append('Type',"IdCard")
+        data.append('Width',325)
+        data.append('Height',205)
+        const res = await imageAPI.uploadImage(data)
+        dataPost= {...dataPost,isSuccess:true,urlImageBefore:res}
+      }
+      if(fileCardAfter!=="")
+      {
+        let data = new FormData();
+        data.append('File',fileCardAfter);
+        data.append('Type',"IdCard")
+        data.append('Width',325)
+        data.append('Height',205)
+        const res = await imageAPI.uploadImage(data)
+        dataPost= {...dataPost,isSuccess:true,urlImageAfter:res}
+      }
+    } catch (error) {
+      dataPost= {...dataPost,isSuccess:false}
+      toast.error("Lưu hình lển server bị lỗi")
+    }
+    return dataPost
+  } 
+
+  const saveImgCard = async (urlBefore,urlAfter) => {
+    try {
+      if(fileCardBefore!=="")
+      {
+        let data = JSON.stringify({
+          id: user.id,
+          lastName: user.lastName,
+          firstName: user.first === " " ? user.lastName : user.first,
+          phone: user.phoneNumber,
+          email: user.email,
+          password: "123@Admin",
+          passwordConfirm: "123@Admin",
+          urlIDCardBefore: urlBefore,
+          urlIDCardAffter: urlAfter,
+          urlAvatar: user.urlAvatar,
+          cmndNgayCap: user.cmndNgayCap,
+          cmndSo: user.cmndSo,
+          cmndNoiCap: user.cmndNoiCap,
+          iDrecommend: user.iDrecommend,
+        });
+         console.log(data)
+        await usersAPI.updateUserByID(data);
+        toast.success("Cập nhật hình ảnh CMND/CCCD thành công");
+      }
+    } catch (error) {
+      toast.error("Cập nhật hình ảnh CMND/CCCD không thành công")
+    }
+  };
   const saveReferralCode = async () => {
-    console.log(referralCode);
-    // var data = JSON.stringify({
-    //   userName: email,
-    //   password: password,
-    // });
+    setIsLoading(true)
     let temp = { ...user, iDrecommend: referralCode };
-    setUser(temp);
     try {
       let data = JSON.stringify({
         id: temp.id,
@@ -114,10 +192,11 @@ const User = () => {
         cmndNoiCap: temp.cmndNoiCap,
         iDrecommend: temp.iDrecommend,
       });
-      const res = await usersAPI.updateUserByID(data);
+      await usersAPI.updateUserByID(data);
+      setIsLoading(false)
       toast.success("Cập nhật mã giới thiệu thành công");
-      console.log(res);
     } catch (error) {
+      setIsLoading(false)
       toast.error(error);
     }
   };
@@ -203,6 +282,7 @@ const User = () => {
                       type="file"
                       id="imgAfter"
                       style={{ display: "none" }}
+                      onChange={handleUpdateCardAfter}
                     />
                   </div>
                 </div>
@@ -226,8 +306,8 @@ const User = () => {
                     defaultValue={referralCode}
                     onChange={(e) => setReferralCode(e.target.value)}
                   />
-                  <Button type="primary" onClick={saveReferralCode}>
-                    Submit
+                  <Button type="primary" onClick={saveReferralCode} loading = {isLoading}>
+                    Lưu 
                   </Button>
                 </Input.Group>
               </Panel>
