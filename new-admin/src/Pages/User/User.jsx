@@ -304,6 +304,7 @@ const User = () => {
                   <Input
                     style={{ width: "calc(100% - 500px)" }}
                     defaultValue={referralCode}
+                    placeholder="nhập mã giới thiệu"
                     onChange={(e) => setReferralCode(e.target.value)}
                   />
                   <Button type="primary" onClick={saveReferralCode} loading = {isLoading}>

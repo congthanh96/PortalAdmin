@@ -31,6 +31,7 @@ const Products = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = React.useState(1);
   const [isVisibleModal,setIsVisibleModal] = useState(false)
+  const [productToRemove,setProductToRemove] = useState("")
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -90,20 +91,43 @@ const Products = () => {
     {
       title: "Hành động",
       key: "action",
-      render: (text, record, index) => (
+      render: (text, record, index) => {
+        return(
         <span>
           <Link to={"/product/" + record.id} className="css-edit">
             Xem
           </Link>
-          <span className="css-remove" onClick={handleRemove(record.id)}>
-          Xóa
+          <span className="css-remove" onClick={()=>onClickRemove(record)}>
+          Ẩn
         </span>
         </span>
-      ),
+        )
+        },
     },
   ];
-  const handleRemove = (id) =>{
-    setIsVisibleModal(false)
+  const onClickRemove = (product) =>{
+    setIsVisibleModal(true)
+    console.log(product)
+    setProductToRemove(product)
+  }
+  const handleRemoveProduct = async() => {
+    setIsLoading(true)
+    try {
+      const res = await productsAPI.disableProduct(productToRemove.id);
+      console.log(res)
+      let temp = products.filter(data => data.id !== productToRemove.id);
+      setProducts(temp)
+      setIsVisibleModal(false)
+      setIsLoading(false)
+      toast.success("Ẩn sản phẩm "+ productToRemove.name +" thành công" )
+    } catch (error) {
+      setIsLoading(false)
+      toast.error("Ẩn sản phẩm "+ productToRemove.name +" thất bại" )
+    }
+  }
+  
+  const handleAddProduct = () => {
+    //  setIsVisibleModal(true)
   }
   const handleDataToExport = () => {
     toast.success("Xuất dữ liệu danh sách sản phẩm thành công!");
@@ -135,7 +159,9 @@ const Products = () => {
       <Spin spinning={isLoading}>
         <TopPage dataProps={dataTop} />
         <div className="css-add-btn">
-          <ButtonComponent >Thêm sản phẩm</ButtonComponent>
+        <Link to="/add-product">
+          <ButtonComponent onClick={handleAddProduct} >Thêm sản phẩm</ButtonComponent>
+          </Link>
         </div>
         <div>
           <Input
@@ -163,7 +189,7 @@ const Products = () => {
           <Table
             dataSource={products}
             columns={columnsAntd}
-            rowKey={(row) => row.code}
+            rowKey={(row) => row.id}
             // footer={Footer}
             // bordered
             pagination={{
@@ -187,16 +213,15 @@ const Products = () => {
      
       </Spin>
       <Modal
-        title="Modal"
+        title="Vô hiệu hóa sản phẩm"
         visible={isVisibleModal}
-        onOk={()=>setIsVisibleModal(false)}
-        onCancel={()=>setIsVisibleModal(false)}
-        okText="确认"
-        cancelText="取消"
+        onOk={()=>{
+          handleRemoveProduct()
+        }}
+        onCancel={()=>{setIsVisibleModal(false)}}
       >
-        <p>Bla bla ...</p>
-        <p>Bla bla ...</p>
-        <p>Bla bla ...</p>
+         <p>Bạn thực sự muốn vô hiệu hóa sản phẩm "{productToRemove.name}"</p>
+        
       </Modal>
     </div>
     

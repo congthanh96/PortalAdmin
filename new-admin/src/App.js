@@ -1,11 +1,11 @@
 import "antd/dist/antd.min.css";
-import React, { useContext,useEffect, lazy, Suspense } from "react";
+import React, { useContext, useEffect, lazy, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
-  useLocation
+  useLocation,
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,9 +15,10 @@ import Sidebar from "./Components/sidebar/Sidebar";
 
 const Home = lazy(() => import("./Pages/Home/Home"));
 const Login = lazy(() => import("./Pages/Login/Login"));
-const Users =  lazy(() => import("./Pages/Users/Users"));
-const User = lazy(()=> import("./Pages/User/User"))
-const Products =  lazy(() => import("./Pages/Products/Products"));
+const Users = lazy(() => import("./Pages/Users/Users"));
+const User = lazy(() => import("./Pages/User/User"));
+const Products = lazy(() => import("./Pages/Products/Products"));
+const AddProduct = lazy(() => import("./Pages/AddProduct/AddProduct"));
 function App() {
   // const toastId = React.useRef(null);
 
@@ -27,7 +28,7 @@ function App() {
   //   }
   // }
   // const [isAuth, setIsAuth] = useState(checkAuth());
-  const user = useContext(UserContext)
+  const user = useContext(UserContext);
   const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -40,27 +41,28 @@ function App() {
 
   return (
     <Router basename="/">
-       <ScrollToTop />
-        <Topbar />
-        <div style={{display:"flex"}}>
+      <ScrollToTop />
+      <Topbar />
+      <div style={{ display: "flex" }}>
         {user.isLogin && <Sidebar />}
         <Suspense fallback={<div>Loading...</div>}>
-        {user.isLogin ? (
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/login" element={<Navigate to="/" />} />
-            <Route exact path="/users" element={<Users />} />
-            <Route path="/user/:userID" element={<User />} />
-            <Route exact path="/products" element={<Products />} />
-          </Routes>
-        ) : (
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Navigate to="/login" />} />
-          </Routes>
-        )}
+          {user.isLogin ? (
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route path="/login" element={<Navigate to="/" />} />
+              <Route exact path="/users" element={<Users />} />
+              <Route path="/user/:userID" element={<User />} />
+              <Route exact path="/products" element={<Products />} />
+              <Route exact path="/add-product" element={<AddProduct />} />
+            </Routes>
+          ) : (
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<Navigate to="/login" />} />
+            </Routes>
+          )}
         </Suspense>
-        </div>
+      </div>
 
       <ToastContainer
         position="bottom-right"

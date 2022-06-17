@@ -16,6 +16,8 @@ export const GET_USERS_API = "/Newee/Manager/GetListSeller/1000/1"//litmit = 100
 export const GET_USER_BY_ID_API = "/Newee/Manager/GetUserById/" // :{userID}
 export const UPDATE_USER_BY_ID_API = "/Newee/Manager/EditProfile"
 export const POST_IMAGE_API = "/upload-image"
+export const DISABLE_PRODUCT_API = "/Newee/ManagerProduct/Disable/" //:{productID}
+
 
 //ACTIONS AUTHENTICATE
 export const AUTH_LOADING = "AUTH_LOADING";

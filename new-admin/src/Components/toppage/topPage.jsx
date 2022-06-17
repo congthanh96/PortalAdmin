@@ -3,7 +3,7 @@ import { DATA_ROUTE } from "../../Common/constants";
 import { Breadcrumb } from 'antd';
 import "./topPage.css";
 import { Link } from "react-router-dom";
-const topPage = ({ dataProps }) => {
+const TopPage = ({ dataProps }) => {
   // let data = DATA_ROUTE.filter((item) => dataProps.includes(item.nameLink));
   const lastItem = [...dataProps].pop().nameLink 
   return (
@@ -46,4 +46,4 @@ const topPage = ({ dataProps }) => {
   );
 };
 
-export default topPage;
+export default TopPage;

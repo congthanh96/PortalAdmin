@@ -1,0 +1,24 @@
+.css-input-item {
+  width: 550px;
+  height: 50px;
+  border-radius: 6px;
+}
+.css-label {
+  font-weight: 400;
+  font-size: 18px;
+  display: block;
+  margin-bottom: 5px;
+}
+.container-step1{
+    margin: 15px;
+}
+.container-item{
+    margin-right: 15px;
+    margin-top: 20px;
+}
+
+.css-text-area{
+  width: 800px;
+  min-height: 128px !important;
+  border-radius: 6px;
+}

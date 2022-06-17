@@ -28,6 +28,7 @@
   border-bottom: 1px solid #FA0707;
   margin-left: 12px;
   color: #FA0707;
+  cursor: pointer;
 }
 
 .css-export {
