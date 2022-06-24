@@ -19,6 +19,8 @@ const Users = lazy(() => import("./Pages/Users/Users"));
 const User = lazy(() => import("./Pages/User/User"));
 const Products = lazy(() => import("./Pages/Products/Products"));
 const AddProduct = lazy(() => import("./Pages/AddProduct/AddProduct"));
+const Product = lazy(()=>import ("./Pages/Product/Product"))
+const Variant = lazy( () =>  import("./Pages/Variant/Variant"))
 function App() {
   // const toastId = React.useRef(null);
 
@@ -54,6 +56,8 @@ function App() {
               <Route path="/user/:userID" element={<User />} />
               <Route exact path="/products" element={<Products />} />
               <Route exact path="/add-product" element={<AddProduct />} />
+              <Route exact path="/product/:productID" element={<Product />} />
+              <Route exact path="/variant/:variantID" element={<Variant />} />
             </Routes>
           ) : (
             <Routes>

@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import { productsAPI } from "../../APIs";
 import { toast } from "react-toastify";
 import NoData from "../../Components/NoData/NoData";
-import { Input, Spin, Table, Modal } from "antd";
+import { Input, Spin, Table, Modal,Rate  } from "antd";
 import { Link } from "react-router-dom";
 import TopPage from "../../Components/toppage/topPage";
 import ButtonComponent from "../../Components/button/ButtonComponent";
@@ -77,7 +77,7 @@ const Products = () => {
       dataIndex: "ratingScores",
       render: (text, record, index) =>
         record.ratingScores !== 0 ? (
-          <span>{record.ratingScores}</span>
+          <Rate value={record.ratingScores}/>
         ) : (
           <NoData />
         ),

@@ -23,6 +23,7 @@
 
 .css-edit {
   border-bottom: 1px solid #1890ff;
+  cursor: pointer;
 }
 .css-remove{
   border-bottom: 1px solid #FA0707;

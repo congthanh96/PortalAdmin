@@ -35,12 +35,12 @@ const Login = () => {
   //Xử lý khi ấn button đăng nhập
   const handleSubmitLogin = async () => {
     try {
-      var params = JSON.stringify({
+      var data = JSON.stringify({
         userName: state.email,
         password: state.password,
       });
 
-      const response = await authAPI.login(params);
+      const response = await authAPI.login(data);
       console.log(response);
       updateUser({ type: "LOGIN_SET", userName: response.username, isLogin:true });
       localStorage.setItem("tokenADMIN", response.token);

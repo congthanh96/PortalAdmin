@@ -17,7 +17,11 @@ export const GET_USER_BY_ID_API = "/Newee/Manager/GetUserById/" // :{userID}
 export const UPDATE_USER_BY_ID_API = "/Newee/Manager/EditProfile"
 export const POST_IMAGE_API = "/upload-image"
 export const DISABLE_PRODUCT_API = "/Newee/ManagerProduct/Disable/" //:{productID}
-
+export const CREATE_PRODUCT_API = "/Newee/ManagerProduct/Create"
+export const GET_LIST_CATEGORY_API = "/Newee/ProductSeller/GetListCategory"
+export const ADD_VARIANT_TO_PRODUCT_API = "/Newee/ManagerVariant/Create"
+export const UPDATE_VARIANT_API = "/Newee/ManagerVariant/Edit"
+export const DISABLE_VARIANT_API= "/Newee/ManagerVariant/Disable/"//:{variantID}
 
 //ACTIONS AUTHENTICATE
 export const AUTH_LOADING = "AUTH_LOADING";

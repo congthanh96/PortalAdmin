@@ -1,0 +1,62 @@
+.container-variant {
+  margin: 15px;
+}
+
+.css-text-area {
+  width: 800px;
+  min-height: 128px !important;
+}
+
+.container-item-variant {
+  margin-right: 15px;
+  margin-top: 10px;
+}
+.css-label-variant {
+  font-weight: 500;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.css-input-item-variant {
+  width: 375px;
+  height: 40px;
+  border-radius: 6px;
+}
+
+.css-select-variant {
+  width: 375px;
+  border-radius: 6px;
+}
+
+.css-image-variant {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  object-fit: fill;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #dedede;
+  cursor: pointer;
+}
+
+.css-container-variant {
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
+}
+.variant-container {
+  flex: 6;
+  background-color: white;
+  margin-left: 30px;
+  margin-top: 20px;
+  width: 100%;
+  margin-right: 40px;
+}
+
+.css-save {
+  margin: 20px 20px 10px 0px;
+  display: flex;
+  justify-content: flex-end;
+}

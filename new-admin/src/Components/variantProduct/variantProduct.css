@@ -1,0 +1,29 @@
+.cardVariant {
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
+}
+.btnAdd {
+  color: green;
+}
+
+.btnExcept {
+  color: red;
+}
+
+.inputNum {
+  margin-left: 10px;
+  border: none;
+  border-bottom: 1px solid lightgray;
+}
+
+.css-edit {
+  border-bottom: 1px solid #1890ff;
+  cursor: pointer;
+}
+.css-remove{
+  border-bottom: 1px solid #FA0707;
+  margin-left: 12px;
+  color: #FA0707;
+  cursor: pointer;
+}

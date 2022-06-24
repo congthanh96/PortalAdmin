@@ -3,22 +3,61 @@
   height: 50px;
   border-radius: 6px;
 }
+
+.css-input-select {
+  width: 550px;
+  border-radius: 6px;
+}
+
 .css-label {
   font-weight: 400;
   font-size: 18px;
   display: block;
   margin-bottom: 5px;
 }
-.container-step1{
-    margin: 15px;
-}
-.container-item{
-    margin-right: 15px;
-    margin-top: 20px;
+
+.container-step1 {
+  margin: 15px;
 }
 
-.css-text-area{
+.container-item {
+  margin-right: 15px;
+  margin-top: 20px;
+}
+
+.css-text-area {
   width: 800px;
   min-height: 128px !important;
   border-radius: 6px;
+}
+.custom-avt {
+  border-radius: 50%;
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.overlay {
+  position: absolute;
+  top: 108px;
+  width: 200px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
+
+.css-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  object-fit: fill;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #dedede;
+  cursor:pointer;
 }

@@ -1,0 +1,42 @@
+.container-step3 {
+  margin: 15px;
+}
+
+.css-text-area {
+  width: 800px;
+  min-height: 128px !important;
+}
+
+.container-item-step3 {
+  margin-right: 15px;
+  margin-top: 10px;
+}
+.css-label-step3 {
+  font-weight: 400;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.css-input-item-step3 {
+  width: 350px;
+  height: 40px;
+  border-radius: 6px;
+}
+
+.css-input-select-step3 {
+    width: 350px;
+    border-radius: 6px;
+  }
+  
+  .css-image-step3{
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    object-fit: fill;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #dedede;
+    cursor:pointer;
+  }

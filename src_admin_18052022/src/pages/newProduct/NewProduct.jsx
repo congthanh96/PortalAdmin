@@ -301,42 +301,43 @@ export default function NewProduct() {
       if (element.productId === '' || element.productId === undefined) {
         element.productId = idProducts
       }
-      try {
-        axios(`${API}/Newee/ManagerVariant/Create`, {
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `bearer ${user}`,
-          },
-          method: 'POST',
-          data: JSON.stringify(element),
-        })
-          .then((res) => {
-            console.log(res)
+      console.log(element)
+      // try {
+      //   axios(`${API}/Newee/ManagerVariant/Create`, {
+      //     headers: {
+      //       Accept: 'application/json',
+      //       'Content-Type': 'application/json',
+      //       Authorization: `bearer ${user}`,
+      //     },
+      //     method: 'POST',
+      //     data: JSON.stringify(element),
+      //   })
+      //     .then((res) => {
+      //       console.log(res)
 
-            setNotify({
-              isOpen: true,
-              message: 'Tạo phân loại sản phẩm thành công!',
-              type: 'success',
-            })
-          })
-          .catch((err) => {
-            console.log(err)
-            console.log(err.response)
+      //       setNotify({
+      //         isOpen: true,
+      //         message: 'Tạo phân loại sản phẩm thành công!',
+      //         type: 'success',
+      //       })
+      //     })
+      //     .catch((err) => {
+      //       console.log(err)
+      //       console.log(err.response)
 
-            setNotify({
-              isOpen: true,
-              message: 'Tạo phân loại sản phẩm không thành công!',
-              type: 'success',
-            })
-            setLoading(false)
-          })
-        setLoading(false)
-      } catch (err) {
-        console.log(err)
-        setLoading(false)
-        alert('Tạo phân loại không thành công!')
-      }
+      //       setNotify({
+      //         isOpen: true,
+      //         message: 'Tạo phân loại sản phẩm không thành công!',
+      //         type: 'success',
+      //       })
+      //       setLoading(false)
+      //     })
+      //   setLoading(false)
+      // } catch (err) {
+      //   console.log(err)
+      //   setLoading(false)
+      //   alert('Tạo phân loại không thành công!')
+      // }
     })
   }
   useEffect(() => {

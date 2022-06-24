@@ -222,7 +222,7 @@ export default function ProductList() {
           >
             Loading 
           </button>
-          <Link to="/add-product">
+          <Link to="/newproduct">
             <button className="productAddButton">Thêm sản phẩm</button>
           </Link>
           <div className="mr-2"></div>
