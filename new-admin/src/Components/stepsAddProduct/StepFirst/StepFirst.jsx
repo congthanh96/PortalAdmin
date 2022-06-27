@@ -89,16 +89,16 @@ const StepFirst = ({
             showSearch
             className="css-input-select"
             placeholder="Search to Select"
-            optionFilterProp="children"
-            filterOption={(input, option) => option.children.includes(input)}
-            filterSort={(optionA, optionB) =>
-              optionA.children
-                .toLowerCase()
-                .localeCompare(optionB.children.toLowerCase())
-            }
-            onSelect={(event) => {
-              setDataForAddProduct({ ...dataForAddProduct, categoryId: event });
-            }}
+            // optionFilterProp="children"
+            // filterOption={(input, option) => option.children.includes(input)}
+            // filterSort={(optionA, optionB) =>
+            //   optionA.children
+            //     .toLowerCase()
+            //     .localeCompare(optionB.children.toLowerCase())
+            // }
+            // onSelect={(event) => {
+            //   setDataForAddProduct({ ...dataForAddProduct, categoryId: event });
+            // }}
           >
             {lstCategory.map((value, index) => {
               return (

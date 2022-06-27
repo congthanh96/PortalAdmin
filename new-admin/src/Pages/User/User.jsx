@@ -234,7 +234,7 @@ const User = () => {
             </Card>
           </div>
           <div className="container-data-item css-infor">
-            <Collapse
+            <Collapse accordion
               // defaultActiveKey={["1"]}
               onChange={onChange}
             >

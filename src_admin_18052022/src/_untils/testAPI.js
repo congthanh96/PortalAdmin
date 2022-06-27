@@ -9,8 +9,8 @@ const apiLocalhost0 = async (endPoint, method, body) => {
     },
     method: method,
     // url: `${Config.LOCALHOST_5000}/${endPoint}`,
-    url: `${Config.API_NEWEE_5001}/${endPoint}`,
-    // url: `${Config.API_NEWEE_5001}/${endPoint}`,
+    url: `${Config.API_NEWEE_6001}/${endPoint}`,
+    // url: `${Config.API_NEWEE_6001}/${endPoint}`,
     data: body,
   });
 };

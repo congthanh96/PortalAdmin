@@ -7,7 +7,7 @@ const ConfigAPI2022 = async (endPoint, method, body, user) => {
       Authorization: `Bearer ${localStorage.getItem('tokenADMIN') ?? user}`,
     },
     method: method,
-    url: `https://api.newee.asia:5001/${endPoint}`,
+    url: `https://api.newee.asia:6001/${endPoint}`,
     data: JSON.stringify(body),
   })
 }

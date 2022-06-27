@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import { productsAPI } from "../../APIs";
 import { toast } from "react-toastify";
 import NoData from "../../Components/NoData/NoData";
-import { Input, Spin, Table, Modal,Rate  } from "antd";
+import { Input, Spin, Table, Modal, Rate } from "antd";
 import { Link } from "react-router-dom";
 import TopPage from "../../Components/toppage/topPage";
 import ButtonComponent from "../../Components/button/ButtonComponent";
@@ -30,8 +30,8 @@ const Products = () => {
   const [dataToSearch, setDataToSearch] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = React.useState(1);
-  const [isVisibleModal,setIsVisibleModal] = useState(false)
-  const [productToRemove,setProductToRemove] = useState("")
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [productToRemove, setProductToRemove] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -77,7 +77,7 @@ const Products = () => {
       dataIndex: "ratingScores",
       render: (text, record, index) =>
         record.ratingScores !== 0 ? (
-          <Rate value={record.ratingScores}/>
+          <Rate value={record.ratingScores} />
         ) : (
           <NoData />
         ),
@@ -92,43 +92,43 @@ const Products = () => {
       title: "Hành động",
       key: "action",
       render: (text, record, index) => {
-        return(
-        <span>
-          <Link to={"/product/" + record.id} className="css-edit">
-            Xem
-          </Link>
-          <span className="css-remove" onClick={()=>onClickRemove(record)}>
-          Ẩn
-        </span>
-        </span>
-        )
-        },
+        return (
+          <span>
+            <Link to={"/product/" + record.id} className="css-edit">
+              Xem
+            </Link>
+            <span className="css-remove" onClick={() => onClickRemove(record)}>
+              Ẩn
+            </span>
+          </span>
+        );
+      },
     },
   ];
-  const onClickRemove = (product) =>{
-    setIsVisibleModal(true)
-    console.log(product)
-    setProductToRemove(product)
-  }
-  const handleRemoveProduct = async() => {
-    setIsLoading(true)
+  const onClickRemove = (product) => {
+    setIsVisibleModal(true);
+    console.log(product);
+    setProductToRemove(product);
+  };
+  const handleRemoveProduct = async () => {
+    setIsLoading(true);
     try {
       const res = await productsAPI.disableProduct(productToRemove.id);
-      console.log(res)
-      let temp = products.filter(data => data.id !== productToRemove.id);
-      setProducts(temp)
-      setIsVisibleModal(false)
-      setIsLoading(false)
-      toast.success("Ẩn sản phẩm "+ productToRemove.name +" thành công" )
+      console.log(res);
+      let temp = products.filter((data) => data.id !== productToRemove.id);
+      setProducts(temp);
+      setIsVisibleModal(false);
+      setIsLoading(false);
+      toast.success("Ẩn sản phẩm " + productToRemove.name + " thành công");
     } catch (error) {
-      setIsLoading(false)
-      toast.error("Ẩn sản phẩm "+ productToRemove.name +" thất bại" )
+      setIsLoading(false);
+      toast.error("Ẩn sản phẩm " + productToRemove.name + " thất bại");
     }
-  }
-  
+  };
+
   const handleAddProduct = () => {
     //  setIsVisibleModal(true)
-  }
+  };
   const handleDataToExport = () => {
     toast.success("Xuất dữ liệu danh sách sản phẩm thành công!");
     setDataToExport(
@@ -153,80 +153,79 @@ const Products = () => {
     setProducts(filteredRows);
   };
   return (
-    <>
-    
-    <div className="products-container">
-      <Spin spinning={isLoading}>
-        <TopPage dataProps={dataTop} />
-        <div className="css-add-btn">
-        <Link to="/add-product">
-          <ButtonComponent onClick={handleAddProduct} >Thêm sản phẩm</ButtonComponent>
-          </Link>
-        </div>
-        <div>
-          <Input
-            className="css-input"
-            placeholder="nhập tên sản phẩm"
-            onChange={(e) => {
-              setSearchValue(e.target.value.trim());
-            }}
-            // allowClear
-          ></Input>
-          <ButtonComponent onClick={handleSearch}>Search</ButtonComponent>
-        </div>
-        <div className="container-data-products">
-        <div className="css-header">
-            <div className="css-total">Total: {products.length} results</div>
-            <div className="css-export">
-              <ButtonComponent onClick={handleDataToExport}>
-                <CSVLink data={dataToExport} filename="Quản lý sản phẩm">
-                  Xuất dữ liệu
-                </CSVLink>
+    <React.Fragment>
+      <div className="products-container">
+        <Spin spinning={isLoading}>
+          <TopPage dataProps={dataTop} />
+          <div className="css-add-btn">
+            <Link to="/add-product">
+              <ButtonComponent onClick={handleAddProduct}>
+                Thêm sản phẩm
               </ButtonComponent>
-            </div>
+            </Link>
           </div>
+          <div>
+            <Input
+              className="css-input"
+              placeholder="nhập tên sản phẩm"
+              onChange={(e) => {
+                setSearchValue(e.target.value.trim());
+              }}
+              // allowClear
+            ></Input>
+            <ButtonComponent onClick={handleSearch}>Search</ButtonComponent>
+          </div>
+          <div className="container-data-products">
+            <div className="css-header">
+              <div className="css-total">Total: {products.length} results</div>
+              <div className="css-export">
+                <ButtonComponent onClick={handleDataToExport}>
+                  <CSVLink data={dataToExport} filename="Quản lý sản phẩm">
+                    Xuất dữ liệu
+                  </CSVLink>
+                </ButtonComponent>
+              </div>
+            </div>
 
-          <Table
-            dataSource={products}
-            columns={columnsAntd}
-            rowKey={(row) => row.id}
-            // footer={Footer}
-            // bordered
-            pagination={{
-              onChange(current) {
-                setPage(current);
-              },
-              position: ["bottomCenter"],
-            }}
-            // exportable
-            // exportableProps={{ users, fileName: "my-table" }}
-            // searchableProps={{
-            //   // dataSource,
-            //   // setDataSource: setSearchDataSource,
-            //   inputProps: {
-            //     placeholder: "Search this table...",
-            //     prefix: <SearchOutlined />,
-            //   },
-            // }}
-          ></Table>
-        </div>
-     
-      </Spin>
-      <Modal
-        title="Vô hiệu hóa sản phẩm"
-        visible={isVisibleModal}
-        onOk={()=>{
-          handleRemoveProduct()
-        }}
-        onCancel={()=>{setIsVisibleModal(false)}}
-      >
-         <p>Bạn thực sự muốn vô hiệu hóa sản phẩm "{productToRemove.name}"</p>
-        
-      </Modal>
-    </div>
-    
-    </>
-    
+            <Table
+              dataSource={products}
+              columns={columnsAntd}
+              rowKey={(row) => row.id}
+              // footer={Footer}
+              // bordered
+              pagination={{
+                onChange(current) {
+                  setPage(current);
+                },
+                position: ["bottomCenter"],
+              }}
+              // exportable
+              // exportableProps={{ users, fileName: "my-table" }}
+              // searchableProps={{
+              //   // dataSource,
+              //   // setDataSource: setSearchDataSource,
+              //   inputProps: {
+              //     placeholder: "Search this table...",
+              //     prefix: <SearchOutlined />,
+              //   },
+              // }}
+            ></Table>
+          </div>
+        </Spin>
+        <Modal
+          title="Vô hiệu hóa sản phẩm"
+          visible={isVisibleModal}
+          onOk={() => {
+            handleRemoveProduct();
+          }}
+          onCancel={() => {
+            setIsVisibleModal(false);
+          }}
+        >
+          <p>Bạn thực sự muốn vô hiệu hóa sản phẩm "{productToRemove.name}"</p>
+        </Modal>
+      </div>
+    </React.Fragment>
   );
 };
 export default Products;

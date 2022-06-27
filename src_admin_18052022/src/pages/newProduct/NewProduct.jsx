@@ -46,7 +46,7 @@ export default function NewProduct() {
 
   // THÔNG TIN ĐIỀN Ở FORM 1/2
   const [infoProduct, setInfoProduct] = useState()
-  // https://api.newee.asia:5001/Newee/ManagerProduct/Create
+  // https://api.newee.asia:6001/Newee/ManagerProduct/Create
   const [variantProduct, setVariantProduct] = useState({
     ProductId: '',
     Price: '',
@@ -59,7 +59,7 @@ export default function NewProduct() {
     percent: '',
     moneyReceived: '',
   })
-  // "https://api.newee.asia:5001/Newee/ManagerVariant/Create",
+  // "https://api.newee.asia:6001/Newee/ManagerVariant/Create",
 
   const [propertyName, setPropertyName] = useState('')
   const [propertyValue, setPropertyValue] = useState('')
@@ -184,7 +184,7 @@ export default function NewProduct() {
     }
   }
 
-  const API = `https://api.newee.asia:5001`
+  const API = `https://api.newee.asia:6001`
 
   // 1/4 UPLOAD ẢNH
   const uploadImageStep1 = () => {
@@ -302,42 +302,42 @@ export default function NewProduct() {
         element.productId = idProducts
       }
       console.log(element)
-      // try {
-      //   axios(`${API}/Newee/ManagerVariant/Create`, {
-      //     headers: {
-      //       Accept: 'application/json',
-      //       'Content-Type': 'application/json',
-      //       Authorization: `bearer ${user}`,
-      //     },
-      //     method: 'POST',
-      //     data: JSON.stringify(element),
-      //   })
-      //     .then((res) => {
-      //       console.log(res)
+      try {
+        axios(`${API}/Newee/ManagerVariant/Create`, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `bearer ${user}`,
+          },
+          method: 'POST',
+          data: JSON.stringify(element),
+        })
+          .then((res) => {
+            console.log(res)
 
-      //       setNotify({
-      //         isOpen: true,
-      //         message: 'Tạo phân loại sản phẩm thành công!',
-      //         type: 'success',
-      //       })
-      //     })
-      //     .catch((err) => {
-      //       console.log(err)
-      //       console.log(err.response)
+            setNotify({
+              isOpen: true,
+              message: 'Tạo phân loại sản phẩm thành công!',
+              type: 'success',
+            })
+          })
+          .catch((err) => {
+            console.log(err)
+            console.log(err.response)
 
-      //       setNotify({
-      //         isOpen: true,
-      //         message: 'Tạo phân loại sản phẩm không thành công!',
-      //         type: 'success',
-      //       })
-      //       setLoading(false)
-      //     })
-      //   setLoading(false)
-      // } catch (err) {
-      //   console.log(err)
-      //   setLoading(false)
-      //   alert('Tạo phân loại không thành công!')
-      // }
+            setNotify({
+              isOpen: true,
+              message: 'Tạo phân loại sản phẩm không thành công!',
+              type: 'success',
+            })
+            setLoading(false)
+          })
+        setLoading(false)
+      } catch (err) {
+        console.log(err)
+        setLoading(false)
+        alert('Tạo phân loại không thành công!')
+      }
     })
   }
   useEffect(() => {

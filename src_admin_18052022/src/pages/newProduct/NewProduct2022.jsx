@@ -108,7 +108,7 @@ export default function NewProduct() {
     }
   }
 
-  const API = `https://api.newee.asia:5001`
+  const API = `https://api.newee.asia:6001`
 
   // 1/4 UPLOAD ẢNH
   const uploadImageStep1 = () => {
@@ -540,7 +540,7 @@ export default function NewProduct() {
           Authorization: `Bearer ${localStorage.getItem('tokenADMIN') ?? user}`,
         },
         method: 'POST',
-        url: `https://api.newee.asia:5001/Newee/ManagerProduct/Create`,
+        url: `https://api.newee.asia:6001/Newee/ManagerProduct/Create`,
         data: JSON.stringify(inputs),
       })
 
@@ -579,7 +579,7 @@ export default function NewProduct() {
               Authorization: `Bearer ${localStorage.getItem('tokenADMIN') ?? user}`,
             },
             method: 'POST',
-            url: `https://api.newee.asia:5001/Newee/ManagerVariant/Create`,
+            url: `https://api.newee.asia:6001/Newee/ManagerVariant/Create`,
             data: JSON.stringify(res),
           }).then((response) => {
             console.log(response)
