@@ -220,7 +220,7 @@ export default function ProductList() {
             className="productRefeshButton"
             onClick={() => loadingPage()}
           >
-            Loading
+            Loading 
           </button>
           <Link to="/newproduct">
             <button className="productAddButton">Thêm sản phẩm</button>

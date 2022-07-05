@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux'
 import { useSnackbar } from 'notistack'
 import './createAccount.css'
 
-const API = `https://api.newee.asia:5001`
+const API = `https://api.newee.asia:6001`
 
 const useStyles = makeStyles((theme) => ({
   title: {

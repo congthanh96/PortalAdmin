@@ -46,7 +46,7 @@ export default function NewProduct() {
 
   // THÔNG TIN ĐIỀN Ở FORM 1/2
   const [infoProduct, setInfoProduct] = useState()
-  // https://api.newee.asia:5001/Newee/ManagerProduct/Create
+  // https://api.newee.asia:6001/Newee/ManagerProduct/Create
   const [variantProduct, setVariantProduct] = useState({
     ProductId: '',
     Price: '',
@@ -59,7 +59,7 @@ export default function NewProduct() {
     percent: '',
     moneyReceived: '',
   })
-  // "https://api.newee.asia:5001/Newee/ManagerVariant/Create",
+  // "https://api.newee.asia:6001/Newee/ManagerVariant/Create",
 
   const [propertyName, setPropertyName] = useState('')
   const [propertyValue, setPropertyValue] = useState('')
@@ -184,7 +184,7 @@ export default function NewProduct() {
     }
   }
 
-  const API = `https://api.newee.asia:5001`
+  const API = `https://api.newee.asia:6001`
 
   // 1/4 UPLOAD ẢNH
   const uploadImageStep1 = () => {
@@ -301,6 +301,7 @@ export default function NewProduct() {
       if (element.productId === '' || element.productId === undefined) {
         element.productId = idProducts
       }
+      console.log(element)
       try {
         axios(`${API}/Newee/ManagerVariant/Create`, {
           headers: {

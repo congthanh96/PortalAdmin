@@ -1,0 +1,61 @@
+.orders-container {
+    flex: 6;
+    background-color: white;
+    margin-left: 30px;
+    margin-top: 20px;
+    width: 100%;
+    margin-right: 40px;
+  }
+  
+  .css-input-orders {
+    width: 250px;
+    height: 37px;
+    background: #ffffff;
+    border: 1px solid #c4c4c4;
+    border-radius: 8px;
+    margin-right: 32px;
+    margin-top: 30px;
+  }
+  
+  .container-data-orders {
+    margin-top: 20px;
+  }
+  
+  .css-edit {
+    border-bottom: 1px solid #1890ff;
+    cursor: pointer !important;
+  }
+  .css-remove{
+    border-bottom: 1px solid #FA0707;
+    margin-left: 12px;
+    color: #FA0707;
+    cursor: pointer;
+  }
+  
+  .css-export {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .css-total {
+    display: flex;
+    float: left;
+    margin-top: 20px;
+  }
+  
+  .css-header {
+    display: inline;
+  }
+  
+  .css-add-btn{
+    margin-top: 20px;
+  }
+  
+  .css-input-select-orders {
+    width: 250px;
+    border-radius: 6px;
+    margin-right: 48px;
+  }
+  

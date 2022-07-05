@@ -137,7 +137,7 @@ export default function NewProductEdit() {
   const [infoProduct, setInfoProduct] = useState(location.state?.infoProduct)
   console.log(infoProduct)
 
-  // https://api.newee.asia:5001/Newee/ManagerProduct/Create
+  // https://api.newee.asia:6001/Newee/ManagerProduct/Create
   const [variantProduct, setVariantProduct] = useState({
     ProductId: '',
     Price: '',
@@ -150,7 +150,7 @@ export default function NewProductEdit() {
     percent: '',
     moneyReceived: '',
   })
-  // "https://api.newee.asia:5001/Newee/ManagerVariant/Create",
+  // "https://api.newee.asia:6001/Newee/ManagerVariant/Create",
 
   const [propertyName, setPropertyName] = useState('')
   const [propertyValue, setPropertyValue] = useState('')
@@ -332,7 +332,7 @@ export default function NewProductEdit() {
     }
   }
 
-  const API = `https://api.newee.asia:5001`
+  const API = `https://api.newee.asia:6001`
 
   // 1/4 UPLOAD ẢNH
   const uploadImageStep1 = () => {

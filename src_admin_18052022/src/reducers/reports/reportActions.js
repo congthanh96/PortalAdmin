@@ -1,5 +1,5 @@
 import { timeoutPromise } from '../../utils/Tools'
-const API = `https://api.newee.asia:5001`
+const API = `https://api.newee.asia:6001`
 export const REPORTS_LOADING = 'REPORTS_LOADING'
 export const REPORTS_FAILURE = 'REPORTS_FAILURE'
 export const REPORTS_DETAIL = 'REPORTS_DETAIL'

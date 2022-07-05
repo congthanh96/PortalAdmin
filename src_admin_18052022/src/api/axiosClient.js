@@ -2,8 +2,8 @@ import axios from 'axios'
 import queryString from 'query-string'
 
 const axiosClient = axios.create({
-  // baseURL: process.env.REACT_APP_API_URL || 'https://api.newee.asia:5001',
-  baseURL: 'https://api.newee.asia:5001',
+  // baseURL: process.env.REACT_APP_API_URL || 'https://api.newee.asia:6001',
+  baseURL: 'https://api.newee.asia:6001',
   headers: {
     'content-type': 'application/json',
   },
