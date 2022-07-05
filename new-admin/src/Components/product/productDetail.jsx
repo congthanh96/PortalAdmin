@@ -27,7 +27,7 @@ const CardProduct = ({
           <h3>Tên sản phẩm: {name}</h3>
           <div>
             <h5>Category: {category}</h5>
-            <h5>Brand: {brand}</h5> 
+            <h5>Brand: {brand}</h5>
           </div>
           <hr />
           <div>
@@ -37,9 +37,7 @@ const CardProduct = ({
               </span>
             ) : (
               <>
-                <span style={{ color: "red" }}>
-                  Rating: Chưa có đánh giá
-                </span>
+                <span style={{ color: "red" }}>Rating: Chưa có đánh giá</span>
               </>
             )}
           </div>
@@ -47,9 +45,8 @@ const CardProduct = ({
           <div>
             <h5>Decription:</h5>
             {description === "" ? (
-                <>Chưa có mô tả</>
+              <>Chưa có mô tả</>
             ) : (
-            
               <ul>
                 <li className="fontText">{description}</li>
               </ul>
@@ -87,4 +84,5 @@ const CardProduct = ({
     </div>
   );
 };
+
 export default CardProduct;

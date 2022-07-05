@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Input, Spin, Table, Modal, Steps, Button, message, Image } from "antd";
+import { Spin, Steps } from "antd";
 import { toast } from "react-toastify";
-import TopPage from "../../Components/toppage/topPage";
-import StepFirst from "../../Components/stepsAddProduct/StepFirst/StepFirst";
-import StepSecond from "../../Components/stepsAddProduct/StepSecond/StepSecond";
-import StepThird from "../../Components/stepsAddProduct/StepThird/StepThird";
-import "./addProduct.css";
-import { imageAPI, productsAPI, variantProductAPI } from "../../APIs";
-import ButtonComponent from "../../Components/button/ButtonComponent";
+import TopPage from "../../../Components/toppage/topPage";
+import StepFirst from "../../../Components/stepsAddProduct/StepFirst/StepFirst";
+import StepSecond from "../../../Components/stepsAddProduct/StepSecond/StepSecond";
+import StepThird from "../../../Components/stepsAddProduct/StepThird/StepThird";
+import { imageAPI, productsAPI, variantProductAPI } from "../../../APIs";
+import ButtonComponent from "../../../Components/button/ButtonComponent";
 import { useNavigate } from "react-router-dom";
+import "./addProduct.css";
+
 const { Step } = Steps;
+
 const steps = [
   {
     title: "First",
@@ -21,6 +23,7 @@ const steps = [
     title: "Last",
   },
 ];
+
 const AddProduct = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -47,7 +50,7 @@ const AddProduct = () => {
     const fetchData = async () => {
       try {
         const res = await productsAPI.getListCategory();
-        console.log(res);
+        // console.log(res);
         setLstCategory(res);
         setIsLoading(false);
       } catch (error) {
@@ -100,7 +103,7 @@ const AddProduct = () => {
         isValidateStep1 = false;
       }
       if (dataForAddProduct.fileImage === "") {
-        console.log(dataForAddProduct.fileImage);
+        // console.log(dataForAddProduct.fileImage);
         isValidateStep1 = false;
       } else {
         try {
@@ -109,9 +112,9 @@ const AddProduct = () => {
           data1.append("Type", "Product");
           data1.append("Width", 244);
           data1.append("Height", 244);
-          for (const value of data1.values()) {
-            console.log(value);
-          }
+          // for (const value of data1.values()) {
+          //   console.log(value);
+          // }
           // let data2 = new FormData();
           // data2.append('File', dataForAddProduct.fileImage);
           // data2.append('Type',"Product")
@@ -122,7 +125,7 @@ const AddProduct = () => {
           // }
           const res1 = await imageAPI.uploadImage(data1);
           // // const res2 = await imageAPI.uploadImage(data2)
-          console.log(res1);
+          // console.log(res1);
           // console.log(res2)
           setDataForAddProduct({ ...dataForAddProduct, link: res1 });
           setIsLoading(false);
@@ -132,8 +135,8 @@ const AddProduct = () => {
           toast.error(error);
         }
       }
-      console.log(isValidateStep1);
-      console.log(dataForAddProduct);
+      // console.log(isValidateStep1);
+      // console.log(dataForAddProduct);
       if (isValidateStep1 === true) {
         toast.success("Lưu hình ảnh thành công");
         setCurrent(current + 1);
@@ -157,9 +160,9 @@ const AddProduct = () => {
           content2: dataForAddProduct.content2,
           content3: dataForAddProduct.content3,
         });
-        console.log(data);
+        // console.log(data);
         const res = await productsAPI.createProduct(data);
-        console.log(res);
+        // console.log(res);
         setDataForAddProduct({ ...dataForAddProduct, id: res.id });
         setCurrent(current + 1);
         toast.success("Tạo sản phẩm thành công");
@@ -202,7 +205,7 @@ const AddProduct = () => {
   const handleAddVariant = async () => {
     let isValidateStep3 = true;
     setIsLoading(true);
-    console.log(dataForAddProduct);
+    // console.log(dataForAddProduct);
     dataForAddProduct.variants.forEach(async (value, index) => {
       if (value.propertyName.trim() === "") {
         isValidateStep3 = false;
@@ -248,9 +251,9 @@ const AddProduct = () => {
             tag7:
               dataForAddProduct.variants[index].tag7 === "true" ? true : false,
           });
-          console.log(data);
+          // console.log(data);
           const res = await variantProductAPI.addVariantToProduct(data);
-          console.log(res);
+          // console.log(res);
           setIsLoading(false);
           toast.success("Lưu variant cho sản phẩm thành công");
           navigate("/products");
@@ -294,6 +297,7 @@ const AddProduct = () => {
         return null;
     }
   };
+
   return (
     <div className="add-product-container">
       <Spin spinning={isLoading}>
@@ -327,4 +331,5 @@ const AddProduct = () => {
     </div>
   );
 };
+
 export default AddProduct;

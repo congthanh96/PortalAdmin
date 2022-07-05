@@ -1,7 +1,6 @@
 /**
  * Danh sách sản phẩm
  */
-
 import React, { useState, useEffect } from "react";
 import { productsAPI } from "../../APIs";
 import { toast } from "react-toastify";
@@ -13,7 +12,16 @@ import ButtonComponent from "../../Components/button/ButtonComponent";
 import { CSVLink } from "react-csv";
 import { formatVND } from "../../Common/formatVND";
 import "./products.css";
+
 const Products = () => {
+  const [products, setProducts] = useState([]);
+  const [dataToExport, setDataToExport] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [dataToSearch, setDataToSearch] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = React.useState(1);
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [productToRemove, setProductToRemove] = useState("");
   const dataTop = [
     {
       linkTo: "/",
@@ -24,19 +32,12 @@ const Products = () => {
       nameLink: "Danh sách sản phẩm",
     },
   ];
-  const [products, setProducts] = useState([]);
-  const [dataToExport, setDataToExport] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-  const [dataToSearch, setDataToSearch] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = React.useState(1);
-  const [isVisibleModal, setIsVisibleModal] = useState(false);
-  const [productToRemove, setProductToRemove] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await productsAPI.getProducts();
-        console.log(res);
+        // console.log(res)
         setProducts(res);
         setDataToSearch(res);
         setIsLoading(false);
@@ -48,6 +49,7 @@ const Products = () => {
 
     fetchData();
   }, []);
+
   const columnsAntd = [
     {
       title: "STT",
@@ -105,16 +107,18 @@ const Products = () => {
       },
     },
   ];
+
   const onClickRemove = (product) => {
     setIsVisibleModal(true);
-    console.log(product);
+    // console.log(product);
     setProductToRemove(product);
   };
+
   const handleRemoveProduct = async () => {
     setIsLoading(true);
     try {
-      const res = await productsAPI.disableProduct(productToRemove.id);
-      console.log(res);
+      await productsAPI.disableProduct(productToRemove.id);
+      // console.log(res);
       let temp = products.filter((data) => data.id !== productToRemove.id);
       setProducts(temp);
       setIsVisibleModal(false);
@@ -129,6 +133,7 @@ const Products = () => {
   const handleAddProduct = () => {
     //  setIsVisibleModal(true)
   };
+
   const handleDataToExport = () => {
     toast.success("Xuất dữ liệu danh sách sản phẩm thành công!");
     setDataToExport(
@@ -140,8 +145,9 @@ const Products = () => {
       }))
     );
   };
+
   const handleSearch = () => {
-    console.log(searchValue);
+    // console.log(searchValue);
     const filteredRows = dataToSearch.filter((row) => {
       if (row.name === null) {
         row.name = "";
@@ -149,9 +155,10 @@ const Products = () => {
       row.name = row.name.trim();
       return row.name.toLowerCase().includes(searchValue.toLowerCase());
     });
-    console.log(filteredRows);
+    // console.log(filteredRows);
     setProducts(filteredRows);
   };
+
   return (
     <React.Fragment>
       <div className="products-container">
@@ -228,4 +235,5 @@ const Products = () => {
     </React.Fragment>
   );
 };
+
 export default Products;

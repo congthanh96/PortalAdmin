@@ -2,7 +2,7 @@
  * Danh sách đơn hàng
  */
 
-import { Spin, Input, Table, Select } from "antd";
+import { Spin, Input, Table, Select, Dropdown, Space, Menu } from "antd";
 import ButtonComponent from "../../Components/button/ButtonComponent";
 import TopPage from "../../Components/toppage/topPage";
 import { Link } from "react-router-dom";
@@ -13,20 +13,14 @@ import { toast } from "react-toastify";
 import NoData from "../../Components/NoData/NoData";
 import { formatVND } from "../../Common/formatVND";
 import { LIST_STATUS_ORDER } from "../../Common/constants";
+import { useNavigate } from "react-router-dom";
+import { DownOutlined } from "@ant-design/icons";
 import "./orders.css";
+
 const { Option } = Select;
 
 const Orders = () => {
-  const dataTop = [
-    {
-      linkTo: "/",
-      nameLink: "Trang chủ",
-    },
-    {
-      linkTo: "/orders",
-      nameLink: "Danh sách đơn hàng",
-    },
-  ];
+  const navigate = useNavigate()
   const [orders, setOrders] = useState([]);
   const [dataToExport, setDataToExport] = useState([]);
   const [searchValue, setSearchValue] = useState({
@@ -38,6 +32,20 @@ const Orders = () => {
   const [dataToSearch, setDataToSearch] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = React.useState(1);
+  const dataTop = [
+    {
+      linkTo: "/",
+      nameLink: "Trang chủ",
+    },
+    {
+      linkTo: "/orders",
+      nameLink: "Danh sách đơn hàng",
+    },
+  ];
+
+  const dataStatus = LIST_STATUS_ORDER.filter(
+    (value) => value.value !== "Cancel"
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +64,126 @@ const Orders = () => {
     fetchData();
   }, []);
 
+  const handleMenuClick = async(e) => {
+   
+   const dataToPost = e.key.split(",")
+   const idBill = dataToPost[1];
+   const status = dataToPost[0];
+  //  if(status==="Accecpt")
+  //  {
+  //   navigate("/GHTK/"+idBill);
+  //  }
+  //  else{
+
+     console.log('id', idBill);
+     console.log('status', status);
+     try {
+      await ordersAPI.changeStatusProduct(idBill, status);
+      let temp = (orders) => {
+        return orders.map((row, index) =>
+          row.idBill === idBill ? { ...row, status: status } : row
+        );
+      };
+      setOrders(temp)
+      setDataToSearch(temp)
+     } catch (error) {
+      toast("Thay đổi trạng thái của "+{idBill}+" sang "+{status}+" không thành công")
+     }
+   //}
+  };
+  
+  const menu = (order) => {
+    // if(order.status===LIST_STATUS_ORDER[1].value)
+    // {
+    //   return(
+    //     <Menu
+    //     onClick={handleMenuClick}
+    //     items={[
+    //       {
+    //         label:LIST_STATUS_ORDER[2].name,
+    //         key: [LIST_STATUS_ORDER[2].value,order.idBill],
+    //         disabled: false,
+    //         //onClick:((event)=>{console.log(event.key)})
+    //       },
+
+    //       {
+    //         label: LIST_STATUS_ORDER[7].name,
+    //         key: [LIST_STATUS_ORDER[7].value,order.idBill],
+    //         disabled: false,
+    //         //onClick:((event)=>{console.log(event.key)})
+    //       },
+    //     ]}
+    //   />
+    //   )
+    // }
+    if(order.status===LIST_STATUS_ORDER[2].value)
+    {
+      return(
+        <Menu
+        onClick={handleMenuClick}
+        items={[
+          {
+            label:LIST_STATUS_ORDER[3].name,
+            key: [LIST_STATUS_ORDER[3].value,order.idBill],
+            disabled: false,
+          },
+
+          {
+            label: LIST_STATUS_ORDER[6].name,
+            key: [LIST_STATUS_ORDER[6].value,order.idBill],
+            disabled: false,
+          },
+        ]}
+      />
+      )
+    }
+    if(order.status===LIST_STATUS_ORDER[3].value)
+    {
+      return(
+        <Menu
+        onClick={handleMenuClick}
+        items={[
+          {
+            label:LIST_STATUS_ORDER[4].name,
+            key: [LIST_STATUS_ORDER[4].value,order.idBill],
+            disabled: false,
+          },
+        ]}
+      />
+      )
+    }
+    if(order.status===LIST_STATUS_ORDER[4].value)
+    {
+      return(
+        <Menu
+        onClick={handleMenuClick}
+        items={[
+          {
+            label:LIST_STATUS_ORDER[5].name,
+            key: [LIST_STATUS_ORDER[5].value,order.idBill],
+            disabled: false,
+          },
+        ]}
+      />
+      )
+    }
+    else
+    {
+      return (
+        <Menu
+        onClick={handleMenuClick}
+          items={[
+            {
+              label: "Not change",
+              key: "1",
+              disabled: true,
+            },
+          ]}
+        />
+      );
+    }
+  };
+
   const columnsAntd = [
     {
       title: "STT",
@@ -68,10 +196,10 @@ const Orders = () => {
       dataIndex: "createTime",
       render: (text, record, index) => {
         if (record.createTime === null) {
-          return <NoData />;
+          return <NoData key={index} />;
         } else {
           let temp = record.createTime.split("T");
-          return <span>{temp[0]}</span>;
+          return <span key={index}>{temp[0]}</span>;
         }
 
         //   return (record.createTime !== null ? <span>{record.createTime}</span> : <NoData />);
@@ -80,8 +208,15 @@ const Orders = () => {
     {
       title: "Mã đơn hàng",
       dataIndex: "code",
+      key: "code",
       render: (text, record, index) =>
-        record.code !== null ? <span>{record.code}</span> : <NoData />,
+        record.code !== null ? (
+          <Link to={"/order/" + record.idBill} className="css-edit">
+            {record.code}
+          </Link>
+        ) : (
+          <NoData />
+        ),
     },
     {
       title: "Mã CTV",
@@ -109,24 +244,60 @@ const Orders = () => {
       ),
     },
     {
+      title: "Trạng thái",
+      key: "status",
+      dataIndex: "status",
+      render: (text, record, index) => (
+        <span key={index}>
+          {LIST_STATUS_ORDER.map((value, idx) =>
+            value.value === record.status ? (
+              <span key={idx}>{value.name}</span>
+            ) : (
+              <span key={idx}></span>
+            )
+          )}
+        </span>
+      ),
+    },
+    {
       title: "Hành động",
       key: "action",
       render: (text, record, index) => {
-        return (
-          <span>
-            <Link to={"/order/" + record.idBill} className="css-edit">
-              Xem
+        if (record.status === "Pending") {
+          return (
+            <Link
+              to={{
+                pathname: `/GHTK/${record.idBill}`,
+              }}
+              state={record}
+            >
+              GHTK
             </Link>
-            {/* <span className="css-remove" onClick={() => console.log(record)}>
-              Ẩn
-            </span> */}
-          </span>
-        );
+          );
+          // <span key={index}>
+        } else {
+          return (
+            <Dropdown overlay={menu(record)} placement="bottomLeft">
+              <Space>
+                Chuyển trạng thái
+                <DownOutlined />
+              </Space>
+            </Dropdown>
+          );
+       }
+        //   <Link to={"/order/" + record.idBill} className="css-edit">
+        //     Xem
+        //   </Link>
+        //   {/* {LIST_STATUS_ORDER.map((value, index) =>
+        //     value.value === record.status ? value.name : <></>
+        //   )} */}
+        // </span>
+        //);
       },
     },
   ];
   const handleSearch = () => {
-    console.log(searchValue);
+    // console.log(searchValue);
     const filteredRows = dataToSearch.filter((row) => {
       if (row.code === null) {
         row.code = "";
@@ -137,9 +308,8 @@ const Orders = () => {
       if (row.fullName === null) {
         row.fullName = "";
       }
-      if(searchValue.status==="All")
-      {
-        searchValue.status =""
+      if (searchValue.status === "All") {
+        searchValue.status = "";
       }
       row.code = row.code.trim();
       row.codeSeller = row.codeSeller.trim();
@@ -149,26 +319,28 @@ const Orders = () => {
         row.codeSeller
           .toLowerCase()
           .includes(searchValue.codeSeller.toLowerCase()) &&
-        row.fullName.toLowerCase().includes(searchValue.name.toLowerCase())
-        &&
+        row.fullName.toLowerCase().includes(searchValue.name.toLowerCase()) &&
         row.status.includes(searchValue.status)
       );
     });
-    console.log(filteredRows);
+    // console.log(filteredRows);
     setOrders(filteredRows);
   };
 
   const handleDataToExport = () => {
     setDataToExport(
-    orders.map((e) => ({
+      orders.map((e) => ({
         "Ngày đặt hàng": e.createTime,
         "Mã đơn hàng": e.code,
         "Mã CTV": e.codeSeller,
         "Tên người nhận": e.fullName,
-        "Giá tiền": formatVND(e.totalPrice)
+        "Trạng thái": e.status,
+        "Giá tiền": formatVND(e.totalPrice),
       }))
     );
+    // if(!toast.isActive(toastId.current)) {
     toast.success("Xuất dữ liệu danh sách đơn hàng thành công!");
+    //}
   };
   return (
     <React.Fragment>
@@ -212,21 +384,22 @@ const Orders = () => {
 
             <Select
               showSearch
-              className="css-input-select"
+              className="css-input-select-orders"
               placeholder="Search to Select"
               optionFilterProp="children"
-              defaultValue={LIST_STATUS_ORDER[0]}
+              size="large"
+              defaultValue={dataStatus[0]}
               filterOption={(input, option) => option.children.includes(input)}
-            //   filterSort={(optionA, optionB) =>
-            //     optionA.children
-            //       .toLowerCase()
-            //       .localeCompare(optionB.children.toLowerCase())
-            //   }
+              //   filterSort={(optionA, optionB) =>
+              //     optionA.children
+              //       .toLowerCase()
+              //       .localeCompare(optionB.children.toLowerCase())
+              //   }
               onSelect={(event) => {
-                setSearchValue({ ...searchValue, status: event});
+                setSearchValue({ ...searchValue, status: event });
               }}
             >
-              {LIST_STATUS_ORDER.map((value, index) => {
+              {dataStatus.map((value, index) => {
                 return (
                   <Option key={index} value={value.value}>
                     {value.name}
@@ -240,9 +413,7 @@ const Orders = () => {
             <div className="css-header">
               <div className="css-total">Total: {orders.length} results</div>
               <div className="css-export">
-                <ButtonComponent
-                onClick={handleDataToExport}
-                >
+                <ButtonComponent onClick={handleDataToExport}>
                   <CSVLink data={dataToExport} filename="Quản lý đơn hàng">
                     Xuất dữ liệu
                   </CSVLink>
@@ -253,7 +424,7 @@ const Orders = () => {
             <Table
               dataSource={orders}
               columns={columnsAntd}
-              rowKey={(row) => row.idBill}
+              rowKey="code"
               // footer={Footer}
               // bordered
               pagination={{

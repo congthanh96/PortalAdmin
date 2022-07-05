@@ -26,17 +26,17 @@
 }
 
 .css-input-select-step3 {
-    width: 350px;
-    border-radius: 6px;
-  }
-  
-  .css-image-step3{
-    width: 100px;
-    height: 100px;
-    border-radius: 5px;
-    object-fit: fill;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #dedede;
-    cursor:pointer;
-  }
+  width: 350px;
+  border-radius: 6px;
+}
+
+.css-image-step3 {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  object-fit: fill;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #dedede;
+  cursor: pointer;
+}

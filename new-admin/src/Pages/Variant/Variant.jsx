@@ -1,21 +1,20 @@
 /**
  * Chi tiết variant
  */
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Input, Spin, Form, Modal, Rate, Select } from "antd";
+import React, { useState } from "react";
+import { Input, Spin, Form, Select } from "antd";
 import TopPage from "../../Components/toppage/topPage";
 import { useLocation } from "react-router";
 import ButtonComponent from "../../Components/button/ButtonComponent";
 import { imageAPI, variantProductAPI } from "../../APIs";
-import "./variant.css";
 import { toast } from "react-toastify";
+import "./variant.css";
 
 const { Option } = Select;
+
 const Variant = () => {
   let data = useLocation();
   const [form] = Form.useForm();
-  console.log(data.state);
   const [dataVariant, setDataVariant] = useState(data.state);
   const [isLoading, setIsLoading] = useState(false);
   const [srcImage, setSrcImage] = useState(data.state.imageLink);
@@ -40,26 +39,30 @@ const Variant = () => {
   ];
 
   const handleChangeDataInput = (event) => {
-    console.log(event);
+    // console.log(event);
     setDataVariant({ ...dataVariant, [event.target.name]: event.target.value });
   };
+
   const handleDataSelectTag1 = (event) => {
     setDataVariant({ ...dataVariant, tag1: event });
-    console.log(event);
+    // console.log(event);
   };
+
   const handleDataSelectTag7 = (event) => {
     setDataVariant({ ...dataVariant, tag7: event });
   };
+
   const handleUpdateImgVariant = (event) => {
     setIsChange(true);
     const [file] = event.target.files;
     setSrcImage(URL.createObjectURL(file));
     setDataVariant({ ...dataVariant, imageLink: file });
   };
+
   const handleUpdateVariant = async () => {
     setIsLoading(true);
     let resUploadImage = dataVariant.imageLink;
-    console.log(dataVariant);
+    // console.log(dataVariant);
     try {
       if (isChange === true) {
         let dataForUploadImage = new FormData();
@@ -70,7 +73,7 @@ const Variant = () => {
         resUploadImage = await imageAPI.uploadImage(dataForUploadImage);
       }
 
-      console.log(resUploadImage);
+      // console.log(resUploadImage);
       let data = JSON.stringify({
         id: dataVariant.id,
         price: parseFloat(dataVariant.price),
@@ -86,8 +89,7 @@ const Variant = () => {
         tag1: dataVariant.tag1 === "true" ? true : false,
         tag7: dataVariant.tag7 === "true" ? true : false,
       });
-      const res = await variantProductAPI.updateVariant(data);
-      console.log(data);
+      await variantProductAPI.updateVariant(data);
       setIsLoading(false);
       toast.success("Chỉnh sửa variant thành công");
     } catch (error) {
@@ -95,10 +97,10 @@ const Variant = () => {
       toast.error("Chỉnh sửa variant không thành công");
     }
   };
+
   return (
     <React.Fragment>
-
-        <div className="variant-container">
+      <div className="variant-container">
         <Spin spinning={isLoading}>
           <TopPage dataProps={dataTop} />
 
@@ -259,10 +261,10 @@ const Variant = () => {
               </div>
             </Form>
           </div>
-          </Spin>
-        </div>
-      
+        </Spin>
+      </div>
     </React.Fragment>
   );
 };
+
 export default Variant;

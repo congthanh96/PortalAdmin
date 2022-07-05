@@ -25,10 +25,10 @@
   border-bottom: 1px solid #1890ff;
   cursor: pointer;
 }
-.css-remove{
-  border-bottom: 1px solid #FA0707;
+.css-remove {
+  border-bottom: 1px solid #fa0707;
   margin-left: 12px;
-  color: #FA0707;
+  color: #fa0707;
   cursor: pointer;
 }
 
@@ -49,6 +49,6 @@
   display: inline;
 }
 
-.css-add-btn{
+.css-add-btn {
   margin-top: 20px;
 }

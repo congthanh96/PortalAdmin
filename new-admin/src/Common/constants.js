@@ -22,6 +22,7 @@ export const GET_LIST_CATEGORY_API = "/Newee/ProductSeller/GetListCategory";
 export const ADD_VARIANT_TO_PRODUCT_API = "/Newee/ManagerVariant/Create";
 export const UPDATE_VARIANT_API = "/Newee/ManagerVariant/Edit";
 export const DISABLE_VARIANT_API = "/Newee/ManagerVariant/Disable/"; //:{variantID}
+export const EDIT_PRODUCT_API = "/Newee/ManagerProduct/Edit";
 
 //ACTIONS AUTHENTICATE
 export const AUTH_LOADING = "AUTH_LOADING";
@@ -51,36 +52,36 @@ export const SHIPPING = "Shipping";
 export const LIST_STATUS_ORDER = [
   {
     name: "Tất cả",
-    value:"All"
+    value: "All",
   },
   {
     name: "Đơn chờ duyệt",
-    value:"Pending"
+    value: "Pending",
   },
   {
     name: "Duyệt đơn",
-    value:"Accecpt"
+    value: "Accecpt",
   },
   {
     name: "Chuẩn bị giao",
-    value:"Preparing"
+    value: "Preparing",
   },
   {
     name: "Đang giao",
-    value:"Shipping"
+    value: "Shipping",
   },
   {
     name: "Giao thành công",
-    value:"Delivered"
+    value: "Delivered",
   },
   {
     name: "Hoãn đơn",
-    value:"Delay"
+    value: "Delay",
   },
-  // {
-  //   name: "Hủy đơn",
-  //   value:"Cancel"
-  // },
+  {
+    name: "Hủy đơn",
+    value:"Cancel"
+  },
 ];
 
 // LIST ADDRESS WAREHOUSE
@@ -121,17 +122,5 @@ export const DATA_ROUTE = [
   {
     linkTo: "/orders",
     nameLink: "Đơn hàng",
-  },
-  {
-    linkTo: "/orders",
-    nameLink: "Đóng hàng",
-  },
-  {
-    linkTo: "/approve-orders",
-    nameLink: "Duyệt đơn hàng",
-  },
-  {
-    linkTo: "/reports",
-    nameLink: "Báo cáo",
   },
 ];

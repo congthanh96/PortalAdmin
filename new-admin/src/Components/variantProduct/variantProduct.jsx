@@ -9,26 +9,30 @@ import { variantProductAPI } from "../../APIs";
 import { toast } from "react-toastify";
 import "./variantProduct.css";
 
-const VariantProduct = ({ variantProductData,setVariantProduct }) => {
-  const [isVisibleModal,setIsVisibleModal] = useState(false)
-  const [variantToRemove,setVariantToRemove] = useState("")
-  const onClickRemove = (variant) =>{
-    setIsVisibleModal(true)
-    console.log(variant)
-    setVariantToRemove(variant)
-  }
-  const handleRemoveVariant =async ()=>{
+const VariantProduct = ({ variantProductData, setVariantProduct }) => {
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [variantToRemove, setVariantToRemove] = useState("");
+  const onClickRemove = (variant) => {
+    setIsVisibleModal(true);
+    // console.log(variant);
+    setVariantToRemove(variant);
+  };
+  const handleRemoveVariant = async () => {
     try {
-      const res = await variantProductAPI.disableVariant(variantToRemove.id);
-      console.log(res)
-      let temp = variantProductData.filter(data => data.id !== variantToRemove.id);
-      setVariantProduct(temp)
-      setIsVisibleModal(false)
-      toast.success("Ẩn sản phẩm "+ variantToRemove.propertyName +" thành công" )
+      await variantProductAPI.disableVariant(variantToRemove.id);
+      // console.log(res);
+      let temp = variantProductData.filter(
+        (data) => data.id !== variantToRemove.id
+      );
+      setVariantProduct(temp);
+      setIsVisibleModal(false);
+      toast.success(
+        "Ẩn sản phẩm " + variantToRemove.propertyName + " thành công"
+      );
     } catch (error) {
-      toast.error("Ẩn sản phẩm "+ variantToRemove.propertyName +" thất bại" )
+      toast.error("Ẩn sản phẩm " + variantToRemove.propertyName + " thất bại");
     }
-  }
+  };
   const columnsAntd = [
     {
       title: "Tên phân loại ",
@@ -71,14 +75,25 @@ const VariantProduct = ({ variantProductData,setVariantProduct }) => {
       render: (text, record, index) => {
         return (
           <span>
-             <Link to={{
-                pathname: '/variant/' + record.id,
-              }} state={record} className="css-edit">
+            <Link
+              to={{
+                pathname: "/variant/" + record.id,
+              }}
+              state={record}
+              className="css-edit"
+            >
               Xem
             </Link>
-            <span className="css-remove" onClick={() =>onClickRemove(record)}>
-              Xóa
-            </span>
+            {variantProductData.length > 1 ? (
+              <span
+                className="css-remove"
+                onClick={() => onClickRemove(record)}
+              >
+                Xóa
+              </span>
+            ) : (
+              <></>
+            )}
           </span>
         );
       },
@@ -95,13 +110,17 @@ const VariantProduct = ({ variantProductData,setVariantProduct }) => {
       <Modal
         title="Vô hiệu hóa loại sản phẩm"
         visible={isVisibleModal}
-        onOk={()=>{
-          handleRemoveVariant()
+        onOk={() => {
+          handleRemoveVariant();
         }}
-        onCancel={()=>{setIsVisibleModal(false)}}
+        onCancel={() => {
+          setIsVisibleModal(false);
+        }}
       >
-         <p>Bạn thực sự muốn vô hiệu hóa loại sản phẩm "{variantToRemove.propertyName} {variantToRemove.propertyValue} "</p>
-        
+        <p>
+          Bạn thực sự muốn vô hiệu hóa loại sản phẩm "
+          {variantToRemove.propertyName} {variantToRemove.propertyValue} "
+        </p>
       </Modal>
     </div>
   );

@@ -1,5 +1,7 @@
+/**
+ * Top của nội dung trang web
+ */
 import React from "react";
-import { DATA_ROUTE } from "../../Common/constants";
 import { Breadcrumb } from 'antd';
 import "./topPage.css";
 import { Link } from "react-router-dom";

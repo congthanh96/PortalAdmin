@@ -2,7 +2,6 @@
  * Trang đăng nhập
  */
 import React, { useState, useContext } from "react";
-
 import { Button, Form, Input, Space } from "antd";
 import {
   UserOutlined,
@@ -10,12 +9,11 @@ import {
   EyeTwoTone,
   LockOutlined,
 } from "@ant-design/icons";
-import "./login.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { authAPI } from "../../APIs";
-
-import { UserContext,UpdateUserContext } from "../../Context/UserContext";
+import {UpdateUserContext } from "../../Context/UserContext";
+import "./login.css";
 
 const Login = () => {
   // const dispatch = useDispatch();
@@ -41,7 +39,7 @@ const Login = () => {
       });
 
       const response = await authAPI.login(data);
-      console.log(response);
+      // console.log(response);
       updateUser({ type: "LOGIN_SET", userName: response.username, isLogin:true });
       localStorage.setItem("tokenADMIN", response.token);
       localStorage.setItem("userName",response.username)

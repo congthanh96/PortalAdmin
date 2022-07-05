@@ -18,11 +18,13 @@ const Login = lazy(() => import("./Pages/Login/Login"));
 const Users = lazy(() => import("./Pages/Users/Users"));
 const User = lazy(() => import("./Pages/User/User"));
 const Products = lazy(() => import("./Pages/Products/Products"));
-const AddProduct = lazy(() => import("./Pages/AddProduct/AddProduct"));
+const AddProduct = lazy(() => import("./Pages/Product/AddProduct/AddProduct"));
+const EditProduct = lazy(()=> import("./Pages/Product/EditProduct/EditProduct"))
 const Product = lazy(() => import("./Pages/Product/Product"));
 const Variant = lazy(() => import("./Pages/Variant/Variant"));
 const Orders = lazy(() => import("./Pages/Orders/Orders"));
 const Order =  lazy(()=> import("./Pages/Order/Order"))
+const GHTK = lazy(()=>import("./Pages/GHTK/GHTK"))
 function App() {
   // const toastId = React.useRef(null);
 
@@ -58,10 +60,12 @@ function App() {
               <Route path="/user/:userID" element={<User />} />
               <Route exact path="/products" element={<Products />} />
               <Route exact path="/add-product" element={<AddProduct />} />
+              <Route exact path="/edit-product/:productID" element={<EditProduct />} />
               <Route exact path="/product/:productID" element={<Product />} />
               <Route exact path="/variant/:variantID" element={<Variant />} />
               <Route exact path="/orders" element={<Orders />} />
               <Route exact path="/order/:orderID" element={<Order />} />
+              <Route exact path="/GHTK/:orderID" element={<GHTK />} />
             </Routes>
           ) : (
             <Routes>

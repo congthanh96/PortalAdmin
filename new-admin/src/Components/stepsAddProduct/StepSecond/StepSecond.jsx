@@ -1,21 +1,24 @@
+/**
+ * Bước 2 của thêm sản phẩm
+ */
 import React from "react";
+import { Collapse, Input } from "antd";
 import "./stepSecond.css";
-import { Collapse,Input } from "antd";
 
 const { Panel } = Collapse;
-const StepSecond = ({dataForAddProduct,setDataForAddProduct}) => {
-    const handleChangeDataInput = (event) => {
-        // console.log(dataForAddProduct)
-        setDataForAddProduct({
-          ...dataForAddProduct,
-          [event.target.name]: event.target.value,
-        });
-      };
+const StepSecond = ({ dataForAddProduct, setDataForAddProduct }) => {
+  const handleChangeDataInput = (event) => {
+    // console.log(dataForAddProduct)
+    setDataForAddProduct({
+      ...dataForAddProduct,
+      [event.target.name]: event.target.value,
+    });
+  };
   return (
     <div className="container-step2">
       <Collapse accordion>
         <Panel header="Nhập nội dung đầu tiên" key="1">
-        <Input.TextArea
+          <Input.TextArea
             type="text"
             className="css-text-area"
             id="description"
@@ -26,7 +29,7 @@ const StepSecond = ({dataForAddProduct,setDataForAddProduct}) => {
           />
         </Panel>
         <Panel header="Nhập nội dung thứ hai" key="2">
-        <Input.TextArea
+          <Input.TextArea
             type="text"
             className="css-text-area"
             id="description"
@@ -37,7 +40,7 @@ const StepSecond = ({dataForAddProduct,setDataForAddProduct}) => {
           />
         </Panel>
         <Panel header="Nhập nội dung thứ ba" key="3">
-        <Input.TextArea
+          <Input.TextArea
             type="text"
             className="css-text-area"
             id="description"

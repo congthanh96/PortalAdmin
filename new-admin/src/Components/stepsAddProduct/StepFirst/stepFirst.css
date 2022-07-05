@@ -50,7 +50,6 @@
   border-bottom-right-radius: 100px;
 }
 
-
 .css-image {
   width: 100px;
   height: 100px;
@@ -59,5 +58,5 @@
   margin-right: 20px;
   margin-bottom: 20px;
   border: 1px solid #dedede;
-  cursor:pointer;
+  cursor: pointer;
 }

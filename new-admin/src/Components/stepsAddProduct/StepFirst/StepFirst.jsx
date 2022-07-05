@@ -1,16 +1,8 @@
+/**
+ * Bước 1 của thêm sản phẩm
+ */
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import {
-  Menu,
-  Dropdown,
-  Space,
-  Input,
-  Button,
-  Form,
-  Table,
-  Image,
-  Select,
-} from "antd";
+import { Input, Form, Select } from "antd";
 import "draft-js/dist/Draft.css";
 import "./stepFirst.css";
 const { Option } = Select;
@@ -24,6 +16,7 @@ const StepFirst = ({
   const [srcImageProduct, setSrcImageProduct] = useState(
     dataForAddProduct.link
   );
+
   const handleChangeDataInput = (event) => {
     // console.log(dataForAddProduct)
     setDataForAddProduct({
@@ -38,8 +31,8 @@ const StepFirst = ({
       ...dataForAddProduct,
       fileImage: file,
     });
-    console.log(file);
-    console.log(dataForAddProduct.link);
+    // console.log(file);
+    // console.log(dataForAddProduct.link);
     setSrcImageProduct(URL.createObjectURL(file));
   };
 
@@ -89,16 +82,16 @@ const StepFirst = ({
             showSearch
             className="css-input-select"
             placeholder="Search to Select"
-            // optionFilterProp="children"
-            // filterOption={(input, option) => option.children.includes(input)}
-            // filterSort={(optionA, optionB) =>
-            //   optionA.children
-            //     .toLowerCase()
-            //     .localeCompare(optionB.children.toLowerCase())
-            // }
-            // onSelect={(event) => {
-            //   setDataForAddProduct({ ...dataForAddProduct, categoryId: event });
-            // }}
+            optionFilterProp="children"
+            filterOption={(input, option) => option.children.includes(input)}
+            filterSort={(optionA, optionB) =>
+              optionA.children
+                .toLowerCase()
+                .localeCompare(optionB.children.toLowerCase())
+            }
+            onSelect={(event) => {
+              setDataForAddProduct({ ...dataForAddProduct, categoryId: event });
+            }}
           >
             {lstCategory.map((value, index) => {
               return (

@@ -21,6 +21,7 @@
   float: right;
   margin: 20px;
 }
+
 .container-steps {
   margin: 30px 50px 0px 30px;
 }
@@ -28,9 +29,10 @@
 .css-edit {
   border-bottom: 1px solid #1890ff;
 }
-.css-remove{
-  border-bottom: 1px solid #FA0707;
+
+.css-remove {
+  border-bottom: 1px solid #fa0707;
   margin-left: 12px;
-  color: #FA0707;
+  color: #fa0707;
   cursor: pointer;
 }

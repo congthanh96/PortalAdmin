@@ -3,19 +3,19 @@
  */
 import React, { useEffect, useState } from "react";
 import { formatVND } from "../../Common/formatVND";
-// import { DataGrid } from "@material-ui/data-grid";
 import { Table, Spin } from "antd";
 import TopPage from "../../Components/toppage/topPage";
 import { ordersAPI } from "../../APIs";
 import { toast } from "react-toastify";
-import "./order.css";
 import { useParams } from "react-router-dom";
+import "./order.css";
 
 const Order = () => {
   let { orderID } = useParams();
   const [orderDetail, setOrderDetail] = useState("");
   const [productsInOrder, setProductsInOrder] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
   const dataTop = [
     {
       linkTo: "/",
@@ -30,6 +30,7 @@ const Order = () => {
       nameLink: "Chi tiết đơn hàng",
     },
   ];
+
   const columnsAntd = [
     {
       title: "Tên sản phẩm",
@@ -53,7 +54,7 @@ const Order = () => {
       setIsLoading(false);
     };
     fetchData();
-  }, []);
+  },[]);
 
   // Lấy chi tiết đơn hàng
   const getDetailOrder = async () => {

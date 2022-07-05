@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+/**
+ * Bước 3 của thêm sản phẩm
+ */
+import React, { useEffect } from "react";
 import { Collapse, Input, Form, Select } from "antd";
-import { PlusSquareOutlined,MinusSquareOutlined } from "@ant-design/icons";
+import { PlusSquareOutlined, MinusSquareOutlined } from "@ant-design/icons";
 import "./stepThird.css";
 
 const { Option } = Select;
@@ -17,93 +20,109 @@ const StepThird = ({ dataForAddProduct, setDataForAddProduct }) => {
     count: 0,
     sku: "",
     imageFile: "",
-    srcImage:null,
+    srcImage: null,
     weight: 0,
     tag1: false,
     tag7: false,
   };
-//   const [dataForAddProduct.variants, setLstVariant] = useState([]);
+  //   const [dataForAddProduct.variants, setLstVariant] = useState([]);
   useEffect(() => {
-    const values=[...dataForAddProduct.variants, variant]
-   // setLstVariant(values);
-    setDataForAddProduct({...dataForAddProduct,variants:values})
+    const values = [...dataForAddProduct.variants, variant];
+    // setLstVariant(values);
+    setDataForAddProduct({ ...dataForAddProduct, variants: values });
     //setDataForAddProduct({...dataForAddProduct,variants:dataForAddProduct.variants})
-  }, []);
+  },[]);
   const genExtra = (index) => (
-   <>
-   {
-    index>0?<MinusSquareOutlined  style={{ fontSize: "120%", marginRight:10, color:"red",cursor:"pointer" }}
-    onClick={async (event) => {
-        event.stopPropagation();
-        const values = [...dataForAddProduct.variants]
-        values.splice(index,1)
-        //setLstVariant(values)
-        setDataForAddProduct({...dataForAddProduct,variants:values})
-    }}
-    />:<></>
-   }
-   
-    <PlusSquareOutlined
-      style={{ fontSize: "120%", color:"green", cursor:"pointer" }}
-      onClick={async (event) => {
-        // If you don't want click extra trigger collapse, you can prevent this:
-        event.stopPropagation();
-        const values=[...dataForAddProduct.variants, variant]
-        //setLstVariant(values);
-        setDataForAddProduct({...dataForAddProduct,variants:values})
-        //setDataForAddProduct({ ...dataForAddProduct, variants: dataForAddProduct.variants });
-      }}
-    />
-   </>
-        
+    <>
+      {index > 0 ? (
+        <MinusSquareOutlined
+          style={{
+            fontSize: "120%",
+            marginRight: 10,
+            color: "red",
+            cursor: "pointer",
+          }}
+          onClick={async (event) => {
+            event.stopPropagation();
+            const values = [...dataForAddProduct.variants];
+            values.splice(index, 1);
+            //setLstVariant(values)
+            setDataForAddProduct({ ...dataForAddProduct, variants: values });
+          }}
+        />
+      ) : (
+        <></>
+      )}
+
+      <PlusSquareOutlined
+        style={{ fontSize: "120%", color: "green", cursor: "pointer" }}
+        onClick={async (event) => {
+          // If you don't want click extra trigger collapse, you can prevent this:
+          event.stopPropagation();
+          const values = [...dataForAddProduct.variants, variant];
+          //setLstVariant(values);
+          setDataForAddProduct({ ...dataForAddProduct, variants: values });
+          //setDataForAddProduct({ ...dataForAddProduct, variants: dataForAddProduct.variants });
+        }}
+      />
+    </>
   );
   const handleChangeDataInput = (event, index) => {
     const values = [...dataForAddProduct.variants];
-    console.log(index);
-    console.log(values[index][event.target.name]);
+    // console.log(index);
+    // console.log(values[index][event.target.name]);
     values.forEach((value, idx) => {
       if (idx === index) {
         values[index][event.target.name] = event.target.value;
       }
     });
-    console.log(values);
-   //setLstVariant(values);
-   setDataForAddProduct({ ...dataForAddProduct, variants: dataForAddProduct.variants });
+    //console.log(values);
+    //setLstVariant(values);
+    setDataForAddProduct({
+      ...dataForAddProduct,
+      variants: dataForAddProduct.variants,
+    });
   };
 
-  const handleDataSelectTag1 = (event,index)=>{
+  const handleDataSelectTag1 = (event, index) => {
     const values = [...dataForAddProduct.variants];
     values.forEach((value, idx) => {
       if (idx === index) {
         values[index]["tag1"] = event;
       }
     });
-    console.log(values);
-   setDataForAddProduct({ ...dataForAddProduct, variants: dataForAddProduct.variants });
-  }
-  const handleDataSelectTag7 = (event,index)=>{
+    // console.log(values);
+    setDataForAddProduct({
+      ...dataForAddProduct,
+      variants: dataForAddProduct.variants,
+    });
+  };
+  const handleDataSelectTag7 = (event, index) => {
     const values = [...dataForAddProduct.variants];
     values.forEach((value, idx) => {
       if (idx === index) {
         values[index]["tag7"] = event;
       }
     });
-    console.log(values);
-   setDataForAddProduct({ ...dataForAddProduct, variants: dataForAddProduct.variants });
-  }
-    
-  const handleUpdateImgVariant = (event,index) => {
+    // console.log(values);
+    setDataForAddProduct({
+      ...dataForAddProduct,
+      variants: dataForAddProduct.variants,
+    });
+  };
+
+  const handleUpdateImgVariant = (event, index) => {
     const [file] = event.target.files;
     const values = [...dataForAddProduct.variants];
     values.forEach((value, idx) => {
-        if (idx === index) {
-            values[index]["imageFile"] = file;
-            values[index]["srcImage"] = URL.createObjectURL(file);
-        }
-      });
-      console.log(values);
+      if (idx === index) {
+        values[index]["imageFile"] = file;
+        values[index]["srcImage"] = URL.createObjectURL(file);
+      }
+    });
+    // console.log(values);
     //   setLstVariant(values);
-      setDataForAddProduct({...dataForAddProduct,variants:values})
+    setDataForAddProduct({ ...dataForAddProduct, variants: values });
     // console.log(file);
     // console.log(dataForAddProduct.link);
     //setSrcImageProduct(URL.createObjectURL(file));
@@ -186,9 +205,7 @@ const StepThird = ({ dataForAddProduct, setDataForAddProduct }) => {
                   />
                 </div>
                 <div className="container-item-step3">
-                  <span className="css-label">
-                    Khối lượng *
-                  </span>
+                  <span className="css-label">Khối lượng *</span>
                   <Input
                     placeholder="nhập khối lượng"
                     className="css-input-item-step3"
@@ -221,20 +238,24 @@ const StepThird = ({ dataForAddProduct, setDataForAddProduct }) => {
                     defaultValue="False"
                     className="css-input-select-step3"
                     name="tag1"
-                    onSelect={(event,name) => handleDataSelectTag1(event,index,name)}
+                    onSelect={(event, name) =>
+                      handleDataSelectTag1(event, index, name)
+                    }
                   >
                     <Option value="true">True</Option>
                     <Option value="false">False</Option>
                   </Select>
                 </div>
-                
+
                 <div className="container-item-step3">
                   <span className="css-label">Hàng nông sản *</span>
                   <Select
                     defaultValue="False"
                     className="css-input-select-step3"
                     name="tag7"
-                    onSelect={(event,name) => handleDataSelectTag7(event,index,name)}
+                    onSelect={(event, name) =>
+                      handleDataSelectTag7(event, index, name)
+                    }
                   >
                     <Option value="true">True</Option>
                     <Option value="false">False</Option>
@@ -252,20 +273,20 @@ const StepThird = ({ dataForAddProduct, setDataForAddProduct }) => {
                     <button>CAMERA</button>
                   </div>
                 </image> */}
-                  <label htmlFor={"imgProduct"+index}>
+                  <label htmlFor={"imgProduct" + index}>
                     <img
                       className="css-image-step3"
                       src={
-                        value.srcImage||
+                        value.srcImage ||
                         "data:image/png;base64,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"
                       }
                       alt=""
                     />
                     <input
                       type="file"
-                      id={"imgProduct"+index}
+                      id={"imgProduct" + index}
                       style={{ display: "none" }}
-                      onChange={(event)=>handleUpdateImgVariant(event,index)}
+                      onChange={(event) => handleUpdateImgVariant(event, index)}
                     />
                   </label>
                 </div>

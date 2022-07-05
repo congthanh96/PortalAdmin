@@ -1,12 +1,11 @@
 /**
  * Chi tiết tài khoản
  */
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import TopPage from "../../Components/toppage/topPage";
-import ButtonComponent from "../../Components/button/ButtonComponent";
 import { Input, Spin, Collapse, Card, Avatar, Button } from "antd";
-import { usersAPI,imageAPI } from "../../APIs";
+import { usersAPI, imageAPI } from "../../APIs";
 import { toast } from "react-toastify";
 import NoData from "../../Components/NoData/NoData";
 import {
@@ -16,13 +15,10 @@ import {
   SaveFilled,
 } from "@ant-design/icons";
 import "./user.css";
+
 const { Panel } = Collapse;
 const { Meta } = Card;
-const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
+
 const User = () => {
   let { userID } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -32,6 +28,22 @@ const User = () => {
   const [fileCardBefore, setFileImgCardBefore] = useState("");
   const [fileCardAfter, setFileImgCardAfter] = useState("");
   const [referralCode, setReferralCode] = useState("");
+
+  const dataTop = [
+    {
+      linkTo: "/",
+      nameLink: "Trang chủ",
+    },
+    {
+      linkTo: "/users",
+      nameLink: "Danh sách tài khoản",
+    },
+    {
+      linkTo: "/user/" + { userID },
+      nameLink: "Tài khoản",
+    },
+  ];
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,104 +62,84 @@ const User = () => {
     fetchData();
   }, [userID]);
 
-  const dataTop = [
-    {
-      linkTo: "/",
-      nameLink: "Trang chủ",
-    },
-    {
-      linkTo: "/users",
-      nameLink: "Danh sách tài khoản",
-    },
-    {
-      linkTo: "/user/" + { userID },
-      nameLink: "Tài khoản",
-    },
-  ];
-
   const onChange = (key) => {
-    console.log(key);
-    console.log(user);
+    // console.log(key);
+    // console.log(user);
   };
 
   const handleUpdateCardBefore = (event) => {
     const [file] = event.target.files;
-    setFileImgCardBefore(file)
+    setFileImgCardBefore(file);
     setSrcImgCardBefore(URL.createObjectURL(file));
   };
+
   const handleUpdateCardAfter = (event) => {
     const [file] = event.target.files;
-    setFileImgCardAfter(file)
+    setFileImgCardAfter(file);
     setSrcImgCardAfter(URL.createObjectURL(file));
   };
-  
+
   const genExtra = () => (
     <SaveFilled
       style={{ fontSize: "150%" }}
-      onClick={ async(event) => {
+      onClick={async (event) => {
         // If you don't want click extra trigger collapse, you can prevent this:
         event.stopPropagation();
-        setIsLoading(true)
+        setIsLoading(true);
         try {
-         let dataPost = await postImage();
-        console.log(dataPost)
-         if(dataPost.isSuccess)
-         {
-          await saveImgCard(dataPost.urlImageBefore,dataPost.urlImageAfter);
-         }
-         setIsLoading(false)
+          let dataPost = await postImage();
+          // console.log(dataPost);
+          if (dataPost.isSuccess) {
+            await saveImgCard(dataPost.urlImageBefore, dataPost.urlImageAfter);
+          }
+          setIsLoading(false);
         } catch (error) {
-          setIsLoading(false)
-          toast.error(error)
+          setIsLoading(false);
+          toast.error(error);
         }
-       
       }}
     />
   );
-    
+
   const postImage = async () => {
     // let isSuccess= false;
     let dataPost = {
-      
-      isSuccess : false,
+      isSuccess: false,
 
-      urlImageBefore :user.urlIDCardBefore,
-      
-      urlImageAfter :user.urlIDcCardAffter,
-    }
-     
+      urlImageBefore: user.urlIDCardBefore,
+
+      urlImageAfter: user.urlIDcCardAffter,
+    };
+
     try {
-      if(fileCardBefore!=="")
-      {
+      if (fileCardBefore !== "") {
         let data = new FormData();
-        data.append('File',fileCardBefore);
-        data.append('Type',"IdCard")
-        data.append('Width',325)
-        data.append('Height',205)
-        const res = await imageAPI.uploadImage(data)
-        dataPost= {...dataPost,isSuccess:true,urlImageBefore:res}
+        data.append("File", fileCardBefore);
+        data.append("Type", "IdCard");
+        data.append("Width", 325);
+        data.append("Height", 205);
+        const res = await imageAPI.uploadImage(data);
+        dataPost = { ...dataPost, isSuccess: true, urlImageBefore: res };
       }
-      if(fileCardAfter!=="")
-      {
+      if (fileCardAfter !== "") {
         let data = new FormData();
-        data.append('File',fileCardAfter);
-        data.append('Type',"IdCard")
-        data.append('Width',325)
-        data.append('Height',205)
-        const res = await imageAPI.uploadImage(data)
-        dataPost= {...dataPost,isSuccess:true,urlImageAfter:res}
+        data.append("File", fileCardAfter);
+        data.append("Type", "IdCard");
+        data.append("Width", 325);
+        data.append("Height", 205);
+        const res = await imageAPI.uploadImage(data);
+        dataPost = { ...dataPost, isSuccess: true, urlImageAfter: res };
       }
     } catch (error) {
-      dataPost= {...dataPost,isSuccess:false}
-      toast.error("Lưu hình lển server bị lỗi")
+      dataPost = { ...dataPost, isSuccess: false };
+      toast.error("Lưu hình lển server bị lỗi");
     }
-    return dataPost
-  } 
+    return dataPost;
+  };
 
-  const saveImgCard = async (urlBefore,urlAfter) => {
+  const saveImgCard = async (urlBefore, urlAfter) => {
     try {
-      if(fileCardBefore!=="")
-      {
+      if (fileCardBefore !== "") {
         let data = JSON.stringify({
           id: user.id,
           lastName: user.lastName,
@@ -164,16 +156,17 @@ const User = () => {
           cmndNoiCap: user.cmndNoiCap,
           iDrecommend: user.iDrecommend,
         });
-         console.log(data)
+        // console.log(data);
         await usersAPI.updateUserByID(data);
         toast.success("Cập nhật hình ảnh CMND/CCCD thành công");
       }
     } catch (error) {
-      toast.error("Cập nhật hình ảnh CMND/CCCD không thành công")
+      toast.error("Cập nhật hình ảnh CMND/CCCD không thành công");
     }
   };
+
   const saveReferralCode = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     let temp = { ...user, iDrecommend: referralCode };
     try {
       let data = JSON.stringify({
@@ -193,13 +186,14 @@ const User = () => {
         iDrecommend: temp.iDrecommend,
       });
       await usersAPI.updateUserByID(data);
-      setIsLoading(false)
+      setIsLoading(false);
       toast.success("Cập nhật mã giới thiệu thành công");
     } catch (error) {
-      setIsLoading(false)
+      setIsLoading(false);
       toast.error(error);
     }
   };
+
   return (
     <div className="user-container">
       <Spin spinning={isLoading}>
@@ -234,7 +228,8 @@ const User = () => {
             </Card>
           </div>
           <div className="container-data-item css-infor">
-            <Collapse accordion
+            <Collapse
+              accordion
               // defaultActiveKey={["1"]}
               onChange={onChange}
             >
@@ -307,8 +302,12 @@ const User = () => {
                     placeholder="nhập mã giới thiệu"
                     onChange={(e) => setReferralCode(e.target.value)}
                   />
-                  <Button type="primary" onClick={saveReferralCode} loading = {isLoading}>
-                    Lưu 
+                  <Button
+                    type="primary"
+                    onClick={saveReferralCode}
+                    loading={isLoading}
+                  >
+                    Lưu
                   </Button>
                 </Input.Group>
               </Panel>

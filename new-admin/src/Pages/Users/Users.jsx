@@ -1,9 +1,7 @@
 /**
  * Danh sách tài khoản
  */
-
 import React, { useEffect, useState } from "react";
-import "./users.css";
 import TopPage from "../../Components/toppage/topPage";
 import ButtonComponent from "../../Components/button/ButtonComponent";
 import { Input, Spin } from "antd";
@@ -13,7 +11,15 @@ import NoData from "../../Components/NoData/NoData";
 import { CSVLink } from "react-csv";
 import { Table } from "antd";
 import { Link } from "react-router-dom";
+import "./users.css";
+
 const Users = () => {
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState("");
+  const [dataToSearch, setDataToSearch] = useState([]);
+  const [dataToExport, setDataToExport] = useState([]);
+  const [page, setPage] = React.useState(1);
   const dataTop = [
     {
       linkTo: "/",
@@ -24,17 +30,12 @@ const Users = () => {
       nameLink: "Danh sách tài khoản",
     },
   ];
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchValue, setSearchValue] = useState("");
-  const [dataToSearch, setDataToSearch] = useState([]);
-  const [dataToExport, setDataToExport] = useState([]);
-  const [page, setPage] = React.useState(1);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await usersAPI.getUsers();
-        console.log(res);
+        // console.log(res);
         setUsers(res);
         setDataToSearch(res);
         setIsLoading(false);
@@ -98,7 +99,7 @@ const Users = () => {
   ];
 
   const handleSearch = () => {
-    console.log(searchValue);
+    // console.log(searchValue);
     const filteredRows = dataToSearch.filter((row) => {
       if (row.code === null) {
         row.code = "";
@@ -106,7 +107,7 @@ const Users = () => {
       row.code = row.code.trim();
       return row.code.toLowerCase().includes(searchValue.toLowerCase());
     });
-    console.log(filteredRows);
+    // console.log(filteredRows);
     setUsers(filteredRows);
   };
 
@@ -180,4 +181,5 @@ const Users = () => {
     </div>
   );
 };
+
 export default Users;
